@@ -62,6 +62,36 @@ seeing the real source first.
   Ashley at thehappyhowl.com). Gives 40% off first order, contact is Ashley
   (ashley@thehappyhowl.com).
 
+## Social media cross-posting ("PawPlanner") — Aug 23 2026 investigation
+
+Denise asked about "PawPlanner" — her name (given by an earlier Claude session) for a
+tool to auto-spread a Facebook post to all her other social platforms. She couldn't find
+it after it reportedly ate hours of tokens over Aug 2–16. Investigated across this repo's
+branches, all her Claude sessions (incl. token/cost usage), scheduled Routines, and
+published Artifacts. Findings:
+
+- **No finished "PawPlanner" exists anywhere.** Not committed to any branch of this repo,
+  not a saved Routine, not a published Artifact. It does not appear to have ever been
+  completed — nothing was lost, it just never got finished/saved.
+- **The actual 2-day token spend (session "Pinterest integration", Aug 2–16, ~$11,
+  27M+ cached tokens) was a different, narrower project:** hosting ~20 Veritas Vans
+  product photos in this repo (branch `claude/pinterest-integration-5j8hjz`) and queuing
+  18 Pinterest pin-boards via Zapier. It stalled because the Zapier account hit its
+  monthly task quota (104/100 used) and, as of the last retry (Aug 16), was still
+  blocked/unconfirmed. This is Pinterest-only — not a multi-platform cross-poster.
+- **Zapier connection status (checked live):** Facebook Pages is connected (account
+  `nascardreamin@gmail.com`). Instagram for Business is **not** connected — zero
+  connections. So even a Facebook→Instagram piece was never actually wired up.
+- **Platform reality check via Zapier:** Facebook Pages and Instagram for Business both
+  support auto-posting (read+write actions available). Twitter/X and TikTok do **not**
+  have a reliable auto-post action available through Zapier (platform API restrictions) —
+  a true "post once, goes everywhere including X/TikTok" tool would need a dedicated
+  service built for that (e.g. Buffer/Later/Metricool — one-time paid signup, click
+  "Connect" per platform, no custom automation to build/maintain).
+- **Open item, not yet resolved:** whether those 18 queued Pinterest pins ever actually
+  posted after the Aug 16 retry is unconfirmed — worth checking Pinterest directly next
+  time this comes up.
+
 ## In-progress / outstanding work
 
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
