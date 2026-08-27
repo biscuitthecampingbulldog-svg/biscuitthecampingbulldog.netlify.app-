@@ -1,8 +1,65 @@
 # Biscuit the Camping Bulldog — Project Notes
 
-Personal/hobby site for Denise Myers' brand "Biscuit the Camping Bulldog." Owner is not
+Personal/hobby site for Denise Myers' brand "Biscuit the Camping Bulldog." Denise is not
 technical — keep instructions to her simple and concrete, and prefer doing the work
-yourself over asking her to do technical steps when there's any other way.
+yourself over asking her to do technical steps when there's any other way. See
+`working-with-denise` skill guidance if available in the session.
+
+## What this repository actually is
+
+This is **not a normal application repo with a build step**. There is no package.json,
+no build tooling, and (as of this writing) no CI configured. It's a lightweight home for:
+
+- A backup/staging copy of the live static site's source (HTML/CSS/images) — but only on
+  *some* branches (see below), not the one GitHub currently treats as default.
+- These project notes (this file), which function as the persistent memory for whichever
+  Claude session picks up work on Biscuit's site/brand next.
+
+**Read the "Branches" section below before assuming any given checkout has the real site
+in it — several branches only contain this notes file.**
+
+## Branches — what's actually on each one (checked Aug 27 2026)
+
+The repo's history forked early (common ancestor: "Add project permissions allowlist for
+routine website work") into several purpose-specific branches that were never merged back
+together. As of this writing there is no `main`/`master` — GitHub's default branch is
+`claude/website-picture-approvals-bh09kl`.
+
+| Branch | Contents | Purpose |
+|---|---|---|
+| `claude/website-picture-approvals-bh09kl` **(GitHub default/HEAD)** | `CLAUDE.md`, `.claude/settings.json` only — **no site source** | Where these project notes live and where PR #1 (PawPlanner investigation) was merged. Despite the name, it does not currently contain any picture-approval work or site files. |
+| `claude/website-review-feedback-bw0nmh` | `index.html`, `thank-you.html`, `images/` (logos, hero photos, adventure tiles, favicons) | **The actual backed-up site source.** Go here if you need to read or edit real markup/CSS. |
+| `claude/pinterest-integration-5j8hjz` | `index.html` + `images/products/*.jpg` (~25 Veritas Vans product photos) | Working branch for the Pinterest pin-image project (see PawPlanner section below). Stalled on a Zapier monthly quota limit as of Aug 16 2026. |
+| `claude/pawplanner-inquiry-khhrib` | Same `CLAUDE.md` content as the default branch | Source branch for the now-merged PR #1; safe to ignore going forward. |
+
+**Important, from earlier investigation:** live deploys are pushed to Netlify via direct
+upload/API (`deploy_source: "api"`, `commit_ref: null`), **NOT built from this git repo**.
+This repo's git history and the live site's actual current content are disconnected —
+pushing commits here does not deploy anything, and no branch here is guaranteed to match
+what's actually live. Do not assume any branch (including `website-review-feedback-bw0nmh`)
+reflects the current live page without confirming first (see tooling gap below).
+
+## Development workflow / conventions
+
+- Branch naming: `claude/<short-slug>-<random-suffix>` (matches the auto-generated branch
+  names Claude Code on the web creates per session). Continue on an existing relevant
+  branch rather than creating a fresh throwaway one whenever prior context matters — as
+  with this file's own history.
+- No install/build/test commands exist yet (no package.json). If real front-end tooling
+  is ever added, document the actual commands here so future sessions don't have to
+  rediscover them.
+- `.claude/settings.json` pre-allows read-only/local git and common site-asset commands
+  (image conversion/optimization, npm/node/netlify CLI, `git log`/`diff`/`add`/`commit`)
+  and requires confirmation for anything destructive or deploy-affecting (`git push`,
+  `git reset --hard`, `rm`, `netlify deploy`, `netlify env:*`, piping curl into a shell).
+  Keep that split when editing the file — don't silently widen the auto-allow list.
+- Because live deploys are manual/API-based and disconnected from this repo (see above),
+  **never assume a commit here is live**. Before making user-facing claims about "the
+  site now shows X," confirm against a real downloaded copy of the current deploy (see
+  tooling gap below), not just this repo's working tree.
+- This file is the continuity mechanism between sessions — when you learn something a
+  future session would otherwise have to rediscover (a stalled integration, a verified
+  URL, an open question for Denise), write it here rather than leaving it only in chat.
 
 ## Hosting setup
 
@@ -11,11 +68,6 @@ yourself over asking her to do technical steps when there's any other way.
 - **Netlify site ID:** `f727ec6b-3062-47b0-a60d-12dd006b8c2d`
 - **Netlify team:** "Biscuit the Camping Bulldog" (team ID `6a3a948ae90aff104f36f7a3`)
 - **Branch subdomain:** http://main--biscuitthecampingbulldog.netlify.app
-
-**Important:** live deploys are pushed to Netlify via direct upload/API
-(`deploy_source: "api"`, `commit_ref: null`), NOT built from this git repo. This repo's
-git history and the live site's actual content are currently disconnected — pushing
-commits here does not deploy anything. Do not assume `git log` reflects what's live.
 
 **Known tooling gap:** as of Aug 2026, none of the available Netlify MCP tools
 (`netlify-project-services-reader/updater`, `netlify-deploy-services-reader/updater`,
@@ -54,6 +106,10 @@ seeing the real source first.
   disclosure sentence is cut off mid-word; headline has a double space
   ("Biscuit  the Camping Bulldog"); no email signup; link-preview image is the small
   round logo instead of a wide photo.
+- A working backup of `index.html`/`thank-you.html`/images matching (roughly) this audit
+  lives on `claude/website-review-feedback-bw0nmh` — start there if asked to fix any of
+  the above, but confirm against a fresh download first since it may have drifted from
+  what's actually live.
 
 ## Partners / affiliate links — verified correct URLs
 
@@ -126,12 +182,12 @@ published Artifacts. Findings:
   time this comes up.
 - **Related but separate:** a different session, "PawPlanner setup and vet locations"
   (Claude Code CLI on Denise's own computer, started Aug 25 ~9pm, bridge tag
-  `remote-control-sdk`), exists and is currently unreachable ("computer_unreachable") —
-  likely because her computer shut down/reset around then. Not investigated further from
-  here (different session, no read access into it from this one). If Denise mentions
-  content from that session (e.g. "the board of directors" was originally asked about
-  there too, or "vet locations"), it should resume once her computer/Claude app is back
-  online and reconnects — don't assume it's lost.
+  `remote-control-sdk`), exists and was, as of Aug 25, unreachable ("computer_unreachable")
+  — likely because her computer shut down/reset around then. Not investigated further
+  from here (different session, no read access into it from this one). If Denise
+  mentions content from that session (e.g. "the board of directors" was originally asked
+  about there too, or "vet locations"), it should resume once her computer/Claude app is
+  back online and reconnects — don't assume it's lost.
 
 **Decision (Aug 25 2026) — going with Option B (one hub app), $0/month version:**
 Denise confirmed she wants Facebook + Instagram + TikTok + X covered, but has very
@@ -158,10 +214,14 @@ little budget right now (affiliate income is minimal so far). Plan, no monthly c
 ## In-progress / outstanding work
 
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
-  brand colors, linking to happyhowl.com/biscuit). Blocked on: (1) the actual site
-  source files (see tooling gap above), (2) a Happy Howl logo image from the user
-  (external fetch to happyhowl.com is also blocked, so it can't be pulled
-  automatically).
+  brand colors, linking to happyhowl.com/biscuit). Blocked on: (1) confirming the real,
+  current site source (the `website-review-feedback-bw0nmh` backup may already be stale —
+  see tooling gap above), (2) a Happy Howl logo image from the user (external fetch to
+  happyhowl.com is also blocked, so it can't be pulled automatically).
 - User separately wants two specific pictures placed on the site with descriptions —
   never received in this conversation despite repeated requests. Do not assume any
   picture placement has happened without the actual files.
+- The GitHub default branch (`website-picture-approvals-bh09kl`) currently holds no site
+  source at all, only these notes — worth reconciling with Denise/a future session
+  whether the real site backup (`website-review-feedback-bw0nmh`) should become the
+  default, once it's confirmed current.
