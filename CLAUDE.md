@@ -110,23 +110,41 @@ asking Denise if that was her before assuming the live site still matches any ol
   org currently can't be granted MCP connectors, so if the Netlify tools aren't loaded
   when it fires, it should say so plainly rather than error.
 
-## Known site structure (per user-provided audit, July 24 2026 — may be stale, confirm against actual downloaded files before editing)
+## Known site structure (CONFIRMED CURRENT — from Denise's actual Netlify deploy download,
+Aug 30 2026, filename `biscuitthecampingbulldogNEWSITE20260830.zip`; superseded the stale
+July 24 audit below it used to say)
 
-- Nav: Home / About / Adventures / Picks
-- Hero section with a "Follow The Pack" button
-- "Picks" section = affiliate/partner links (Veritas Vans, Starlink, Liquified RV, Necto,
-  Blue Technology, Chewy) — this is likely what the user calls the "Partners" section/tab
-- "Life in the Smokies" tile section (6 tiles; 2 — "Connected Anywhere" and "RV Road
-  Trips" — were missing photos as of the audit)
-- Known bugs from that audit, not yet confirmed fixed: "Follow The Pack"/"Follow Us"
-  buttons point to a social-follow section that doesn't exist on the page; affiliate
-  disclosure sentence is cut off mid-word; headline has a double space
-  ("Biscuit  the Camping Bulldog"); no email signup; link-preview image is the small
-  round logo instead of a wide photo.
-- A working backup of `index.html`/`thank-you.html`/images matching (roughly) this audit
-  lives on `claude/website-review-feedback-bw0nmh` — start there if asked to fix any of
-  the above, but confirm against a fresh download first since it may have drifted from
-  what's actually live.
+Denise attached a real zip download of the live deploy. That exact `index.html` + `images/`
+are now committed to this branch (`claude/biscuits-website-deploy-9vesak`) as the confirmed
+source of truth — treat this branch's copy as current until told otherwise, no more
+guessing from old backups.
+
+- Nav: Home / About Biscuit / Adventures / Biscuit's Picks, plus a "Follow Us" link straight
+  to Biscuit's real Facebook page (https://www.facebook.com/profile.php?id=61582414480969).
+- Hero has a "🛍️ Biscuit's Favorites" button (jumps to `#affiliates`) and a "📱 Follow The
+  Pack" button — this one **does** work now, links to the Facebook page above.
+- "Biscuit's Favorite Picks" section (`#affiliates`) — **8 affiliate cards now**, more than
+  the old audit knew about: Veritas Vans, Starlink, Liquified RV, Necto, Blue Technology,
+  Chewy, and two new ones added since: **FXW** (Rollick dog playpen, Amazon link) and
+  **RVLock** (keyless RV door lock). All logos are inlined as base64 `data:` URIs directly
+  in the HTML (plus loose `images/logos/fxw_logo.png` / `rvlock_logo_white.png` / `.b64`
+  files sitting in the repo unused by the page — harmless leftovers, not a bug).
+- "Life in the Smokies" adventure tiles — all have photos now, including the two the July
+  audit flagged as missing (`adv-connected.jpg`, `adv-roadtrip.jpg` both present).
+- Footer has a working email signup ("Get Biscuit's Camping Tips by Email") wired to
+  Netlify Forms (`biscuit-newsletter`, matches the form ID in Hosting setup above) and a
+  second "Follow Biscuit on Facebook" button.
+- **All the old July-24-audit bugs are already fixed on live:** no double space in the
+  headline, affiliate disclosure sentence is complete (not cut off), "Follow"
+  buttons/links work, link-preview (`og:image`)/`twitter:image` is a proper wide photo
+  (`images/biscuit-about.jpg`), not the round logo.
+- **One real bug found this pass, now fixed in this branch's copy:** the newsletter form's
+  `action="/thank-you.html"` — but the live deploy zip Denise sent has **no
+  `thank-you.html` at all**, so anyone submitting the form almost certainly hits a 404
+  instead of a thank-you page. Pulled a matching `thank-you.html` from the old
+  `claude/website-review-feedback-bw0nmh` backup branch (same color/font variables, so it
+  looks native) and added it here. **Not yet pushed live** — needs Denise's okay first
+  since it touches the production site (see In-progress section).
 
 ## Partners / affiliate links — verified correct URLs
 
@@ -230,15 +248,19 @@ little budget right now (affiliate income is minimal so far). Plan, no monthly c
 
 ## In-progress / outstanding work
 
+- **Newsletter form 404 fix ready, waiting on Denise's go-ahead to deploy live** (see
+  above) — a `thank-you.html` was missing from the live deploy. Fix is committed on
+  `claude/biscuits-website-deploy-9vesak`; deploying it live is a one-call use of the
+  Netlify `deploy-site` operation (see Hosting setup) once she confirms.
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
-  brand colors, linking to happyhowl.com/biscuit). Blocked on: (1) confirming the real,
-  current site source (the `website-review-feedback-bw0nmh` backup may already be stale —
-  see tooling gap above), (2) a Happy Howl logo image from the user (external fetch to
-  happyhowl.com is also blocked, so it can't be pulled automatically).
+  brand colors, linking to happyhowl.com/biscuit). The "stale backup" blocker is now
+  resolved (real current site source confirmed, see above) — the only remaining blocker
+  is a Happy Howl logo image from Denise (external fetch to happyhowl.com is blocked, so
+  it can't be pulled automatically).
 - User separately wants two specific pictures placed on the site with descriptions —
   never received in this conversation despite repeated requests. Do not assume any
   picture placement has happened without the actual files.
 - The GitHub default branch (`website-picture-approvals-bh09kl`) currently holds no site
-  source at all, only these notes — worth reconciling with Denise/a future session
-  whether the real site backup (`website-review-feedback-bw0nmh`) should become the
-  default, once it's confirmed current.
+  source at all, only these notes. Now that a confirmed-current site backup lives on
+  `claude/biscuits-website-deploy-9vesak`, it's worth this becoming (or merging into) the
+  default once Denise is comfortable — ask her rather than switching it unilaterally.
