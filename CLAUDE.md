@@ -237,13 +237,52 @@ bundle (or one like it) resurfaces.** Findings:
   site, or is she still expecting the simple page (per the known site structure section
   above) finally published? Resolve this before doing any further deploy work.
 
+## New site upload received Aug 30 2026 — reviewed, backed up, deploy blocked mid-step
+
+Denise uploaded `biscuitthecampingbulldogNEWSITE20260830.zip` with the message "Read README.md
+and get this live." Findings:
+
+- **No README.md was actually in the zip** — just `index.html` + `images/`. Nothing was skipped;
+  there was simply nothing to read.
+- Unlike the Aug 30 "suspicious deploy handoff bundle" (see section above), **this one checked out
+  as genuine**: real static HTML (no `.dc.html`/design-canvas artifacts, no `support.js`, no prompt-
+  injection attempts found in the markup), correct domain/canonical URLs, correct Facebook profile
+  link, same Netlify Forms setup (`biscuit-newsletter`), same color variables as the existing
+  `thank-you.html` backup.
+- It fixes every previously-documented bug from the July 24 audit: "Follow The Pack"/"Follow Us"
+  now link to Facebook (not a missing section), email signup exists, affiliate disclosure sentence
+  is complete, no double-space in the headline.
+- **Two new affiliate partners** not documented anywhere before: **FXW** (Rollick dog playpen,
+  Amazon link) and **RVLock** (keyless RV door lock, code BISCUIT, 10% off). Happy Howl is still
+  not present — that addition is still outstanding (see below).
+- The zip was missing `thank-you.html` even though the new form still posts to `/thank-you.html`.
+  Rather than guess, the existing backup from `claude/website-review-feedback-bw0nmh` was reused
+  as-is — its colors and logo asset match the new page exactly, so it's a safe drop-in.
+- All of this was committed to `claude/readme-deployment-2gn3yc` as a tracked backup and opened as
+  a draft PR (biscuitthecampingbulldog-svg/biscuitthecampingbulldog.netlify.app-#5) — **but the PR
+  merging does not deploy anything** (deploys are git-disconnected, see Hosting setup above).
+- **Actual live deploy did not happen.** The Netlify MCP tool's `deploy-site` operation doesn't
+  deploy directly — it hands back an `npx -y @netlify/mcp@latest --site-id ... --proxy-path "..."`
+  command that has to be run from the source directory. Running that command was blocked by this
+  session's own permission classifier as a deploy-affecting action needing explicit confirmation
+  (same bucket as `netlify deploy`/piping-curl in `.claude/settings.json`). **A future session
+  (or Denise, if asked to just click "confirm" on one prompt) needs to approve running that exact
+  command** to actually publish this. The proxy URL/token in that command is short-lived — don't
+  reuse an old one from chat history, regenerate via `netlify-deploy-services-updater` →
+  `deploy-site` again first.
+- Open question for Denise: is this new site (with FXW/RVLock added) what she wants published as-is,
+  or does she also want Happy Howl added in the same pass before it goes live?
+
 ## In-progress / outstanding work
 
+- **Deploy the Aug 30 upload live** — see section above. Everything is reviewed and committed
+  (PR #5); only the actual publish command remains, and it needs a human to approve running it
+  (blocked by this session's permission classifier as deploy-affecting).
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
-  brand colors, linking to happyhowl.com/biscuit). Blocked on: (1) confirming the real,
-  current site source (the `website-review-feedback-bw0nmh` backup may already be stale —
-  see tooling gap above), (2) a Happy Howl logo image from the user (external fetch to
-  happyhowl.com is also blocked, so it can't be pulled automatically).
+  brand colors, linking to happyhowl.com/biscuit). The Aug 30 upload (see above) is now the
+  best-known current site source and does NOT include Happy Howl yet — still blocked on a
+  Happy Howl logo image from the user (external fetch to happyhowl.com is also blocked, so it
+  can't be pulled automatically).
 - User separately wants two specific pictures placed on the site with descriptions —
   never received in this conversation despite repeated requests. Do not assume any
   picture placement has happened without the actual files.
