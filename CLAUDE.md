@@ -69,16 +69,33 @@ reflects the current live page without confirming first (see tooling gap below).
 - **Netlify team:** "Biscuit the Camping Bulldog" (team ID `6a3a948ae90aff104f36f7a3`)
 - **Branch subdomain:** http://main--biscuitthecampingbulldog.netlify.app
 
-**Known tooling gap:** as of Aug 2026, none of the available Netlify MCP tools
-(`netlify-project-services-reader/updater`, `netlify-deploy-services-reader/updater`,
-etc.) can download the actual deployed file contents (no "get deploy files" operation
-exists). Outbound WebFetch/curl to the live domain is also blocked by this environment's
-network policy. So there is currently **no way to read the live page's actual HTML/CSS
-from within a session** — the only way to get it is to have the user download it
-manually: Netlify dashboard → the site → Deploys → latest deploy → Download, then have
-her attach the zip in chat. Don't attempt to blindly reconstruct/redeploy the whole site
-from a guess; the blast radius (breaking the live business site) is too high without
-seeing the real source first.
+**Known tooling gap (reading the live site):** as of Aug 2026, none of the available
+Netlify MCP tools can download the actual deployed file contents (no "get deploy files"
+operation exists). Outbound WebFetch/curl to the live domain is also blocked by this
+environment's network policy. So there is currently **no way to read the live page's
+actual HTML/CSS from within a session** — the only way to get it is to have the user
+download it manually: Netlify dashboard → the site → Deploys → latest deploy → Download,
+then have her attach the zip in chat. Don't attempt to blindly reconstruct/redeploy the
+whole site from a guess; the blast radius (breaking the live business site) is too high
+without seeing the real source first.
+
+**Deploying (this is no longer a gap — updated Aug 30 2026):** the `Netlify` MCP server's
+`netlify-deploy-services-updater` tool has a `deploy-site` operation (params: `siteId`)
+that can publish straight to production **from this session**, with no zip/manual-upload
+step for Denise. This means once real site files exist in the working tree here (e.g.
+checked out from `claude/website-review-feedback-bw0nmh`) and have been edited/verified,
+a Claude session can deploy them live directly. Confirm with Denise before actually
+deploying to production (it's a live business site with no easy rollback confirmed yet) —
+but the *mechanism* for "keeping it updated" without her touching Netlify at all now
+exists; don't tell her manual download/upload is the only path. If the Netlify MCP server
+shows as failed-to-connect at session start, that's usually transient — it has reconnected
+mid-session before; check `ToolSearch` again before assuming the gap is back.
+
+**Live status snapshot (Aug 30 2026, ~10:30 UTC):** current production deploy id
+`6a94062955a6492782e5dac8`, `deploy_source: "drop"` (manual drag-and-drop upload, not API,
+not git), `manual_deploy: true`, `commit_ref: null`, state `ready`. So very recently
+(same day) someone manually pushed a deploy through the Netlify dashboard UI — worth
+asking Denise if that was her before assuming the live site still matches any old audit.
 
 ## Newsletter signups
 
