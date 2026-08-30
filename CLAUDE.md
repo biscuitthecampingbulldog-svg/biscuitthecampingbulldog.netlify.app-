@@ -18,7 +18,7 @@ no build tooling, and (as of this writing) no CI configured. It's a lightweight 
 **Read the "Branches" section below before assuming any given checkout has the real site
 in it — several branches only contain this notes file.**
 
-## Branches — what's actually on each one (checked Aug 27 2026)
+## Branches — what's actually on each one (checked Aug 30 2026)
 
 The repo's history forked early (common ancestor: "Add project permissions allowlist for
 routine website work") into several purpose-specific branches that were never merged back
@@ -28,7 +28,8 @@ together. As of this writing there is no `main`/`master` — GitHub's default br
 | Branch | Contents | Purpose |
 |---|---|---|
 | `claude/website-picture-approvals-bh09kl` **(GitHub default/HEAD)** | `CLAUDE.md`, `.claude/settings.json` only — **no site source** | Where these project notes live and where PR #1 (PawPlanner investigation) was merged. Despite the name, it does not currently contain any picture-approval work or site files. |
-| `claude/website-review-feedback-bw0nmh` | `index.html`, `thank-you.html`, `images/` (logos, hero photos, adventure tiles, favicons) | **The actual backed-up site source.** Go here if you need to read or edit real markup/CSS. |
+| `claude/biscuit-website-impl-pvzmuz` | `index.html`, `thank-you.html`, `images/` — **the current/newest site build** | Implements the "Biscuit Website" mockup Denise built in Claude Design (claude.ai/design). Denise exported the finished design as a static site zip (`biscuitthecampingbulldogNEWSITE20260830.zip`) and attached it in chat on Aug 30 2026 since this session couldn't reach the Claude Design MCP (no design-system login in a non-interactive/remote session). This build fixes every bug listed in the July 24 audit below and adds FXW + RVLock as new affiliate partners. See "Aug 30 2026 — site rebuild" below for details. **This supersedes `website-review-feedback-bw0nmh` as the source to work from going forward** — start here, not there. |
+| `claude/website-review-feedback-bw0nmh` | `index.html`, `thank-you.html`, `images/` (logos, hero photos, adventure tiles, favicons) | Older backed-up site source, now stale as of the Aug 30 rebuild above — kept for history only. |
 | `claude/pinterest-integration-5j8hjz` | `index.html` + `images/products/*.jpg` (~25 Veritas Vans product photos) | Working branch for the Pinterest pin-image project (see PawPlanner section below). Stalled on a Zapier monthly quota limit as of Aug 16 2026. |
 | `claude/pawplanner-inquiry-khhrib` | Same `CLAUDE.md` content as the default branch | Source branch for the now-merged PR #1; safe to ignore going forward. |
 
@@ -93,7 +94,39 @@ seeing the real source first.
   org currently can't be granted MCP connectors, so if the Netlify tools aren't loaded
   when it fires, it should say so plainly rather than error.
 
-## Known site structure (per user-provided audit, July 24 2026 — may be stale, confirm against actual downloaded files before editing)
+## Aug 30 2026 — site rebuild (implements the Claude Design mockup)
+
+Denise designed the site visually in Claude Design (project "Biscuit Website", canvas file
+`Biscuit Website.dc.html`) and asked for it to be implemented here. This session's
+`claude_design`/`DesignSync` MCP access requires a `/design-login` that only works in an
+interactive session, so it couldn't be pulled directly — Denise instead exported the
+finished design as a static site and attached the zip
+(`biscuitthecampingbulldogNEWSITE20260830.zip`) in chat. That export **is** the
+implementation (real, complete `index.html` + images, not a raw canvas file), so it was
+brought into this repo close to as-is on `claude/biscuit-website-impl-pvzmuz` rather than
+re-built from scratch.
+
+What changed vs. the old backup on `website-review-feedback-bw0nmh`:
+- All bugs from the July 24 2026 audit (below) are now fixed in this build.
+- Two new affiliate partners added: **FXW** (Rollick dog playpen, Amazon link) and
+  **RVLock** (keyless RV door lock).
+- `thank-you.html` was not included in the export (the form posts to `/thank-you.html`
+  via Netlify Forms) — Claude authored a matching branded one from the same color/font
+  variables so the form has somewhere to land.
+- The export embeds the FXW/RVLock partner logos as inline base64 `data:` URIs directly
+  in `index.html` rather than referencing separate image files, which is why
+  `index.html` is ~340KB. A `images/logos/` folder of loose `.png`/`.b64` files existed
+  in the zip too but isn't referenced anywhere in the page — left out of the repo as
+  unused working files. Worth a follow-up performance pass (extract those into real
+  `<img src>` files) if page-weight ever becomes a concern, but not done here to avoid
+  touching working markup without being asked.
+- **Not yet deployed live** — per the hosting note below, deploys are manual/API-based
+  and disconnected from this repo, and pushing a full site replacement to the live
+  business site is exactly the kind of outward-facing, hard-to-reverse action that needs
+  Denise's go-ahead first, not an assumption. Ask her before deploying.
+
+## Known site structure (per user-provided audit, July 24 2026 — superseded by the Aug 30
+rebuild above; kept for history)
 
 - Nav: Home / About / Adventures / Picks
 - Hero section with a "Follow The Pack" button
@@ -101,15 +134,11 @@ seeing the real source first.
   Blue Technology, Chewy) — this is likely what the user calls the "Partners" section/tab
 - "Life in the Smokies" tile section (6 tiles; 2 — "Connected Anywhere" and "RV Road
   Trips" — were missing photos as of the audit)
-- Known bugs from that audit, not yet confirmed fixed: "Follow The Pack"/"Follow Us"
-  buttons point to a social-follow section that doesn't exist on the page; affiliate
-  disclosure sentence is cut off mid-word; headline has a double space
+- Known bugs from that audit — **fixed in the Aug 30 rebuild above**: "Follow The
+  Pack"/"Follow Us" buttons point to a social-follow section that doesn't exist on the
+  page; affiliate disclosure sentence is cut off mid-word; headline has a double space
   ("Biscuit  the Camping Bulldog"); no email signup; link-preview image is the small
   round logo instead of a wide photo.
-- A working backup of `index.html`/`thank-you.html`/images matching (roughly) this audit
-  lives on `claude/website-review-feedback-bw0nmh` — start there if asked to fix any of
-  the above, but confirm against a fresh download first since it may have drifted from
-  what's actually live.
 
 ## Partners / affiliate links — verified correct URLs
 
@@ -214,14 +243,14 @@ little budget right now (affiliate income is minimal so far). Plan, no monthly c
 ## In-progress / outstanding work
 
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
-  brand colors, linking to happyhowl.com/biscuit). Blocked on: (1) confirming the real,
-  current site source (the `website-review-feedback-bw0nmh` backup may already be stale —
-  see tooling gap above), (2) a Happy Howl logo image from the user (external fetch to
-  happyhowl.com is also blocked, so it can't be pulled automatically).
+  brand colors, linking to happyhowl.com/biscuit). Still blocked on a Happy Howl logo
+  image from the user (external fetch to happyhowl.com is also blocked, so it can't be
+  pulled automatically) — the Aug 30 rebuild (see above) did not add this, it wasn't part
+  of that design export.
 - User separately wants two specific pictures placed on the site with descriptions —
   never received in this conversation despite repeated requests. Do not assume any
   picture placement has happened without the actual files.
-- The GitHub default branch (`website-picture-approvals-bh09kl`) currently holds no site
-  source at all, only these notes — worth reconciling with Denise/a future session
-  whether the real site backup (`website-review-feedback-bw0nmh`) should become the
-  default, once it's confirmed current.
+- **Open question for Denise:** should `claude/biscuit-website-impl-pvzmuz` (the Aug 30
+  rebuild) actually be pushed live to Netlify, and should it become the GitHub default
+  branch? Both need her explicit yes before acting — don't deploy or repoint the default
+  branch on assumption.
