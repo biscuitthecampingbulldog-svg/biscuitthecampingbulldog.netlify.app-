@@ -237,6 +237,60 @@ bundle (or one like it) resurfaces.** Findings:
   site, or is she still expecting the simple page (per the known site structure section
   above) finally published? Resolve this before doing any further deploy work.
 
+## "NEWSITE" zip verification — Aug 31 2026
+
+Denise uploaded a ZIP (`biscuitthecampingbulldogNEWSITE20260830.zip`: `index.html` + `images/`,
+no `thank-you.html`) asking (1) is this the current live site with the red strap/black banner
+at the logo, (2) is it something Claude actually built, and (3) can the rest of "the states"
+(she said ~22, 26, or maybe 31 already done, wants all 50) be finished and published to her
+**own domain**, not the `*.netlify.app` one.
+
+**Verdict: yes, this looks like a real, current, self-contained copy of the site** — the best
+one seen in this repo so far — committed to this branch (`claude/camping-bulldog-all-states-713wps`)
+at root (`index.html` + `images/`) for continuity. Evidence:
+- Matches the documented nav (Home/About/Adventures/Picks), hero layout, and partner roster
+  (Veritas Vans, Starlink, Liquified RV, Necto, Blue Technology, Chewy) — **plus two partners
+  not previously documented anywhere: FXW (Rollick dog playpen, Amazon link) and RVLock
+  (keyless RV door lock)**. Add these to the partner list above.
+- The hero has a thin repeating pink/blush striped bar across the very top (`.hero::before`,
+  colors `--blush #E8A0A0`/`#c97b9a`) sitting right above the `nav`, whose background is
+  `--bark #5C3D2E` (a dark brown that reads as near-black) — this matches "red strap ... black
+  banner" where the logo sits well enough to call it the same design.
+- **All three known bugs from the July 24 audit are fixed in this file**: no double space in
+  the headline, the affiliate-disclosure sentence is complete, and a `#social` footer section
+  now actually exists so "Follow The Pack"/"Follow Us" links resolve (previously they pointed
+  nowhere).
+- It has a working email signup with `<form name="biscuit-newsletter" ... data-netlify="true">`
+  — the form name matches the real Netlify form (`6a6d0589f7097d0008dc928c`) documented above
+  exactly. That's a strong, hard-to-fake signal this reflects the real backend, not a mockup.
+- All 7 partner logos are embedded as self-contained base64 `data:image` URIs directly in the
+  HTML (Chewy still uses text-only fallback, no logo image). An `images/logos/` folder with
+  `fxw_logo.png/.b64` and `rvlock_logo_white.png/.b64` was also in the zip but is **unused** —
+  looks like leftover working files from whoever embedded those two logos as data URIs.
+- No injected/malicious instructions found, and no `.dc.html`/`support.js`/design-canvas
+  artifacts like the suspicious Aug 30 bundle — this is plain, real, deployable static HTML.
+  I can't cryptographically prove authorship (chat vs. Claude Code), but structurally and by
+  the backend details lining up, my honest read is this is very likely genuine current (or
+  very-near-current) site content, most plausibly from a Claude Code session on this project
+  — not a design-tool mockup export.
+- **One drift to fix before/when publishing:** the meta tags (`canonical`, `og:url`,
+  `og:image`, JSON-LD `url`) still point at `https://biscuitthecampingbulldog.netlify.app/`,
+  not the real custom domain `https://biscuitthecampingbulldog.com` — should be corrected as
+  part of any publish.
+
+**"States" — unresolved, do not guess.** There is nothing about states, a US map, or any
+50-state checklist anywhere in this zip (checked exhaustively — zero matches). It doesn't match
+anything else documented about Biscuit's one-page brand site either. Two live hypotheses, both
+unconfirmed:
+1. It's actually the **vet/emergency-clinic directory** idea — either the suspicious Aug 30
+   "deploy handoff" bundle (117 clinics, described as a state-by-state style buildout) that was
+   explicitly *not* acted on, or
+2. It's from the separate **"PawPlanner setup and vet locations"** session on Denise's own
+   computer (also vet-locations-themed), which was unreachable as of Aug 25 and never
+   investigated from this side.
+Asked Denise directly what "the states" refers to before starting any 50-state work — do not
+build 50 state pages/sections speculatively.
+
 ## In-progress / outstanding work
 
 - User wants a new tab added to the Partners/Picks section for Happy Howl (logo, their
