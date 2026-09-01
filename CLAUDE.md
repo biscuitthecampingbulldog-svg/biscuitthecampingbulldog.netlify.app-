@@ -1,3 +1,11 @@
+> **⚠️ As of 2026-08-24, Denise's canonical project memory moved to Google Drive.**
+> Drive folder `0AKDaL2Adl1IUUk9PVA` contains a Google Doc titled
+> `BISCUIT_MEMORY (CURRENT <date> - READ THIS ONE)` — always read the one whose
+> title says CURRENT (older ones are renamed to SUPERSEDED/BROKEN, never deleted).
+> That doc is more current than this file for accounts, PawPlanner, and
+> in-flight work. This file remains this **git repo's own** notes (branches,
+> repo-specific facts) — keep both in sync when either changes.
+
 # Biscuit the Camping Bulldog — Project Notes
 
 Personal/hobby site for Denise Myers' brand "Biscuit the Camping Bulldog." Denise is not
@@ -236,6 +244,26 @@ bundle (or one like it) resurfaces.** Findings:
 - Open question sent to Denise: did she actually ask for a vet-directory version of the
   site, or is she still expecting the simple page (per the known site structure section
   above) finally published? Resolve this before doing any further deploy work.
+- **This resurfaced 2026-09-01, same problem, different chat.** Denise pasted a Google
+  Drive folder link + a transcript from a *different* conversation claiming a file called
+  `biscuitthecampingbulldog-LIVE-fixed.zip` (sitting in that other chat, not this one, not
+  in Drive) was "the real, whole, working site." Checked the two files that *were* in
+  Drive (`biscuitthecampingbulldog-index-2026-09-01.html`,
+  `biscuitthecampingbulldog-logic-2026-09-01.js`) — both are Claude Design canvas files
+  again: `<x-dc>` wrapper, 262 literal `{{ ... }}` template placeholders, a
+  `<script src="./support.js">` dependency that doesn't exist anywhere reachable
+  (confirmed via Drive search), and `logic.js` opens with `class Component extends
+  DCLogic` (the canvas component base class, not plain JS). `logic.js`'s own comment
+  confirms 21 of 22 states' vet-listing data live *only* in that other chat's zip, not
+  here. Full write-up in the 2026-09-01 Drive memory doc (see banner at top of this
+  file). **Also found:** the live site's last deploy (checked via Netlify MCP) was
+  2026-08-30 17:45 UTC, `deploy_source: "api"`, exactly one file changed (index.html) —
+  suspiciously close to the original Aug 30 bundle incident. Could not confirm visually
+  whether the live site is currently broken — outbound fetch to
+  biscuitthecampingbulldog.com is still blocked from this environment (tried curl and
+  WebFetch on 2026-09-01, both egress-blocked). **A future session should get eyes on
+  the live URL (its own fetch, or ask Denise to just look) before doing anything else
+  deploy-related.**
 
 ## In-progress / outstanding work
 
