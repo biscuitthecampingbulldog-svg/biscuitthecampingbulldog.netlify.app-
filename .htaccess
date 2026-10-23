@@ -1,0 +1,48 @@
+# Security headers for biscuitthecampingbulldog.com
+# Note: No Content-Security-Policy header is set here on purpose —
+# the site relies on inline JavaScript, and a strict CSP would break it.
+
+# Friendly page links. The site is one file (index.html) that switches what it shows
+# based on the web address, e.g. /gear. Without this, visiting /gear directly (not
+# through the site's own menu) would show a "not found" page instead of loading the
+# app. This only kicks in for these exact addresses -- everything else on the site
+# (images, robots.txt, the PDF checklist, etc.) is untouched. The rule fires even if a
+# same-named folder also exists (some hosts don't auto-serve a folder's index.html on
+# their own), so this is the one thing that makes these addresses work either way.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  # Each page address is served through page.php, which reads index.html and adds that page's own share preview
+# (title, description, picture) so links shared on Facebook, Instagram and texts look right.
+RewriteRule ^$ /page.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(gear|vets|heat|about|pet-papers|install|reviews|fxw-dog-fence-review|blu-tech-review|necto-temperature-monitor-review|rvlock-keyless-entry-review|terms|stories|my-nose-knows-service-dog|shop|giveaway)/?$ /page.php [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Image caching. Filenames don't change when a photo is replaced, so images
+# are versioned with a "?v=2" style query string in the HTML instead — bump
+# that number any time a photo file is swapped for a new one, so visitors'
+# browsers fetch the new version instead of an old cached copy.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+</IfModule>
+
+# Always check for the newest pages, scripts and data. Without this, browsers kept
+# showing an old saved copy of the site for a while after each update.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|json|webmanifest|xml|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
