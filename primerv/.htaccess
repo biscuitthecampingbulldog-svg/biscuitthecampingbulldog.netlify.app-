@@ -1,0 +1,6 @@
+# Prime RV shop. This folder belongs ONLY to primerv.biscuitthecampingbulldog.com.
+# Keep the main site's page-address rules out of here, and send anyone who reaches this folder
+# through Biscuit's address (biscuitthecampingbulldog.com/primerv) to the shop's own address.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^primerv\. [NC]
+RewriteRule ^(.*)$ https://primerv.biscuitthecampingbulldog.com/$1 [R=301,L]
