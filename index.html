@@ -2010,9 +2010,12 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
     // Emergency button with a real location: the nearest 24-hour vets in ANY state (a closer one may be over the state line).
     const nearMode = !!uPt && this.state.emergOnly && !vetQ && !areaPick && this.state.locSource !== 'picked';
     const isER = (v) => v.tag === 'Open 24/7' || v.tag === 'Emergency';
+    // Emergency first (added 2026-10-27): the 3 closest 24-hour/emergency vets sit at the top,
+    // then everything else closest first, so a nearby regular vet never pushes the ER down the list.
+    const erFirst = (list) => { const top = list.filter(isER).slice(0, 3); return top.concat(list.filter(v => top.indexOf(v) < 0)); };
     const vetsSorted = nearMode
       ? byDistance(onePerPlace(Object.keys(this.DATA).flatMap(k => this.DATA[k].filter(isER)))).slice(0, 12)
-      : byDistance(vetsAll);
+      : erFirst(byDistance(onePerPlace(vetsAll)));
     const locatingNow = this.state.loc === 'asking' && p === 'vets';
     const noStateYet = !locatingNow && this.state.locSource === 'none' && !vetQ && !areaPick;
     const hideList = locatingNow || noStateYet;
