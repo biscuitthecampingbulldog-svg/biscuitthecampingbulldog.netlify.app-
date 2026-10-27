@@ -71,6 +71,14 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  /* Mark Denise's, Jeff's and Claude's own devices as internal so Google Analytics leaves their visits out
+     (added 2026-10-26). Open the site once with ?biscuit_internal=on on each device; ?biscuit_internal=off undoes it. */
+  try {
+    var bqi = new URLSearchParams(location.search).get('biscuit_internal');
+    if (bqi === 'on') localStorage.setItem('biscuit_internal', '1');
+    if (bqi === 'off') localStorage.removeItem('biscuit_internal');
+    if (localStorage.getItem('biscuit_internal') === '1') gtag('set', { traffic_type: 'internal' });
+  } catch (e) {}
   gtag('config', 'G-T6H2CSSG6B');
 </script>
 <script>
@@ -1515,7 +1523,7 @@ class Component extends DCLogic {
       if (!window.BISCUIT_ZIP3) { const z = document.createElement('script'); z.src = 'zip3.js?v=20261026a'; z.async = true; z.onload = () => this.setState({ zip3Ready: true }); document.head.appendChild(z); }
       if (window.BISCUIT_VET_DATA) { apply(); return; }
       const s = document.createElement('script');
-      s.src = 'vet-data.js?v=20261026a'; /* bump this version after every vet-data.js update so visitors get the new data */
+      s.src = 'vet-data.js?v=20261026b'; /* bump this version after every vet-data.js update so visitors get the new data */
       s.onload = apply;
       s.onerror = () => { this.setState({ vetDataReady: true, vetDataError: true }); resolve(); };
       document.head.appendChild(s);
