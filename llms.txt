@@ -31,7 +31,7 @@ Biscuit the Camping Bulldog is a full-time RV lifestyle brand run by Denise and 
 - [Pet Heat Safety Guide](https://biscuitthecampingbulldog.com/heat): How hot is too hot for your pet, temperature by temperature, for dogs, cats and small animals on the road.
 - [Pet Papers](https://biscuitthecampingbulldog.com/pet-papers): Offline pet paperwork checklist for RV travel.
 - [Packing checklist](https://biscuitthecampingbulldog.com/biscuit-packing-checklist.pdf): A free printable packing checklist.
-- [Vet directory](https://biscuitthecampingbulldog.com/vets): A directory of emergency and regular veterinarians plus pet-friendly campgrounds, covering all 50 states and popular RV destinations, searchable by town, park name or ZIP. Each listing has call now, directions, and report a change links.
+- [Vet directory](https://biscuitthecampingbulldog.com/vets): A directory of emergency and regular veterinarians plus pet-friendly campgrounds, covering all 50 states and popular RV destinations, searchable by town, park name or ZIP. Each listing has call now, directions, and report a change links. The red "Nearest 24-hour vet" button uses the visitor's location to list the closest 24-hour vets in any state, with approximate straight-line miles. Each state also has its own page at biscuitthecampingbulldog.com/vets/<state> (for example https://biscuitthecampingbulldog.com/vets/tennessee).
 
 ## About
 

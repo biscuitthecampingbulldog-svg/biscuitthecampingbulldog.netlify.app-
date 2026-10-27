@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8">
+<base href="/"><!-- all file links start from the site root, so state pages like /vets/tennessee find their pictures and scripts (added 2026-10-26) -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name='impact-site-verification' value='1fcbe164-d47f-41a9-82fb-9a557761e11b'>
 <meta name="theme-color" content="#1A1712">
 <link rel="manifest" href="manifest.json">
+<!-- React is kept on Biscuit's own site (added 2026-10-26) so the page no longer depends on an outside server. If these ever fail to load, support.js falls back to the outside copy by itself. -->
+<script src="/lib/react-18.3.1.min.js"></script>
+<script src="/lib/react-dom-18.3.1.min.js"></script>
 <script src="./support.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6H2CSSG6B"></script>
 <script>
@@ -41,6 +45,8 @@
     function setTitle(path){
       var p=(path||"/").replace(/\/index\.html$/,"/").replace(/\/+$/,"")||"/";
       var t=window.BISCUIT_TITLES[p]||window.BISCUIT_HOME_TITLE;
+      var sm=p.match(/^\/vets\/([a-z-]+)$/);
+      if(sm){ var nm=sm[1].split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' '); t=nm+" Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog"; }
       if(document.title!==t) document.title=t;
     }
     /* Review schema (JSON-LD) for review pages. Add every new review here: path -> Review object. Only use facts that appear on the page. */
@@ -648,7 +654,7 @@ a:hover{color:#A8352A}
         <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px">
           <div>
             <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8A4A20">Vet directory</div>
-            <h1 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0">Vets near {{ place }}</h1>
+            <h1 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0">Vets {{ placeNear }}</h1>
             <div style="font:400 16px/1.45 Barlow,sans-serif;color:#7A6E5B;margin-top:9px">{{ locSubline }}</div>
 <sc-if value="{{ locGuessed }}" hint-placeholder-val="{{ false }}">
 <div style="font:500 14.5px/1.45 Barlow,sans-serif;color:#7A4712;margin-top:6px">This is a best guess, not your exact location &mdash; <button type="button" onClick="{{ cycleManual }}" style="background:transparent;border:none;padding:0;font:inherit;color:#8A4A20;text-decoration:underline;cursor:pointer">update it here</button>.</div>
@@ -664,7 +670,7 @@ a:hover{color:#A8352A}
           <div id="state-picker" style="font:600 11px/1 Barlow,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8A4A20;margin-top:18px">Or pick a state</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:13px">
             <sc-for list="{{ stateChips }}" as="s" hint-placeholder-count="8">
-              <button type="button" onClick="{{ s.go }}" style="background:{{ s.bg }};border:1px solid {{ s.border }};color:{{ s.fg }};font:600 13.5px/1 Barlow,sans-serif;padding:12px 14px;cursor:pointer;white-space:nowrap" style-hover="border-color:#8A4A20">{{ s.label }}</button>
+              <a href="{{ s.href }}" onClick="{{ s.go }}" style="background:{{ s.bg }};border:1px solid {{ s.border }};color:{{ s.fg }};font:600 13.5px/1 Barlow,sans-serif;padding:12px 14px;cursor:pointer;white-space:nowrap;display:inline-block;text-decoration:none" style-hover="border-color:#8A4A20">{{ s.label }}</a>
             </sc-for>
             <span style="display:flex;align-items:center;font:400 13.5px/1.4 Barlow,sans-serif;color:#7A6E5B;padding:0 6px">All 50 states covered</span>
           </div>
@@ -710,7 +716,7 @@ a:hover{color:#A8352A}
         <sc-if value="{{ hasPetCamps }}" hint-placeholder-val="{{ true }}">
           <div style="margin-top:44px;padding-top:30px;border-top:1px solid rgba(26,23,18,.2)">
             <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#3C5A46">Where to stay</div>
-            <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0;text-wrap:pretty">Pet-friendly campgrounds near {{ place }}</h2>
+            <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0;text-wrap:pretty">Pet-friendly campgrounds {{ placeNear }}</h2>
             <div style="font:400 16px/1.5 Barlow,sans-serif;color:#7A6E5B;margin-top:9px;max-width:62ch">Places that welcome the whole pack. Call ahead about breed rules and how many pets they allow.</div>
             <div style="display:grid;grid-template-columns:{{ vetCols }};gap:18px;margin-top:22px">
               <sc-for list="{{ petCamps }}" as="v" hint-placeholder-count="3">
@@ -748,7 +754,7 @@ a:hover{color:#A8352A}
         <sc-if value="{{ hasStateParks }}" hint-placeholder-val="{{ true }}">
           <div style="margin-top:44px;padding-top:30px;border-top:1px solid rgba(26,23,18,.2)">
             <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8A4A20">Where to stay</div>
-            <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0;text-wrap:pretty">State parks near {{ place }}</h2>
+            <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0;text-wrap:pretty">State parks {{ placeNear }}</h2>
             <div style="font:400 16px/1.5 Barlow,sans-serif;color:#7A6E5B;margin-top:9px;max-width:62ch">Public campgrounds with real hookup details where we could confirm them. Always call to confirm before you book.</div>
             <div style="display:grid;grid-template-columns:{{ vetCols }};gap:18px;margin-top:22px">
               <sc-for list="{{ stateParks }}" as="v" hint-placeholder-count="1">
@@ -849,7 +855,7 @@ a:hover{color:#A8352A}
             <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
               <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D81E10">Signs to stop immediately</div>
               <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Loud raspy breathing, thick ropey drool, bright red or purple gums, wobbling, refusing to move. Get into air conditioning and call the nearest emergency vet.</div>
-              <button type="button" onClick="{{ goVets }}" style="margin-top:18px;background:#A8352A;border:none;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 20px;cursor:pointer" style-hover="background:#932C22">Nearest ER near {{ place }}</button>
+              <button type="button" onClick="{{ goVets }}" style="margin-top:18px;background:#A8352A;border:none;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 20px;cursor:pointer" style-hover="background:#932C22">Nearest ER {{ placeNear }}</button>
             </div>
             <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
               <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D81E10">Power loss is an emergency</div>
@@ -1425,8 +1431,15 @@ a:hover{color:#A8352A}
 // path below and open straight to the right page instead of a 404.
 const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', giveaway: '/giveaway' };
 const REVIEW_FOR = { 'FXW': ['fxwReview', 'Read the FXW Dog Fence review \u203a'], 'Necto': ['nectoReview', 'Read our Necto review \u203a'], 'RVLock': ['rvlockReview', 'Read our RVLock review \u203a'] };
+// One page per state for Google (added 2026-10-26): /vets/tennessee, /vets/new-york ...
+const stateSlug = (name) => String(name || '').toLowerCase().replace(/[^a-z]+/g, '-');
+function stateFromPath(pathname) {
+  const m = String(pathname || '').replace(/\/+$/, '').match(/^\/vets\/([a-z-]+)$/);
+  return m ? m[1] : '';
+}
 function pageFromPath(pathname) {
   const clean = (pathname || '/').replace(/\/index\.html$/, '/').replace(/\/+$/, '') || '/';
+  if (stateFromPath(clean)) return 'vets';
   const found = Object.keys(PAGE_PATHS).find((k) => PAGE_PATHS[k] !== '/' && PAGE_PATHS[k] === clean);
   return found || 'home';
 }
@@ -1499,9 +1512,10 @@ class Component extends DCLogic {
         this.setState({ vetDataReady: true });
         resolve();
       };
+      if (!window.BISCUIT_ZIP3) { const z = document.createElement('script'); z.src = 'zip3.js?v=20261026a'; z.async = true; z.onload = () => this.setState({ zip3Ready: true }); document.head.appendChild(z); }
       if (window.BISCUIT_VET_DATA) { apply(); return; }
       const s = document.createElement('script');
-      s.src = 'vet-data.js?v=20261025a'; /* bump this version after every vet-data.js update so visitors get the new data */
+      s.src = 'vet-data.js?v=20261026a'; /* bump this version after every vet-data.js update so visitors get the new data */
       s.onload = apply;
       s.onerror = () => { this.setState({ vetDataReady: true, vetDataError: true }); resolve(); };
       document.head.appendChild(s);
@@ -1581,10 +1595,10 @@ class Component extends DCLogic {
       .then(d => {
         const idx = (d && d.countryCode === 'US') ? this.stateIx(d.principalSubdivision, d.principalSubdivisionCode) : -1;
         if (idx === -1) throw new Error('no guess');
-        this.setState({ loc: 'found', placeIx: idx, locSource: 'approx', userZip: '', locNote: why + ' My best guess from your internet connection is ' + this.PLACES[idx].state + ', but that can be off (especially on Starlink or cell data). If it is wrong, tap your state below.' + (extra || '') });
+        this.setState({ loc: 'found', placeIx: idx, locSource: 'approx', userZip: '', userPt: null, locNote: why + ' My best guess from your internet connection is ' + this.PLACES[idx].state + ', but that can be off (especially on Starlink or cell data). If it is wrong, tap your state below.' + (extra || '') });
       })
       .catch(() => {
-        this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: why + ' Tap your state below.' + (extra || '') });
+        this.setState({ loc: 'found', locSource: 'none', userZip: '', userPt: null, locNote: why + ' Tap your state below.' + (extra || '') });
         this.scrollToPicker();
       });
   };
@@ -1628,13 +1642,13 @@ class Component extends DCLogic {
         this.coordsToState(latitude, longitude).then(r => {
           if (!live()) return;
           if (r.outside) {
-            this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: 'You look to be outside the United States. This directory covers the 50 US states, so tap a state below.' });
+            this.setState({ loc: 'found', locSource: 'none', userZip: '', userPt: null, locNote: 'You look to be outside the United States. This directory covers the 50 US states, so tap a state below.' });
             this.scrollToPicker();
           } else if (r.idx === -1) {
-            this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: 'Got your location, but could not match it to a state. Tap your state below.' + extra });
+            this.setState({ loc: 'found', locSource: 'none', userZip: '', userPt: [latitude, longitude], locNote: 'Got your location, but could not match it to a state. Tap your state below.' + extra });
             this.scrollToPicker();
           } else {
-            this.setState({ loc: 'found', placeIx: r.idx, locSource: r.offline ? 'approx' : 'gps', userZip: r.zip || '', locNote: r.offline ? 'Got your location, but the address lookup did not answer, so ' + this.PLACES[r.idx].state + ' is my best match. If you are near a state line, double-check below.' : '' });
+            this.setState({ loc: 'found', placeIx: r.idx, locSource: r.offline ? 'approx' : 'gps', userZip: r.zip || '', userPt: [latitude, longitude], locNote: r.offline ? 'Got your location, but the address lookup did not answer, so ' + this.PLACES[r.idx].state + ' is my best match. If you are near a state line, double-check below.' : '' });
           }
         });
       },
@@ -1646,6 +1660,21 @@ class Component extends DCLogic {
       },
       { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 }
     );
+  };
+
+  // Keep the address bar on the state's own page (/vets/tennessee) when a state is chosen.
+  setStateUrl = (stateName) => {
+    if (typeof window === 'undefined' || !window.history || !window.history.pushState) return;
+    const path = '/vets/' + stateSlug(stateName);
+    if (window.location.pathname !== path) window.history.pushState({ page: 'vets' }, '', path);
+  };
+  applyStateFromPath = () => {
+    const slug = stateFromPath(typeof window !== 'undefined' ? window.location.pathname : '');
+    if (!slug) return false;
+    const idx = this.PLACES.findIndex(p => stateSlug(p.state) === slug);
+    if (idx === -1) return false;
+    this.setState({ page: 'vets', placeIx: idx, loc: 'found', locNote: '', locSource: 'picked', area: '', vetQuery: '' });
+    return true;
   };
 
   // Hero button: if we already found them, jump to their state; otherwise locate.
@@ -1738,8 +1767,10 @@ class Component extends DCLogic {
       const v = window.innerWidth < 780 ? 'phone' : 'desktop';
       if (v !== this.state.view) this.setState({ view: v });
     });
+    this.applyStateFromPath();
     window.addEventListener('popstate', () => {
       this.setState({ page: pageFromPath(window.location.pathname), menuOpen: false });
+      this.applyStateFromPath();
     });
     try {
       const raw = localStorage.getItem(this.WX_KEY);
@@ -1832,7 +1863,8 @@ class Component extends DCLogic {
 
   
 // Popular RV areas dropdown on /vets. Built from the directory data itself, so new areas appear automatically:
-// any area label that has at least one vet and one campground.
+// every area label in the directory (since 2026-10-26). If an area has only vets or only
+// campgrounds listed under its exact name, the page fills in the closest ones nearby.
 buildAreaSelect = (place) => {
 if (!this.state.vetDataReady) return null;
 if (!this._areaList) {
@@ -1841,7 +1873,7 @@ const cnt = {};
 const id = k + '|' + v.city; cnt[id] = cnt[id] || { v: 0, c: 0 }; cnt[id][kind]++;
 })));
 const byState = {};
-Object.keys(cnt).filter(id => cnt[id].v > 0 && cnt[id].c > 0).forEach(id => { const k = id.split('|')[0]; (byState[k] = byState[k] || []).push(id.slice(k.length + 1)); });
+Object.keys(cnt).filter(id => cnt[id].v > 0 || cnt[id].c > 0).forEach(id => { const k = id.split('|')[0]; (byState[k] = byState[k] || []).push(id.slice(k.length + 1)); });
 this._areaList = this.PLACES.filter(p => byState[p.key]).map(p => ({ key: p.key, state: p.state, areas: byState[p.key].sort() }));
 }
 const h = React.createElement;
@@ -1854,6 +1886,7 @@ if (!val) { this.setState({ area: '' }); return; }
 const k = val.split('|')[0]; const label = val.slice(k.length + 1);
 const idx = this.PLACES.findIndex(p => p.key === k);
 if (this.state.page !== 'vets') this.go('vets')();
+if (idx !== -1) this.setStateUrl(this.PLACES[idx].state);
 this.setState({ area: label, placeIx: idx === -1 ? this.state.placeIx : idx, vetQuery: '', loc: 'found', locNote: '', locSource: 'picked' });
 },
 style: { display: 'block', width: '100%', maxWidth: 520, boxSizing: 'border-box', marginTop: 13, font: '400 16px/1.2 Barlow,sans-serif', color: '#1A1712', background: '#F5ECDC', border: '1px solid rgba(26,23,18,.28)', padding: '13px 12px', cursor: 'pointer' }
@@ -1877,7 +1910,7 @@ zipPre = allZ.filter(z => z.slice(0, 3) === vetQ.slice(0, 3)).length >= 2 ? vetQ
 }
 const matchQ = (v, q) => zipPre ? (v.zip || '').indexOf(zipPre) === 0 : (v.name + ' ' + v.where + ' ' + (v.city || '') + ' ' + (v.zip || '')).toLowerCase().includes(q);
 // Each place shows once on a state page, even when it is listed under several nearby areas.
-const onePerPlace = (list) => { const seen = {}; return list.filter(v => { const k = (v.name || '').toLowerCase().replace(/[^a-z0-9]/g, '') + '|' + (v.phone || '').replace(/[^0-9]/g, '').slice(-10); if (seen[k]) return false; seen[k] = true; return true; }); };
+const onePerPlace = (list) => { const seen = {}; return list.filter(v => { const ph = (v.phone || '').replace(/[^0-9]/g, '').slice(-10); const k = ph.length === 10 ? 'p' + ph : 'n' + (v.name || '').toLowerCase().replace(/[^a-z0-9]/g, ''); /* same phone number = same place (2026-10-26) */ if (seen[k]) return false; seen[k] = true; return true; }); };
     // Search looks through every state but never changes the state the visitor picked.
 // The picked state's matches come first, then matches from other states.
 const searchAll = (src) => vetQ ? [place.key].concat(Object.keys(src).filter(k => k !== place.key)).flatMap(k => (src[k] || []).filter(v => matchQ(v, vetQ))) : null;
@@ -1885,7 +1918,7 @@ const searchAll = (src) => vetQ ? [place.key].concat(Object.keys(src).filter(k =
 const LOC = {
       idle: { text: 'Turn on location and I\u2019ll show the vets in your state.', dot: '#7A6E5B', btn: 'Use my location', bg: '#1A1712', fg: '#EFE0C4', border: '#1A1712', sub: '' },
       asking: { text: this.state.emergOnly ? 'Finding your nearest 24-hour vet\u2026' : 'Sniffing out where you are\u2026', dot: '#B5761F', btn: 'Locating\u2026', bg: '#B5761F', fg: '#FFF6E6', border: '#B5761F', sub: '' },
-      found: { text: (this.state.locSource === 'gps' ? 'Got you in ' + place.state + ' \u00b7 vets in your state' : this.state.locSource === 'approx' ? 'Best guess: ' + place.state + ' \u00b7 tap your state if wrong' : this.state.locSource === 'none' ? 'Tap your state below to see its vets' : 'Showing vets in ' + place.state), dot: '#3C5A46', btn: 'Update location', bg: 'transparent', fg: '#3C5A46', border: 'rgba(60,90,70,0.5)', sub: (this.state.locSource === 'gps' ? 'Showing your state, from your phone\u2019s location.' + (this.state.emergOnly && this.state.userZip ? ' Vets in your ZIP area are listed first.' : '') : this.state.locSource === 'approx' ? 'This is a best guess, not your exact location.' : this.state.locSource === 'picked' ? 'Showing the state you picked.' : '') }
+      found: { text: ((!!this.state.userPt && this.state.emergOnly && !vetQ && !this.state.area && this.state.locSource !== 'picked') ? 'Got your location \u00b7 nearest 24-hour vets, closest first' : this.state.locSource === 'gps' ? 'Got you in ' + place.state + ' \u00b7 vets in your state' : this.state.locSource === 'approx' ? 'Best guess: ' + place.state + ' \u00b7 tap your state if wrong' : this.state.locSource === 'none' ? 'Tap your state below to see its vets' : 'Showing vets in ' + place.state), dot: '#3C5A46', btn: 'Update location', bg: 'transparent', fg: '#3C5A46', border: 'rgba(60,90,70,0.5)', sub: ((!!this.state.userPt && this.state.emergOnly && !vetQ && !this.state.area && this.state.locSource !== 'picked') ? 'From your phone\u2019s location, in any state. Miles are straight-line, so check the drive time.' : this.state.locSource === 'gps' ? 'Showing your state, from your phone\u2019s location. Closest listed first.' : this.state.locSource === 'approx' ? 'This is a best guess, not your exact location.' : this.state.locSource === 'picked' ? 'Showing the state you picked.' : '') }
     };
     const L = LOC[this.state.loc];
 
@@ -1907,23 +1940,57 @@ const LOC = {
     });
     const areaPick = (!vetQ && this.state.area) ? this.state.area : '';
 const inArea = (list) => areaPick ? list.filter(v => v.city === areaPick) : list;
-const vetsAll = (searchAll(this.DATA) || inArea(rows0))
+// Center of the picked area.
+let areaPt = null;
+if (areaPick) {
+  const pts = [].concat(this.DATA[place.key] || [], this.CAMPS[place.key] || []).filter(v => v.city === areaPick && typeof v.lat === 'number');
+  // Use the ZIP that shows up most often under this area (usually the town itself), not an average that drifts toward outlying listings.
+  if (pts.length) { const tally = {}; pts.forEach(v => { tally[v.zip] = (tally[v.zip] || 0) + 1; }); const topZip = Object.keys(tally).sort((a, b) => tally[b] - tally[a])[0]; const hit = pts.find(v => v.zip === topZip); areaPt = [hit.lat, hit.lng]; }
+}
+const milesBetween = (a, q) => { const R = 3958.8, t = Math.PI / 180, dLa = (q[0] - a[0]) * t, dLo = (q[1] - a[1]) * t; const h = Math.sin(dLa / 2) ** 2 + Math.cos(a[0] * t) * Math.cos(q[0] * t) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
+// An area with nothing of one kind under its exact name borrows the closest ones (any state, within 90 miles).
+const fillNear = (src, list, keep) => {
+  if (!areaPick || !areaPt || list.some(keep)) return list;
+  const pool = Object.keys(src).flatMap(k => src[k] || []).filter(v => keep(v) && typeof v.lat === 'number').map(v => ({ v, d: milesBetween(areaPt, [v.lat, v.lng]) })).filter(x => x.d <= 90).sort((a, b) => a.d - b.d);
+  const seen = {}; const out = [];
+  pool.forEach(x => { const k = (x.v.phone || x.v.name).replace(/[^0-9a-z]/gi, ''); if (!seen[k] && out.length < 5) { seen[k] = 1; out.push(x.v); } });
+  return list.concat(out);
+};
+const erOK = (v) => !this.state.emergOnly || v.tag === 'Open 24/7' || v.tag === 'Emergency';
+const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK))
       .filter(v => !this.state.emergOnly || v.tag === 'Open 24/7' || v.tag === 'Emergency')
       .filter(v => {
         const q = this.state.vetQuery.trim().toLowerCase();
         return !q || matchQ(v, q);
       });
-    // Emergency mode with a known ZIP: put the closest 24-hour vets (by ZIP area) first.
-    const uz = (!vetQ && !areaPick && this.state.emergOnly && this.state.locSource === 'gps' && /^\d{5}$/.test(this.state.userZip || '')) ? parseInt(this.state.userZip.slice(0, 3), 10) : null;
-    const vetsSorted = uz === null ? vetsAll : vetsAll.map((v, i) => ({ v, i, d: /^\d{3}/.test(v.zip || '') ? Math.abs(parseInt(v.zip.slice(0, 3), 10) - uz) : 999 })).sort((x, y) => x.d - y.d || x.i - y.i).map(x => x.v);
+    // Distance (added 2026-10-26): every listing has a map spot from its ZIP (lat/lng),
+    // with the 3-digit ZIP area as a backup. Straight-line miles, rounded.
+    const uPt = areaPt || this.state.userPt;
+    const refName = areaPt ? areaPick.split(',')[0].split(' / ')[0] : '';
+    const Z3 = (typeof window !== 'undefined' && window.BISCUIT_ZIP3) || {};
+    const ptOf = (v) => (typeof v.lat === 'number' && typeof v.lng === 'number') ? [v.lat, v.lng] : (Z3[(v.zip || '').slice(0, 3)] || null);
+    const milesTo = (v) => {
+      const q = uPt && ptOf(v); if (!q) return null;
+      const R = 3958.8, toR = Math.PI / 180, dLa = (q[0] - uPt[0]) * toR, dLo = (q[1] - uPt[1]) * toR;
+      const h = Math.sin(dLa / 2) ** 2 + Math.cos(uPt[0] * toR) * Math.cos(q[0] * toR) * Math.sin(dLo / 2) ** 2;
+      return 2 * R * Math.asin(Math.sqrt(h));
+    };
+    const byDistance = (list) => uPt ? list.map((v, i) => ({ v, i, d: milesTo(v) })).sort((x, y) => (x.d === null ? 1e9 : x.d) - (y.d === null ? 1e9 : y.d) || x.i - y.i).map(x => x.v) : list;
+    const withMiles = (v) => { const d = milesTo(v); if (d === null) return v; const m = refName ? (d < 2 ? 'In ' + refName : 'About ' + Math.round(d) + ' mi from ' + refName) : (d < 1 ? 'Under 1 mi away' : 'About ' + Math.round(d) + ' mi away'); return { ...v, facts: [m].concat(v.facts || []) }; };
+    // Emergency button with a real location: the nearest 24-hour vets in ANY state (a closer one may be over the state line).
+    const nearMode = !!uPt && this.state.emergOnly && !vetQ && !areaPick && this.state.locSource !== 'picked';
+    const isER = (v) => v.tag === 'Open 24/7' || v.tag === 'Emergency';
+    const vetsSorted = nearMode
+      ? byDistance(onePerPlace(Object.keys(this.DATA).flatMap(k => this.DATA[k].filter(isER)))).slice(0, 12)
+      : byDistance(vetsAll);
     const locatingNow = this.state.loc === 'asking' && p === 'vets';
     const noStateYet = !locatingNow && this.state.locSource === 'none' && !vetQ && !areaPick;
     const hideList = locatingNow || noStateYet;
-    const vets = hideList ? [] : onePerPlace(vetsSorted).map((v, i) => card(v, i, 'v'));
+    const vets = hideList ? [] : onePerPlace(vetsSorted).map((v, i) => card(withMiles(v), i, 'v'));
     const vetDataLoading = !this.state.vetDataReady || hideList;
     const noVetMatches = vets.length === 0 && this.state.vetDataReady && !hideList;
     this.syncVetSchema(p === 'vets', vets);
-    const camps = hideList ? [] : onePerPlace(searchAll(this.CAMPS) || inArea(this.CAMPS[place.key] || [])).map((v, i) => card(v, i, 'c'));
+    const camps = hideList ? [] : byDistance(onePerPlace(searchAll(this.CAMPS) || fillNear(this.CAMPS, inArea(this.CAMPS[place.key] || []), () => true))).map((v, i) => card(withMiles(v), i, 'c'));
     const petCamps = camps.filter(v => v.tag !== 'State Park');
     const stateParks = camps.filter(v => v.tag === 'State Park');
     const hasCamps = camps.length > 0;
@@ -2008,7 +2075,8 @@ const vetsAll = (searchAll(this.DATA) || inArea(rows0))
 
     const stateChips = this.PLACES.map((pl, i) => ({
       label: pl.state,
-      go: () => { this._autoJumpQ = ''; this.setState({ placeIx: i, loc: 'found', locNote: '', locSource: 'picked', vetQuery: '', area: '' }); },
+      href: '/vets/' + stateSlug(pl.state),
+      go: (e) => { if (e && e.preventDefault) e.preventDefault(); this._autoJumpQ = ''; this.setStateUrl(pl.state); this.setState({ placeIx: i, loc: 'found', locNote: '', locSource: 'picked', vetQuery: '', area: '' }); },
       bg: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#1A1712' : 'transparent',
       fg: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#EFE0C4' : '#4A4234',
       border: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#1A1712' : 'rgba(26,23,18,0.24)'
@@ -2105,7 +2173,8 @@ const vetsAll = (searchAll(this.DATA) || inArea(rows0))
 
     return {
       views, nav, vets, camps, hasCamps, petCamps, hasPetCamps, stateParks, hasStateParks, noVetMatches, vetDataLoading, vetLoadingText: locatingNow ? (this.state.emergOnly ? 'Finding your location to show the nearest 24-hour vets\u2026 If your phone asks, tap Allow.' : 'Finding your location\u2026 If your phone asks, tap Allow.') : noStateYet ? 'Tap your state above (or type a town) and I\u2019ll show its vets and pet-friendly campgrounds.' : 'Loading the vet directory\u2026', stateChips, picks: LIVE_PICKS, pendingPicks: PENDING_PICKS, amazonExtras: AMAZON_EXTRAS, hasAmazonExtras: AMAZON_EXTRAS.length > 0, gearCards: GEAR_CARDS, gearSections: GEAR_SECTIONS, homePicks: HOME_PICKS, gearAmazon: GEAR_AMAZON,
-      place: vetQ ? '\u201c' + this.state.vetQuery.trim() + '\u201d' : (areaPick || (this.state.loc === 'asking' ? 'you' : this.state.locSource === 'none' ? 'you \u2014 pick a state' : place.label)),
+      placeNear: vetQ ? 'matching \u201c' + this.state.vetQuery.trim() + '\u201d' : areaPick ? 'near ' + areaPick : (this.state.loc === 'asking' || this.state.locSource === 'none' || (!!this.state.userPt && this.state.emergOnly && !vetQ && !this.state.area && this.state.locSource !== 'picked')) ? 'near you' : 'in ' + place.state,
+      place: vetQ ? '\u201c' + this.state.vetQuery.trim() + '\u201d' : (areaPick || ((this.state.loc === 'asking' || (!!this.state.userPt && this.state.emergOnly && !vetQ && !this.state.area && this.state.locSource !== 'picked')) ? 'you' : this.state.locSource === 'none' ? 'you \u2014 pick a state' : place.label)),
 areaSelectEl: this.buildAreaSelect(place),
       frameW: phone ? 'min(412px,100%)' : 'min(1240px,100%)',
       gut: phone ? '18px' : '34px',
@@ -2323,7 +2392,7 @@ goFxwReviewTop: () => { this.go('fxwReview')(); try { window.scrollTo(0, 0); } c
 }
 </script>
 <script>
-/* Shop page category buttons: scroll to that section (added 2026-10-04). */
-document.addEventListener("click",function(ev){var a=ev.target&&ev.target.closest?ev.target.closest('a[href^="#shop-"]'):null;if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(t){ev.preventDefault();t.scrollIntoView({block:"start"});}});
+/* Jump buttons (Shop and Gear sections): scroll to that section on the same page (added 2026-10-04; all # links since 2026-10-26 because of the <base> tag). */
+document.addEventListener("click",function(ev){var a=ev.target&&ev.target.closest?ev.target.closest('a[href^="#"]'):null;if(!a)return;var t=document.getElementById(a.getAttribute("href").slice(1));if(t){ev.preventDefault();t.scrollIntoView({block:"start"});}});
 </script></body>
 </html>

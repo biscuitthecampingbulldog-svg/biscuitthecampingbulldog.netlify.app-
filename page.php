@@ -31,6 +31,47 @@ $path = rtrim($uri, '/');
 if ($path === '' || $path === '/index.html') $path = '/';
 if ($path === '/page.php') $path = isset($_GET['p']) ? rtrim($_GET['p'], '/') : '/';
 if ($path === '') $path = '/';
+/* One page per state for search engines (added 2026-10-26): /vets/tennessee, /vets/new-york ...
+   Each gets its own title, description and address, plus a list of that state's vets and
+   campgrounds (read straight from vet-data.js, so new areas show up by themselves). */
+$STATES = array('AL'=>'Alabama','AK'=>'Alaska','AZ'=>'Arizona','AR'=>'Arkansas','CA'=>'California','CO'=>'Colorado','CT'=>'Connecticut','DE'=>'Delaware','FL'=>'Florida','GA'=>'Georgia','HI'=>'Hawaii','ID'=>'Idaho','IL'=>'Illinois','IN'=>'Indiana','IA'=>'Iowa','KS'=>'Kansas','KY'=>'Kentucky','LA'=>'Louisiana','ME'=>'Maine','MD'=>'Maryland','MA'=>'Massachusetts','MI'=>'Michigan','MN'=>'Minnesota','MS'=>'Mississippi','MO'=>'Missouri','MT'=>'Montana','NE'=>'Nebraska','NV'=>'Nevada','NH'=>'New Hampshire','NJ'=>'New Jersey','NM'=>'New Mexico','NY'=>'New York','NC'=>'North Carolina','ND'=>'North Dakota','OH'=>'Ohio','OK'=>'Oklahoma','OR'=>'Oregon','PA'=>'Pennsylvania','RI'=>'Rhode Island','SC'=>'South Carolina','SD'=>'South Dakota','TN'=>'Tennessee','TX'=>'Texas','UT'=>'Utah','VT'=>'Vermont','VA'=>'Virginia','WA'=>'Washington','WV'=>'West Virginia','WI'=>'Wisconsin','WY'=>'Wyoming');
+$STATE_KEY = '';
+if (preg_match('#^/vets/([a-z-]+)$#', $path, $sm)) {
+  foreach ($STATES as $k => $nm) {
+    if (trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') === $sm[1]) { $STATE_KEY = $k; break; }
+  }
+  if ($STATE_KEY === '') { $path = '/vets'; }
+}
+/* Pull one state's listings out of vet-data.js (one listing per line). */
+function biscuit_state_listings($key) {
+  $js = @file_get_contents(__DIR__ . '/vet-data.js');
+  if ($js === false) return array(array(), array());
+  $js = str_replace("\r\n", "\n", $js);
+  $parts = explode("\nCAMPS: {", $js, 2);
+  $out = array();
+  foreach ($parts as $part) {
+    $list = array();
+    if (preg_match('#\n' . $key . ': \[\n(.*?)\n\]#s', $part, $m)) {
+      foreach (explode("\n", $m[1]) as $line) {
+        $row = array();
+        foreach (array('name', 'where', 'phone', 'tag') as $f) {
+          if (preg_match("#\b$f: '((?:\\\\.|[^'\\\\])*)'#", $line, $fm)) $row[$f] = stripslashes($fm[1]);
+        }
+        if (!empty($row['name'])) $list[strtolower(preg_replace('/[^0-9]/', '', isset($row['phone']) ? $row['phone'] : '') ?: $row['name'])] = $row;
+      }
+    }
+    $out[] = array_values($list);
+  }
+  return array(isset($out[0]) ? $out[0] : array(), isset($out[1]) ? $out[1] : array());
+}
+if ($STATE_KEY !== '') {
+  $nm = $STATES[$STATE_KEY];
+  list($SV, $SC) = biscuit_state_listings($STATE_KEY);
+  $er = 0; foreach ($SV as $v) { if (isset($v['tag']) && ($v['tag'] === 'Open 24/7' || $v['tag'] === 'Emergency')) $er++; }
+  $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
+    "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
+    'biscuit-hero-smokies.jpg');
+}
 $html = @file_get_contents(__DIR__ . '/index.html');
 if ($html === false) { http_response_code(500); exit('Site file missing.'); }
 if (isset($PAGES[$path])) {
@@ -77,6 +118,22 @@ JSON;
 $LD['/rvlock-keyless-entry-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"RVLock Keyless Door Lock Review: No More Fumbling for Keys","url":"https://biscuitthecampingbulldog.com/rvlock-keyless-entry-review","datePublished":"2026-10-19","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"RVLock Keyless RV Door Lock","brand":{"@type":"Brand","name":"RVLock"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
 JSON;
+if ($STATE_KEY !== '') {
+  $items = array(); $pos = 1;
+  foreach ($SV as $v) {
+    $it = array('@type' => 'VeterinaryCare', 'name' => $v['name']);
+    if (!empty($v['where'])) $it['address'] = $v['where'];
+    if (!empty($v['phone'])) $it['telephone'] = $v['phone'];
+    $items[] = array('@type' => 'ListItem', 'position' => $pos++, 'item' => $it);
+  }
+  foreach ($SC as $v) {
+    $it = array('@type' => 'Campground', 'name' => $v['name'], 'petsAllowed' => true);
+    if (!empty($v['where'])) $it['address'] = $v['where'];
+    if (!empty($v['phone'])) $it['telephone'] = $v['phone'];
+    $items[] = array('@type' => 'ListItem', 'position' => $pos++, 'item' => $it);
+  }
+  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+}
 if (isset($LD[$path])) {
   $pos = stripos($html, '</head>');
   if ($pos !== false) $html = substr_replace($html, '<script type="application/ld+json" id="biscuit-review-ld">' . $LD[$path] . "</script>\n", $pos, 0);
