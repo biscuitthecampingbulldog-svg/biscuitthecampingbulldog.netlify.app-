@@ -132,11 +132,42 @@ if ($STATE_KEY !== '') {
     if (!empty($v['phone'])) $it['telephone'] = $v['phone'];
     $items[] = array('@type' => 'ListItem', 'position' => $pos++, 'item' => $it);
   }
-  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+  $crumbs = array('@type' => 'BreadcrumbList', 'itemListElement' => array(
+    array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'),
+    array('@type' => 'ListItem', 'position' => 2, 'name' => 'Find a vet', 'item' => $SITE . '/vets'),
+    array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $path)));
+  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
 if (isset($LD[$path])) {
   $pos = stripos($html, '</head>');
   if ($pos !== false) $html = substr_replace($html, '<script type="application/ld+json" id="biscuit-review-ld">' . $LD[$path] . "</script>\n", $pos, 0);
+}
+/* Plain-HTML version of each page for search engines and AI tools that don't run JavaScript (added 2026-10-26).
+   Visitors never see it (it sits inside <noscript>); it gives crawlers the real page title, summary,
+   links to every page and, on state pages, every vet and campground. */
+$e2 = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
+$NAV = array('/' => 'Home', '/vets' => 'Find a vet near you (all 50 states)', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet travel papers checklist', '/gear' => "Biscuit's road-tested gear", '/shop' => 'Shop what we use', '/reviews' => 'Gear reviews', '/stories' => "Biscuit's stories", '/giveaway' => 'Necto giveaway', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+if (isset($PAGES[$path])) {
+  $np = $PAGES[$path];
+  $ns = '<noscript><div style="max-width:760px;margin:0 auto;padding:16px;font-family:sans-serif">';
+  $ns .= '<h1>' . $e2(preg_replace('/ \| Biscuit the Camping Bulldog$/', '', $np[0])) . '</h1><p>' . $e2($np[1]) . '</p>';
+  if ($STATE_KEY !== '') {
+    $ns .= '<h2>Vets in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
+    foreach ($SV as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['tag']) ? ' (' . $e2($v['tag']) . ')' : '') . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; <a href="tel:' . preg_replace('/[^0-9]/', '', $v['phone']) . '">' . $e2($v['phone']) . '</a>' : '') . '</li>';
+    $ns .= '</ul><h2>Pet-friendly campgrounds and state parks in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
+    foreach ($SC as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; ' . $e2($v['phone']) : '') . '</li>';
+    $ns .= '</ul><p>Hours and services change. Call ahead when you can. In an emergency, go to the nearest open clinic.</p>';
+  }
+  if ($path === '/vets' || $STATE_KEY !== '') {
+    $ns .= '<h2>Vets and pet-friendly campgrounds by state</h2><p>';
+    $links = array();
+    foreach ($STATES as $k => $nm) $links[] = '<a href="/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') . '">' . $e2($nm) . '</a>';
+    $ns .= implode(' &middot; ', $links) . '</p>';
+  }
+  $ns .= '<h2>More from Biscuit the Camping Bulldog</h2><ul>';
+  foreach ($NAV as $u => $label) if ($u !== $path) $ns .= '<li><a href="' . $u . '">' . $e2($label) . '</a></li>';
+  $ns .= '</ul><p>Contact: <a href="mailto:biscuit@biscuitthecampingbulldog.com">biscuit@biscuitthecampingbulldog.com</a></p></div></noscript>';
+  $html = preg_replace_callback('#<body>#i', function ($m) use ($ns) { return '<body>' . $ns; }, $html, 1);
 }
 $html = preg_replace('#<html>#i', '<html lang="en">', $html, 1);
 header('Content-Type: text/html; charset=utf-8');
