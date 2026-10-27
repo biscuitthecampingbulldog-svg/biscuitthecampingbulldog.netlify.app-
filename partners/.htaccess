@@ -1,0 +1,6 @@
+# Shop Biscuit's Partners page. This folder belongs ONLY to partners.biscuitthecampingbulldog.com.
+# It is never part of Biscuit's main site: visits through biscuitthecampingbulldog.com/partners
+# are sent to the page's own address.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^partners\. [NC]
+RewriteRule ^(.*)$ https://partners.biscuitthecampingbulldog.com/$1 [R=301,L]
