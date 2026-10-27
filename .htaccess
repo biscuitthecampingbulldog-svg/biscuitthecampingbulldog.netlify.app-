@@ -20,7 +20,7 @@ RewriteRule ^$ /page.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^vets/[a-z-]+/?$ /page.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(gear|vets|heat|about|pet-papers|install|reviews|fxw-dog-fence-review|blu-tech-review|necto-temperature-monitor-review|rvlock-keyless-entry-review|terms|stories|my-nose-knows-service-dog|shop|giveaway)/?$ /page.php [L]
+RewriteRule ^(gear|vets|heat|about|pet-papers|install|reviews|fxw-dog-fence-review|blu-tech-review|necto-temperature-monitor-review|rvlock-keyless-entry-review|blu-waterstop-review|terms|stories|my-nose-knows-service-dog|shop|giveaway)/?$ /page.php [L]
 </IfModule>
 
 <IfModule mod_headers.c>

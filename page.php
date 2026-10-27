@@ -18,6 +18,7 @@ $PAGES = array(
   '/blu-tech-review' => array('Blu Technology Review | Biscuit the Camping Bulldog', 'The leak alarm, water filter and softener that keep our camper water clean and our floor dry: what each one does and why we use it, with a video from Biscuit.', 'picks/pick-blu-tech.jpg'),
   '/necto-temperature-monitor-review' => array('Necto Temperature Monitor Review | Biscuit the Camping Bulldog', 'Why Biscuit stays home safely in the camper: the Necto cell-connected temperature monitor, 2 years of monitoring included, alerts straight to our phones.', 'picks/pick-necto.jpg'),
   '/rvlock-keyless-entry-review' => array('RVLock Keyless Door Lock Review | Biscuit the Camping Bulldog', 'The RVLock keyless RV door lock: unlock the camper from a keychain remote, no more fumbling for keys with your hands full.', 'picks/pick-rvlock-2.jpg'),
+  '/blu-waterstop-review' => array('Blu Technology WATERSTOP Review | Biscuit the Camping Bulldog', 'A blown water pump seal, a tiny leak puck and an automatic shut-off: why the Blu Technology WATERSTOP kept our RV underbelly dry. Specs and 5 paws.', 'picks/pick-blu-tech.jpg'),
   '/shop' => array('Shop What We Use | Biscuit the Camping Bulldog', "Over 85 things our full-time RV family actually bought and uses, from dog gear, solar and RV parts to plumbing, camp kitchen and campsite favorites on Amazon.", 'biscuit-hero-smokies.jpg'),
   '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', "Win a Necto pet temperature monitor (\$199 value)! Join Biscuit's Pack by Dec 14, 2026 to enter. Winner drawn Dec 15. US residents 18+, no purchase needed.", 'picks/pick-necto.jpg'),
   '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains.', 'adv-service-dog-biscuit.jpg'),
@@ -84,7 +85,7 @@ if (isset($PAGES[$path])) {
   };
   $html = preg_replace_callback('#<title>.*?</title>#s', function ($m) use ($title) { return '<title>' . $title . '</title>'; }, $html, 1);
   $html = $set($html, 'name', 'description', $desc);
-  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review') ? 'article' : 'website';
+  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review') ? 'article' : 'website';
   $html = $set($html, 'property', 'og:type', $ogType);
   $html = $set($html, 'property', 'og:title', $title);
   $html = $set($html, 'property', 'og:description', $desc);
@@ -94,7 +95,7 @@ if (isset($PAGES[$path])) {
   $html = $set($html, 'name', 'twitter:description', $desc);
   $html = $set($html, 'name', 'twitter:image', $img);
   $head = "\n<title>$title</title>\n<link rel=\"canonical\" href=\"$url\">\n<meta name=\"description\" content=\"$desc\">\n"
-    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' ? 'article' : 'website') . "\">\n"
+    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review' ? 'article' : 'website') . "\">\n"
     . "<meta property=\"og:site_name\" content=\"$NAME\">\n<meta property=\"og:title\" content=\"$title\">\n<meta property=\"og:description\" content=\"$desc\">\n"
     . "<meta property=\"og:image\" content=\"$img\">\n<meta property=\"og:url\" content=\"$url\">\n"
     . "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"$title\">\n<meta name=\"twitter:description\" content=\"$desc\">\n<meta name=\"twitter:image\" content=\"$img\">\n";
@@ -117,6 +118,9 @@ $LD['/necto-temperature-monitor-review'] = <<<'JSON'
 JSON;
 $LD['/rvlock-keyless-entry-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"RVLock Keyless Door Lock Review: No More Fumbling for Keys","url":"https://biscuitthecampingbulldog.com/rvlock-keyless-entry-review","datePublished":"2026-10-19","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"RVLock Keyless RV Door Lock","brand":{"@type":"Brand","name":"RVLock"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
+JSON;
+$LD['/blu-waterstop-review'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"Review","name":"Blu Technology WATERSTOP Review: The Little Blue Box That Saved Our Underbelly","url":"https://biscuitthecampingbulldog.com/blu-waterstop-review","datePublished":"2026-10-27","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"Blu Technology WATERSTOP RV Leak Detection and Automatic Water Shut-Off","brand":{"@type":"Brand","name":"Blu Technology"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
 JSON;
 if ($STATE_KEY !== '') {
   $items = array(); $pos = 1;
@@ -142,7 +146,7 @@ if ($STATE_KEY !== '') {
    (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
 $LD2 = array();
 $CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
-$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories');
+$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/blu-waterstop-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories');
 if ($path !== '/' && $STATE_KEY === '' && isset($PAGES[$path])) {
   $cl = array(array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'));
   if (isset($CRUMB_PARENT[$path])) { $pp = $CRUMB_PARENT[$path]; $cl[] = array('@type' => 'ListItem', 'position' => 2, 'name' => $CRUMB_NAMES[$pp], 'item' => $SITE . $pp); }
