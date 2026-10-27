@@ -1,0 +1,2 @@
+# The Starlink shop is its own plain page. Keep the main site's page-address rules out of this folder.
+RewriteEngine Off
