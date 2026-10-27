@@ -52,7 +52,9 @@ RewriteRule ^(gear|vets|heat|about|pet-papers|install|reviews|fxw-dog-fence-revi
 # Squeeze text files before sending them (added 2026-10-26). The vet directory alone is
 # about 800 KB; compressed it is a fraction of that, which matters on campground wifi.
 <IfModule mod_deflate.c>
+<IfModule mod_filter.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
 </IfModule>
 
 # Biscuit's own copy of React never changes (the version is in the file name), so phones can keep it.
