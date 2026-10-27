@@ -8,23 +8,23 @@ $SITE = 'https://biscuitthecampingbulldog.com';
 $NAME = 'Biscuit the Camping Bulldog';
 $IMG  = $SITE . '/images/';
 $PAGES = array(
-  '/' => array("Biscuit the Camping Bulldog \u{2014} vet-first travel for every pet", 'Emergency and regular vets, pet-friendly campgrounds and a heat guide for travelling pets, from a service dog living full-time in the Great Smoky Mountains.', 'biscuit-hero-smokies.jpg'),
-  '/gear' => array("Biscuit's Road-Tested Gear | Biscuit the Camping Bulldog", 'The RV and pet gear our family actually uses, with discount codes and deals for our readers from Happy Howl, Necto, RVLock, CRAVOT, Prime RV and more.', 'picks/pick-blu-tech.jpg'),
-  '/vets' => array('Find a Vet Near You | Biscuit the Camping Bulldog', 'Emergency and regular vets plus pet-friendly campgrounds in all 50 states and the top RV destinations, checked by hand. Call or get directions in one tap.', 'biscuit-hero-smokies.jpg'),
-  '/heat' => array('Pet Heat Safety Guide | Biscuit the Camping Bulldog', 'How hot is too hot for your pet? A temperature-by-temperature guide for dogs, cats and small animals on the road, and why a parked camper heats up so fast.', 'adv-campsite.jpg'),
-  '/pet-papers' => array('Pet Travel Papers Checklist | Biscuit the Camping Bulldog', "Keep your pet's microchip, rabies tag, shots and vet info on one card that opens with no signal. Saved only on your device.", 'adv-campsite.jpg'),
-  '/reviews' => array('Gear Reviews | Biscuit the Camping Bulldog', 'Honest reviews of the gear Biscuit uses on the road. If we recommend it, it survived a bulldog.', 'review-fxw-fence-upright.jpg'),
-  '/fxw-dog-fence-review' => array('FXW Dog Fence Review | Biscuit the Camping Bulldog', 'The portable fence that gives Biscuit her own yard at every campground: setup, what we like, and what to know before you buy.', 'review-fxw-fence-upright.jpg'),
+  '/' => array("Biscuit the Camping Bulldog \u{2014} vet-first travel for every pet", "Emergency and regular vets in all 50 states, pet-friendly campgrounds, a pet heat guide and honest RV gear reviews from Biscuit, a full-time RV service dog.", 'biscuit-hero-smokies.jpg'),
+  '/gear' => array("Biscuit's Road-Tested Gear | Biscuit the Camping Bulldog", "The RV and pet gear Biscuit's family actually uses on the road, with discount codes from Happy Howl, Necto, RVLock, CRAVOT, Prime RV, Blu Tech and more.", 'picks/pick-blu-tech.jpg'),
+  '/vets' => array('Find a Vet Near You | Biscuit the Camping Bulldog', "Find emergency 24-hour vets, regular vets and pet-friendly campgrounds in all 50 states and top RV destinations, checked by hand. Call or get directions fast.", 'biscuit-hero-smokies.jpg'),
+  '/heat' => array('Pet Heat Safety Guide | Biscuit the Camping Bulldog', "How hot is too hot for your dog or cat? A temperature-by-temperature pet heat guide for RV travelers, plus how fast a parked car or camper heats up inside.", 'biscuit-about.jpg'),
+  '/pet-papers' => array('Pet Travel Papers Checklist | Biscuit the Camping Bulldog', "Keep your pet's microchip, rabies and vet info on one offline card, plus a checklist for taking your dog into Canada and back to the U.S. Saved on your device.", 'biscuit-about-2.jpg'),
+  '/reviews' => array('Gear Reviews | Biscuit the Camping Bulldog', "Honest, first-hand reviews of the RV and pet gear Biscuit uses every day, rated in pink paws: dog fence, water filter, temperature monitor and keyless lock.", 'review-fxw-fence-upright.jpg'),
+  '/fxw-dog-fence-review' => array('FXW Dog Fence Review | Biscuit the Camping Bulldog', "Our FXW portable dog fence review: how it gives Biscuit her own yard at every campground, the 10 minute setup, what we like and what to know before you buy.", 'review-fxw-fence-upright.jpg'),
   '/blu-tech-review' => array('Blu Technology Review | Biscuit the Camping Bulldog', 'The leak alarm, water filter and softener that keep our camper water clean and our floor dry: what each one does and why we use it, with a video from Biscuit.', 'picks/pick-blu-tech.jpg'),
   '/necto-temperature-monitor-review' => array('Necto Temperature Monitor Review | Biscuit the Camping Bulldog', 'Why Biscuit stays home safely in the camper: the Necto cell-connected temperature monitor, 2 years of monitoring included, alerts straight to our phones.', 'picks/pick-necto.jpg'),
   '/rvlock-keyless-entry-review' => array('RVLock Keyless Door Lock Review | Biscuit the Camping Bulldog', 'The RVLock keyless RV door lock: unlock the camper from a keychain remote, no more fumbling for keys with your hands full.', 'picks/pick-rvlock-2.jpg'),
-  '/shop' => array('Shop What We Use | Biscuit the Camping Bulldog', 'Over 85 things our full-time RV family actually bought and uses: dog gear, solar, RV parts, plumbing, camp kitchen and campsite favorites.', 'biscuit-hero-smokies.jpg'),
-  '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', 'Win a Necto ($199 value)! Join Biscuit\'s Pack by December 14, 2026 for a chance to win. US residents 18+, no purchase necessary.', 'picks/pick-necto.jpg'),
+  '/shop' => array('Shop What We Use | Biscuit the Camping Bulldog', "Over 85 things our full-time RV family actually bought and uses, from dog gear, solar and RV parts to plumbing, camp kitchen and campsite favorites on Amazon.", 'biscuit-hero-smokies.jpg'),
+  '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', "Win a Necto pet temperature monitor (\$199 value)! Join Biscuit's Pack by Dec 14, 2026 to enter. Winner drawn Dec 15. US residents 18+, no purchase needed.", 'picks/pick-necto.jpg'),
   '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains.', 'adv-service-dog-biscuit.jpg'),
   '/my-nose-knows-service-dog' => array('My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog', "People see the vest and think I'm playing dress-up. I am not. What a working service dog actually does, from Biscuit herself.", 'adv-service-dog-biscuit.jpg'),
-  '/about' => array('About Biscuit | Biscuit the Camping Bulldog', 'Meet Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains with her mama Denise and daddy Jeffrey.', 'adv-roadtrip.jpg'),
-  '/install' => array("Get Biscuit's App | Biscuit the Camping Bulldog", "Add Biscuit's vet finder to your phone's home screen. Free, no account, no app store.", 'biscuit-hero-smokies.jpg'),
-  '/terms' => array('Terms of Use | Biscuit the Camping Bulldog', 'Terms of use and copyright for biscuitthecampingbulldog.com.', 'biscuit-hero-smokies.jpg')
+  '/about' => array('About Biscuit | Biscuit the Camping Bulldog', "Meet Biscuit, an English Bulldog service dog who lives full-time in an RV in the Great Smoky Mountains with her mama Denise and daddy Jeffrey. Big heart!", 'adv-roadtrip.jpg'),
+  '/install' => array("Get Biscuit's App | Biscuit the Camping Bulldog", "Add Biscuit's free vet finder to your phone's home screen. No app store and no account, and the vet list still works at campgrounds with no cell signal.", 'biscuit-hero-smokies.jpg'),
+  '/terms' => array('Terms of Use | Biscuit the Camping Bulldog', "Terms of use and copyright for biscuitthecampingbulldog.com, the vet-first pet travel website from Biscuit, an English Bulldog service dog living in an RV.", 'biscuit-hero-smokies.jpg')
 );
 $uri = parse_url(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/', PHP_URL_PATH);
 $path = rtrim($uri, '/');
@@ -137,6 +137,37 @@ if ($STATE_KEY !== '') {
     array('@type' => 'ListItem', 'position' => 2, 'name' => 'Find a vet', 'item' => $SITE . '/vets'),
     array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $path)));
   $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+}
+/* Extra schema (added 2026-10-27): breadcrumbs on every subpage, FAQ on the heat guide and pet papers
+   (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
+$LD2 = array();
+$CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories');
+if ($path !== '/' && $STATE_KEY === '' && isset($PAGES[$path])) {
+  $cl = array(array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'));
+  if (isset($CRUMB_PARENT[$path])) { $pp = $CRUMB_PARENT[$path]; $cl[] = array('@type' => 'ListItem', 'position' => 2, 'name' => $CRUMB_NAMES[$pp], 'item' => $SITE . $pp); }
+  $cl[] = array('@type' => 'ListItem', 'position' => count($cl) + 1, 'name' => isset($CRUMB_NAMES[$path]) ? $CRUMB_NAMES[$path] : preg_replace('/ \| Biscuit the Camping Bulldog$/', '', $PAGES[$path][0]), 'item' => $SITE . $path);
+  $LD2[] = array('@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $cl);
+}
+$faq = function ($qa) { $m = array(); foreach ($qa as $q => $a) $m[] = array('@type' => 'Question', 'name' => $q, 'acceptedAnswer' => array('@type' => 'Answer', 'text' => $a)); return array('@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $m); };
+if ($path === '/heat') $LD2[] = $faq(array(
+  'How much hotter does a parked camper or car get than the air outside?' => 'A parked camper, car or trailer runs 30 to 40 degrees F hotter than the air outside, and it gets there in under an hour. On an 85 degree F day, the inside of a parked car hits about 104 degrees F in 10 minutes and 114 degrees F in 20.',
+  'Which pets overheat soonest?' => 'Flat-faced dogs, cats, rabbits and birds overheat sooner than people expect. Cut every temperature in the guide by ten degrees for bulldogs, frenchies, pugs, boxers and Persian cats.',
+  'What are the signs a pet is overheating?' => 'Loud raspy breathing, thick ropey drool, bright red or purple gums, wobbling, or refusing to move. Get into air conditioning and call the nearest emergency vet.',
+  'What if the RV air conditioning stops working?' => 'Treat power loss as an emergency. If the trailer air conditioning quits in summer, a pet shut inside has minutes, not hours. Know where the nearest cooled building is before you settle in for the night.'));
+if ($path === '/pet-papers') $LD2[] = $faq(array(
+  'What does my dog need to go into Canada from the U.S.?' => 'Dogs over 3 months old need a rabies certificate signed by a licensed vet that describes the dog and shows a rabies shot given within the last 3 years. Puppies under 3 months need proof of age. No health certificate is needed for a pet dog traveling with you. Rules change, so check the official USDA and Canadian pages before each trip.',
+  'Can I bring dog food into Canada?' => 'Yes, up to 20 kg (about 44 lb) per pet, if it is made in the USA, in the original store packaging, and only for the pet traveling with you.',
+  'What does my dog need to come back into the U.S. from Canada?' => 'The dog must be at least 6 months old, have a microchip a standard scanner can read, look healthy, and you need a receipt for the free CDC Dog Import Form, filled in online before you reach the border (one per dog, good for 6 months).',
+  'Where is the pet papers card saved?' => 'Only in the browser on your own device. Nothing is uploaded or sent to the website, and it opens with no signal.'));
+if ($path === '/gear') {
+  $GEAR = array(array('Happy Howl Dog Food', 'https://www.happyhowl.com/Biscuit'), array('Chewy', 'https://chewy.sjv.io/c/7017016/2846786/32975'), array('Necto temperature monitor', 'https://getnecto.com/?ref=biscuit'), array('FXW Dog Playpen', 'https://www.amazon.com/dp/B08MF1XBZW?tag=biscuit0b5-20'), array('Starlink', 'https://starlink.com/'), array('Veritas Vans Starlink Mini Mount', 'https://veritasvans.com/product/starlink-mini-mount/'), array('Veritas Vans Starlink Mini Dish', 'https://veritasvans.com/product/starlink-mini-dish/'), array('Blu Tech Water Filter', 'https://goblutech.com/Biscuit'), array('Prime RV tank treatment', 'https://liquifiedrv.com/'), array('RVLock keyless door lock', 'https://club.co/s/UW-J-NcpZXQtQ'), array('CRAVOT CyberRack S2', 'https://cravot.com/discount/biscuit10'), array('Xtreme Heaters', 'https://xtremeheaters.com/?ref=Biscuit'), array('BLUETTI Power Stations', 'https://www.bluettipower.com/'), array('Harvest Hosts', 'https://www.harvesthosts.com/'));
+  $gi = array(); foreach ($GEAR as $n => $g) $gi[] = array('@type' => 'ListItem', 'position' => $n + 1, 'name' => $g[0], 'url' => $g[1]);
+  $LD2[] = array('@context' => 'https://schema.org', '@type' => 'ItemList', 'name' => "Biscuit's Road-Tested Gear", 'url' => $SITE . '/gear', 'numberOfItems' => count($gi), 'itemListElement' => $gi);
+}
+foreach ($LD2 as $ld) {
+  $pos = stripos($html, '</head>');
+  if ($pos !== false) $html = substr_replace($html, '<script type="application/ld+json">' . json_encode($ld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n", $pos, 0);
 }
 if (isset($LD[$path])) {
   $pos = stripos($html, '</head>');
