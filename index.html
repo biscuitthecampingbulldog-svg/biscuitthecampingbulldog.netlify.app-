@@ -239,7 +239,7 @@ a:hover{color:#A8352A}
         </span>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button type="button" onClick="{{ detect }}" style="background:{{ locBtnBg }};border:1px solid {{ locBtnBorder }};color:{{ locBtnFg }};font:600 13px/1 Barlow,sans-serif;padding:11px 13px;cursor:pointer" style-hover="filter:brightness(0.95)">{{ locBtn }}</button>
+        <button type="button" onClick="{{ relocate }}" style="background:{{ locBtnBg }};border:1px solid {{ locBtnBorder }};color:{{ locBtnFg }};font:600 13px/1 Barlow,sans-serif;padding:11px 13px;cursor:pointer" style-hover="filter:brightness(0.95)">{{ locBtn }}</button>
         <button type="button" onClick="{{ cycleManual }}" style="background:transparent;border:1px solid rgba(26,23,18,.24);color:#4A4234;font:600 13px/1 Barlow,sans-serif;padding:11px 13px;cursor:pointer" style-hover="background:#F5ECDC;border-color:#8A4A20;color:#1A1712">Enter it myself</button>
       </div>
     </div>
@@ -651,7 +651,7 @@ a:hover{color:#A8352A}
             <h1 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0">Vets near {{ place }}</h1>
             <div style="font:400 16px/1.45 Barlow,sans-serif;color:#7A6E5B;margin-top:9px">{{ locSubline }}</div>
 <sc-if value="{{ locGuessed }}" hint-placeholder-val="{{ false }}">
-<div style="font:500 14.5px/1.45 Barlow,sans-serif;color:#7A4712;margin-top:6px">This is a starting spot, not your actual location &mdash; <button type="button" onClick="{{ cycleManual }}" style="background:transparent;border:none;padding:0;font:inherit;color:#8A4A20;text-decoration:underline;cursor:pointer">update it here</button>.</div>
+<div style="font:500 14.5px/1.45 Barlow,sans-serif;color:#7A4712;margin-top:6px">This is a best guess, not your exact location &mdash; <button type="button" onClick="{{ cycleManual }}" style="background:transparent;border:none;padding:0;font:inherit;color:#8A4A20;text-decoration:underline;cursor:pointer">update it here</button>.</div>
 </sc-if>
           </div>
           <div style="flex:none;font:600 11px/1 Barlow,sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#3C5A46;border:1px solid rgba(60,90,70,.45);padding:9px 11px">Confirmed by hand</div>
@@ -784,7 +784,7 @@ a:hover{color:#A8352A}
           </div>
         </sc-if>
         <sc-if value="{{ vetDataLoading }}" hint-placeholder-val="{{ false }}">
-          <div style="border:1px dashed rgba(26,23,18,.3);padding:24px 22px;margin-top:22px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Loading the vet directory…</div>
+          <div style="border:1px dashed rgba(26,23,18,.3);padding:24px 22px;margin-top:22px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">{{ vetLoadingText }}</div>
         </sc-if>
         <sc-if value="{{ noVetMatches }}" hint-placeholder-val="{{ false }}">
           <div style="border:1px dashed rgba(26,23,18,.3);padding:24px 22px;margin-top:22px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Nothing matches that here. Try a different spelling, clear the emergency filter, or pick another state below.</div>
@@ -1431,7 +1431,7 @@ function pageFromPath(pathname) {
   return found || 'home';
 }
 class Component extends DCLogic {
-  state = { page: (typeof window !== 'undefined' ? pageFromPath(window.location.pathname) : 'home'), view: (typeof window !== 'undefined' && window.innerWidth < 780) ? 'phone' : 'desktop', menuOpen: false, loc: 'idle', locNote: '', placeIx: 0, query: '', vetQuery: '', emergOnly: false, email: '', subbed: false, reported: {}, wx: null, wxState: 'idle', wxError: '', pets: [], activePetIx: 0, papersEditing: false, papersIsNew: false, draft: {}, shareState: 'idle' , vetDataReady: false, vetDataError: false, locSource: 'default', area: '' };
+  state = { page: (typeof window !== 'undefined' ? pageFromPath(window.location.pathname) : 'home'), view: (typeof window !== 'undefined' && window.innerWidth < 780) ? 'phone' : 'desktop', menuOpen: false, loc: 'idle', locNote: '', placeIx: 0, query: '', vetQuery: '', emergOnly: false, email: '', subbed: false, reported: {}, wx: null, wxState: 'idle', wxError: '', pets: [], activePetIx: 0, papersEditing: false, papersIsNew: false, draft: {}, shareState: 'idle' , vetDataReady: false, vetDataError: false, locSource: 'none', area: '' };
 
   PLACES = [
     { label: 'Hoover, AL', key: 'AL', state: 'Alabama' },
@@ -1517,73 +1517,153 @@ class Component extends DCLogic {
     this.setState({ page, menuOpen: false });
   };
 
-  detect = () => {
-    if (this.state.loc === 'found') {
-      this.setState({ page: 'vets', menuOpen: false });
-      setTimeout(() => {
-        const el = typeof document !== 'undefined' ? document.getElementById('state-picker') : null;
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 60);
+  // ---- Finding the visitor's state (rebuilt 2026-10-26) ----
+  // Before: if the phone's location failed for ANY reason (permission off, Facebook's
+  // built-in browser, slow GPS, lookup service down), the page quietly showed the first
+  // state in the list -- Alabama. Now: a safety timer, two lookup services, an offline
+  // backup, a best guess from the internet connection, and a clear note whenever the
+  // state shown is a guess. Vet listings are hidden while we are still locating.
+  STATE_BOXES = {
+    AL:[30.14,35.01,-88.47,-84.89],AK:[51.2,71.4,-179.2,-129.9],AZ:[31.33,37.0,-114.82,-109.04],AR:[33.0,36.5,-94.62,-89.64],CA:[32.53,42.01,-124.41,-114.13],CO:[36.99,41.0,-109.06,-102.04],CT:[40.98,42.05,-73.73,-71.79],DE:[38.45,39.84,-75.79,-75.05],FL:[24.4,31.0,-87.63,-80.03],GA:[30.36,35.0,-85.61,-80.84],HI:[18.9,22.24,-160.25,-154.8],ID:[41.99,49.0,-117.24,-111.04],IL:[36.97,42.51,-91.51,-87.5],IN:[37.77,41.76,-88.1,-84.78],IA:[40.38,43.5,-96.64,-90.14],KS:[36.99,40.0,-102.05,-94.59],KY:[36.5,39.15,-89.57,-81.96],LA:[28.93,33.02,-94.04,-88.82],ME:[42.98,47.46,-71.08,-66.95],MD:[37.91,39.72,-79.49,-75.05],MA:[41.24,42.89,-73.51,-69.93],MI:[41.7,48.31,-90.42,-82.41],MN:[43.5,49.38,-97.24,-89.49],MS:[30.17,35.0,-91.66,-88.1],MO:[35.99,40.61,-95.77,-89.1],MT:[44.36,49.0,-116.05,-104.04],NE:[40.0,43.0,-104.05,-95.31],NV:[35.0,42.0,-120.01,-114.04],NH:[42.7,45.31,-72.56,-70.6],NJ:[38.93,41.36,-75.56,-73.89],NM:[31.33,37.0,-109.05,-103.0],NY:[40.5,45.02,-79.76,-71.86],NC:[33.84,36.59,-84.32,-75.46],ND:[45.94,49.0,-104.05,-96.55],OH:[38.4,41.98,-84.82,-80.52],OK:[33.62,37.0,-103.0,-94.43],OR:[41.99,46.29,-124.57,-116.46],PA:[39.72,42.27,-80.52,-74.69],RI:[41.15,42.02,-71.86,-71.12],SC:[32.03,35.22,-83.35,-78.54],SD:[42.48,45.95,-104.06,-96.44],TN:[34.98,36.68,-90.31,-81.65],TX:[25.84,36.5,-106.65,-93.51],UT:[37.0,42.0,-114.05,-109.04],VT:[42.73,45.02,-73.44,-71.46],VA:[36.54,39.47,-83.68,-75.24],WA:[45.54,49.0,-124.76,-116.92],WV:[37.2,40.64,-82.64,-77.72],WI:[42.49,47.31,-92.89,-86.25],WY:[40.99,45.01,-111.06,-104.05]
+  };
+
+  stateIx = (name, code) => {
+    const c = (code || '').toUpperCase().replace(/^US-/, '');
+    let idx = c ? this.PLACES.findIndex(p => p.key === c) : -1;
+    if (idx === -1 && name) idx = this.PLACES.findIndex(p => p.state.toLowerCase() === String(name).toLowerCase());
+    return idx;
+  };
+
+  // Offline backup: which state's box holds this point (smallest box wins near borders).
+  boxStateIx = (lat, lon) => {
+    let best = -1, bestArea = Infinity;
+    Object.keys(this.STATE_BOXES).forEach(k => {
+      const b = this.STATE_BOXES[k];
+      if (lat >= b[0] && lat <= b[1] && lon >= b[2] && lon <= b[3]) {
+        const a = (b[1] - b[0]) * (b[3] - b[2]);
+        if (a < bestArea) { bestArea = a; best = this.PLACES.findIndex(p => p.key === k); }
+      }
+    });
+    return best;
+  };
+
+  fetchJSON = (url, ms) => new Promise((resolve, reject) => {
+    const t = setTimeout(() => reject(new Error('timeout')), ms || 8000);
+    fetch(url, { headers: { 'Accept': 'application/json' } }).then(r => { if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(d => { clearTimeout(t); resolve(d); }).catch(e => { clearTimeout(t); reject(e); });
+  });
+
+  // Turn GPS coordinates into a state: lookup service 1, then service 2, then the offline boxes.
+  coordsToState = (lat, lon) => {
+    const la = lat.toFixed(4), lo = lon.toFixed(4);
+    return this.fetchJSON('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + la + '&longitude=' + lo + '&localityLanguage=en')
+      .then(d => {
+        if (d && d.countryCode && d.countryCode !== 'US') return { idx: -1, outside: true };
+        const idx = this.stateIx(d && d.principalSubdivision, d && d.principalSubdivisionCode);
+        if (idx === -1) throw new Error('no match');
+        return { idx, zip: (d && d.postcode) || '' };
+      })
+      .catch(() => this.fetchJSON('https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&lat=' + la + '&lon=' + lo)
+        .then(d => {
+          const a = (d && d.address) || {};
+          if (a.country_code && a.country_code !== 'us') return { idx: -1, outside: true };
+          const iso = a['ISO3166-2-lvl4'] || '';
+          const idx = this.stateIx(a.state, iso);
+          if (idx === -1) throw new Error('no match');
+          return { idx, zip: (a.postcode || '').slice(0, 5) };
+        }))
+      .catch(() => ({ idx: this.boxStateIx(lat, lon), zip: '', offline: true }));
+  };
+
+  // When the phone won't share GPS, make a best guess from the internet connection.
+  guessFromConnection = (why, extra) => {
+    this.fetchJSON('https://api.bigdatacloud.net/data/reverse-geocode-client?localityLanguage=en', 6000)
+      .then(d => {
+        const idx = (d && d.countryCode === 'US') ? this.stateIx(d.principalSubdivision, d.principalSubdivisionCode) : -1;
+        if (idx === -1) throw new Error('no guess');
+        this.setState({ loc: 'found', placeIx: idx, locSource: 'approx', userZip: '', locNote: why + ' My best guess from your internet connection is ' + this.PLACES[idx].state + ', but that can be off (especially on Starlink or cell data). If it is wrong, tap your state below.' + (extra || '') });
+      })
+      .catch(() => {
+        this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: why + ' Tap your state below.' + (extra || '') });
+        this.scrollToPicker();
+      });
+  };
+
+  scrollToPicker = () => {
+    setTimeout(() => {
+      const el = typeof document !== 'undefined' ? document.getElementById('state-picker') : null;
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  };
+
+  locate = (emerg) => {
+    const run = (this._locRun || 0) + 1;
+    this._locRun = run;
+    const live = () => this._locRun === run;
+    const extra = emerg ? ' The list shows that state’s 24-hour and emergency vets.' : '';
+    const base = { page: 'vets', menuOpen: false, vetQuery: '', area: '' };
+    if (emerg) base.emergOnly = true;
+    if (typeof window !== 'undefined' && window.history && window.history.pushState && window.location.pathname !== '/vets') window.history.pushState({ page: 'vets' }, '', '/vets');
+    if (typeof navigator === 'undefined' || !navigator.geolocation) {
+      this.setState({ ...base, loc: 'asking', locNote: '' });
+      this.guessFromConnection('This browser will not share a location.', extra);
       return;
     }
-    if (!navigator.geolocation) {
-      this.setState({ loc: 'found', locNote: 'This browser will not share a location. Pick your state below.', page: 'vets', menuOpen: false });
-      return;
-    }
-    this.setState({ loc: 'asking', locNote: '' });
+    this.setState({ ...base, loc: 'asking', locNote: '' });
+    let settled = false;
+    const fail = (why) => {
+      if (settled || !live()) return;
+      settled = true;
+      clearTimeout(this._locTimer);
+      this.guessFromConnection(why, extra);
+    };
+    // Some phones and in-app browsers (Facebook, Instagram, Messenger) never answer at all.
+    this._locTimer = setTimeout(() => fail('Your phone did not share its location in time.'), 15000);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
+        if (settled || !live()) return;
+        settled = true;
+        clearTimeout(this._locTimer);
         const { latitude, longitude } = pos.coords;
-        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + latitude + '&longitude=' + longitude + '&localityLanguage=en')
-          .then(r => r.json())
-          .then(d => {
-            const stateName = d && d.principalSubdivision;
-            const idx = stateName ? this.PLACES.findIndex(p => p.state.toLowerCase() === stateName.toLowerCase()) : -1;
-            if (idx !== -1) {
-              this.setState({ loc: 'found', locNote: '', page: 'vets', menuOpen: false, placeIx: idx, locSource: 'gps' });
-            } else {
-              this.setState({ loc: 'found', locNote: 'Got your location, but could not match it to a state. Pick yours below.', page: 'vets', menuOpen: false });
-            }
-          })
-          .catch(() => this.setState({ loc: 'found', locNote: 'Got your location, but the lookup service did not answer. Pick your state below.', page: 'vets', menuOpen: false }));
+        this.coordsToState(latitude, longitude).then(r => {
+          if (!live()) return;
+          if (r.outside) {
+            this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: 'You look to be outside the United States. This directory covers the 50 US states, so tap a state below.' });
+            this.scrollToPicker();
+          } else if (r.idx === -1) {
+            this.setState({ loc: 'found', locSource: 'none', userZip: '', locNote: 'Got your location, but could not match it to a state. Tap your state below.' + extra });
+            this.scrollToPicker();
+          } else {
+            this.setState({ loc: 'found', placeIx: r.idx, locSource: r.offline ? 'approx' : 'gps', userZip: r.zip || '', locNote: r.offline ? 'Got your location, but the address lookup did not answer, so ' + this.PLACES[r.idx].state + ' is my best match. If you are near a state line, double-check below.' : '' });
+          }
+        });
       },
       (err) => {
-        const msg = err && err.code === 1 ? 'Location permission was turned down. Pick your state below.' : 'Could not get a location just now. Pick your state below.';
-        this.setState({ loc: 'found', locNote: msg, page: 'vets', menuOpen: false });
+        const why = err && err.code === 1
+          ? 'Location is turned off for this site (or for the app you opened it in).'
+          : 'Could not get a location just now.';
+        fail(why);
       },
-      { timeout: 10000, maximumAge: 600000 }
+      { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 }
     );
   };
 
-  findNearestEmergency = () => {
-    if (!navigator.geolocation) {
-      this.setState({ loc: 'found', locNote: 'This browser will not share a location. Pick your state below to see its 24-hour vets.', page: 'vets', emergOnly: true, vetQuery: '', menuOpen: false });
+  // Hero button: if we already found them, jump to their state; otherwise locate.
+  detect = () => {
+    if (this.state.loc === 'found' && this.state.locSource === 'gps') {
+      this.setState({ page: 'vets', menuOpen: false });
+      if (typeof window !== 'undefined' && window.history && window.history.pushState && window.location.pathname !== '/vets') window.history.pushState({ page: 'vets' }, '', '/vets');
+      this.scrollToPicker();
       return;
     }
-    this.setState({ loc: 'asking', locNote: '', page: 'vets', emergOnly: true, vetQuery: '', menuOpen: false });
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        fetch('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + latitude + '&longitude=' + longitude + '&localityLanguage=en')
-          .then(r => r.json())
-          .then(d => {
-            const stateName = d && d.principalSubdivision;
-            const idx = stateName ? this.PLACES.findIndex(p => p.state.toLowerCase() === stateName.toLowerCase()) : -1;
-            if (idx !== -1) {
-              this.setState({ loc: 'found', locNote: '', placeIx: idx, locSource: 'gps' });
-            } else {
-              this.setState({ loc: 'found', locNote: 'Got your location, but could not match it to a state. Pick yours below to see its 24-hour vets.' });
-            }
-          })
-          .catch(() => this.setState({ loc: 'found', locNote: 'Got your location, but the lookup service did not answer. Pick your state below to see its 24-hour vets.' }));
-      },
-      (err) => {
-        const msg = err && err.code === 1 ? 'Location permission was turned down. Pick your state below to see its 24-hour vets.' : 'Could not get a location just now. Pick your state below to see its 24-hour vets.';
-        this.setState({ loc: 'found', locNote: msg });
-      },
-      { timeout: 10000, maximumAge: 300000 }
-    );
+    this.locate(false);
   };
+
+  // "Update location" button: always asks again.
+  relocate = () => this.locate(this.state.emergOnly);
+
+  // Red "Nearest 24-hour vet" emergency button.
+  findNearestEmergency = () => this.locate(true);
 
   PAPER_FIELDS = [
     { key: 'name', label: 'Pet', hint: 'Biscuit' },
@@ -1805,7 +1885,7 @@ const searchAll = (src) => vetQ ? [place.key].concat(Object.keys(src).filter(k =
 const LOC = {
       idle: { text: 'Turn on location and I\u2019ll show the vets in your state.', dot: '#7A6E5B', btn: 'Use my location', bg: '#1A1712', fg: '#EFE0C4', border: '#1A1712', sub: '' },
       asking: { text: this.state.emergOnly ? 'Finding your nearest 24-hour vet\u2026' : 'Sniffing out where you are\u2026', dot: '#B5761F', btn: 'Locating\u2026', bg: '#B5761F', fg: '#FFF6E6', border: '#B5761F', sub: '' },
-      found: { text: (this.state.locSource === 'gps' ? 'Got you in ' + place.state + ' \u00b7 vets in your state' : 'Showing vets in ' + place.state), dot: '#3C5A46', btn: 'Update location', bg: 'transparent', fg: '#3C5A46', border: 'rgba(60,90,70,0.5)', sub: (this.state.locSource === 'gps' ? 'Showing your state, from your phone\u2019s location.' : this.state.locSource === 'picked' ? 'Showing the state you picked.' : '') }
+      found: { text: (this.state.locSource === 'gps' ? 'Got you in ' + place.state + ' \u00b7 vets in your state' : this.state.locSource === 'approx' ? 'Best guess: ' + place.state + ' \u00b7 tap your state if wrong' : this.state.locSource === 'none' ? 'Tap your state below to see its vets' : 'Showing vets in ' + place.state), dot: '#3C5A46', btn: 'Update location', bg: 'transparent', fg: '#3C5A46', border: 'rgba(60,90,70,0.5)', sub: (this.state.locSource === 'gps' ? 'Showing your state, from your phone\u2019s location.' + (this.state.emergOnly && this.state.userZip ? ' Vets in your ZIP area are listed first.' : '') : this.state.locSource === 'approx' ? 'This is a best guess, not your exact location.' : this.state.locSource === 'picked' ? 'Showing the state you picked.' : '') }
     };
     const L = LOC[this.state.loc];
 
@@ -1833,11 +1913,17 @@ const vetsAll = (searchAll(this.DATA) || inArea(rows0))
         const q = this.state.vetQuery.trim().toLowerCase();
         return !q || matchQ(v, q);
       });
-    const vets = onePerPlace(vetsAll).map((v, i) => card(v, i, 'v'));
-    const vetDataLoading = !this.state.vetDataReady;
-    const noVetMatches = vets.length === 0 && this.state.vetDataReady;
+    // Emergency mode with a known ZIP: put the closest 24-hour vets (by ZIP area) first.
+    const uz = (!vetQ && !areaPick && this.state.emergOnly && this.state.locSource === 'gps' && /^\d{5}$/.test(this.state.userZip || '')) ? parseInt(this.state.userZip.slice(0, 3), 10) : null;
+    const vetsSorted = uz === null ? vetsAll : vetsAll.map((v, i) => ({ v, i, d: /^\d{3}/.test(v.zip || '') ? Math.abs(parseInt(v.zip.slice(0, 3), 10) - uz) : 999 })).sort((x, y) => x.d - y.d || x.i - y.i).map(x => x.v);
+    const locatingNow = this.state.loc === 'asking' && p === 'vets';
+    const noStateYet = !locatingNow && this.state.locSource === 'none' && !vetQ && !areaPick;
+    const hideList = locatingNow || noStateYet;
+    const vets = hideList ? [] : onePerPlace(vetsSorted).map((v, i) => card(v, i, 'v'));
+    const vetDataLoading = !this.state.vetDataReady || hideList;
+    const noVetMatches = vets.length === 0 && this.state.vetDataReady && !hideList;
     this.syncVetSchema(p === 'vets', vets);
-    const camps = onePerPlace(searchAll(this.CAMPS) || inArea(this.CAMPS[place.key] || [])).map((v, i) => card(v, i, 'c'));
+    const camps = hideList ? [] : onePerPlace(searchAll(this.CAMPS) || inArea(this.CAMPS[place.key] || [])).map((v, i) => card(v, i, 'c'));
     const petCamps = camps.filter(v => v.tag !== 'State Park');
     const stateParks = camps.filter(v => v.tag === 'State Park');
     const hasCamps = camps.length > 0;
@@ -1923,9 +2009,9 @@ const vetsAll = (searchAll(this.DATA) || inArea(rows0))
     const stateChips = this.PLACES.map((pl, i) => ({
       label: pl.state,
       go: () => { this._autoJumpQ = ''; this.setState({ placeIx: i, loc: 'found', locNote: '', locSource: 'picked', vetQuery: '', area: '' }); },
-      bg: i === this.state.placeIx ? '#1A1712' : 'transparent',
-      fg: i === this.state.placeIx ? '#EFE0C4' : '#4A4234',
-      border: i === this.state.placeIx ? '#1A1712' : 'rgba(26,23,18,0.24)'
+      bg: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#1A1712' : 'transparent',
+      fg: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#EFE0C4' : '#4A4234',
+      border: (i === this.state.placeIx && this.state.locSource !== 'none') ? '#1A1712' : 'rgba(26,23,18,0.24)'
     }));
 
     const ADVENTURES = [
@@ -2018,8 +2104,8 @@ const vetsAll = (searchAll(this.DATA) || inArea(rows0))
       nm === 'BLUETTI' ? HOME_BLUETTI : (nm === 'FXW' ? Object.assign({}, GEAR_FROM['FXW'], { hasDisclosure: true, disclosure: GEAR_AMZ_NOTE }) : GEAR_FROM[nm]));
 
     return {
-      views, nav, vets, camps, hasCamps, petCamps, hasPetCamps, stateParks, hasStateParks, noVetMatches, vetDataLoading, stateChips, picks: LIVE_PICKS, pendingPicks: PENDING_PICKS, amazonExtras: AMAZON_EXTRAS, hasAmazonExtras: AMAZON_EXTRAS.length > 0, gearCards: GEAR_CARDS, gearSections: GEAR_SECTIONS, homePicks: HOME_PICKS, gearAmazon: GEAR_AMAZON,
-      place: vetQ ? '\u201c' + this.state.vetQuery.trim() + '\u201d' : (areaPick || place.label),
+      views, nav, vets, camps, hasCamps, petCamps, hasPetCamps, stateParks, hasStateParks, noVetMatches, vetDataLoading, vetLoadingText: locatingNow ? (this.state.emergOnly ? 'Finding your location to show the nearest 24-hour vets\u2026 If your phone asks, tap Allow.' : 'Finding your location\u2026 If your phone asks, tap Allow.') : noStateYet ? 'Tap your state above (or type a town) and I\u2019ll show its vets and pet-friendly campgrounds.' : 'Loading the vet directory\u2026', stateChips, picks: LIVE_PICKS, pendingPicks: PENDING_PICKS, amazonExtras: AMAZON_EXTRAS, hasAmazonExtras: AMAZON_EXTRAS.length > 0, gearCards: GEAR_CARDS, gearSections: GEAR_SECTIONS, homePicks: HOME_PICKS, gearAmazon: GEAR_AMAZON,
+      place: vetQ ? '\u201c' + this.state.vetQuery.trim() + '\u201d' : (areaPick || (this.state.loc === 'asking' ? 'you' : this.state.locSource === 'none' ? 'you \u2014 pick a state' : place.label)),
 areaSelectEl: this.buildAreaSelect(place),
       frameW: phone ? 'min(412px,100%)' : 'min(1240px,100%)',
       gut: phone ? '18px' : '34px',
@@ -2145,6 +2231,7 @@ goFxwReviewTop: () => { this.go('fxwReview')(); try { window.scrollTo(0, 0); } c
       goHeat: this.go('heat'),
       goInstall: this.go('install'),
       detect: this.detect,
+      relocate: this.relocate,
       cycleManual: () => {
         this.setState({ page: 'vets', menuOpen: false, loc: 'found' });
         setTimeout(() => {
@@ -2153,8 +2240,8 @@ goFxwReviewTop: () => { this.go('fxwReview')(); try { window.scrollTo(0, 0); } c
         }, 60);
       },
       locText: L.text, locDot: L.dot, locBtn: L.btn, locBtnBg: L.bg, locBtnFg: L.fg, locBtnBorder: L.border, locNote: this.state.locNote,
-      locSubline: L.sub, locGuessed: this.state.locSource === 'default',
-      heroLocBtn: this.state.loc === 'found' ? 'Show vets in ' + place.state : L.btn,
+      locSubline: L.sub, locGuessed: this.state.loc !== 'asking' && this.state.locSource === 'approx',
+      heroLocBtn: (this.state.loc === 'found' && this.state.locSource === 'gps') ? 'Show vets in ' + place.state : L.btn,
       query: this.state.query,
       onQuery: (e) => this.setState({ query: e.target.value }),
       email: this.state.email,
