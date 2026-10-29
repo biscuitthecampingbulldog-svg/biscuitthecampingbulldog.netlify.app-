@@ -23,10 +23,12 @@ const before = areas(cur), beforeCities = allCities(cur), cb = count(cur);
 // existing spots by ZIP, existing names and phones per state/section
 const zipSpot = {}; const seenName = new Set(); const seenPhone = new Set();
 const digits = p => String(p || '').replace(/\D/g, '').slice(-10);
+// toll-free numbers are shared reservation lines (e.g. a state's parks line), so they never count as a duplicate
+const sharedLine = ph => /^8(00|33|44|55|66|77|88)/.test(ph);
 for (const k of ['DATA', 'CAMPS']) for (const st in cur[k]) for (const e of cur[k][st]) {
   if (e.zip && typeof e.lat === 'number' && !zipSpot[e.zip]) zipSpot[e.zip] = [e.lat, e.lng];
   seenName.add(k + '|' + st + '|' + e.name.toLowerCase().trim());
-  if (digits(e.phone).length === 10) seenPhone.add(k + '|' + digits(e.phone));
+  if (digits(e.phone).length === 10 && !sharedLine(digits(e.phone))) seenPhone.add(k + '|' + digits(e.phone));
 }
 const r3 = x => Math.round(x * 1000) / 1000;
 // sanity check: a spot must be within 450 miles of the middle of that state's existing listings
@@ -53,7 +55,7 @@ for (const f of batches) {
   for (const k of ['DATA', 'CAMPS']) for (const st in (b[k] || {})) for (const e of b[k][st]) {
     const idN = k + '|' + st + '|' + e.name.toLowerCase().trim(), ph = digits(e.phone);
     if (seenName.has(idN)) { skipped.push(st + ' ' + e.name + ' (same name already there)'); continue; }
-    if (ph.length === 10 && seenPhone.has(k + '|' + ph)) { skipped.push(st + ' ' + e.name + ' (same phone already there)'); continue; }
+    if (ph.length === 10 && !sharedLine(ph) && seenPhone.has(k + '|' + ph)) { skipped.push(st + ' ' + e.name + ' (same phone already there)'); continue; }
     const sp = spotFor(e, st); if (!sp) { noSpot.push(st + ' ' + e.name + ' zip ' + e.zip); continue; }
     spotSource[sp[2]]++;
     let li = -1; const start = sec(k), end = k === 'DATA' ? sec('CAMPS') : lines.length;
