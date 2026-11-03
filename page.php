@@ -39,14 +39,35 @@ if ($path === '') $path = '/';
    campgrounds (read straight from vet-data.js, so new areas show up by themselves). */
 $STATES = array('AL'=>'Alabama','AK'=>'Alaska','AZ'=>'Arizona','AR'=>'Arkansas','CA'=>'California','CO'=>'Colorado','CT'=>'Connecticut','DE'=>'Delaware','FL'=>'Florida','GA'=>'Georgia','HI'=>'Hawaii','ID'=>'Idaho','IL'=>'Illinois','IN'=>'Indiana','IA'=>'Iowa','KS'=>'Kansas','KY'=>'Kentucky','LA'=>'Louisiana','ME'=>'Maine','MD'=>'Maryland','MA'=>'Massachusetts','MI'=>'Michigan','MN'=>'Minnesota','MS'=>'Mississippi','MO'=>'Missouri','MT'=>'Montana','NE'=>'Nebraska','NV'=>'Nevada','NH'=>'New Hampshire','NJ'=>'New Jersey','NM'=>'New Mexico','NY'=>'New York','NC'=>'North Carolina','ND'=>'North Dakota','OH'=>'Ohio','OK'=>'Oklahoma','OR'=>'Oregon','PA'=>'Pennsylvania','RI'=>'Rhode Island','SC'=>'South Carolina','SD'=>'South Dakota','TN'=>'Tennessee','TX'=>'Texas','UT'=>'Utah','VT'=>'Vermont','VA'=>'Virginia','WA'=>'Washington','WV'=>'West Virginia','WI'=>'Wisconsin','WY'=>'Wyoming');
 $STATE_KEY = '';
-if (preg_match('#^/vets/([a-z-]+)$#', $path, $sm)) {
+$AREA = ''; $AREA_SLUG = '';
+if (preg_match('#^/vets/([a-z-]+)(?:/([a-z0-9-]+))?$#', $path, $sm)) {
   foreach ($STATES as $k => $nm) {
     if (trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') === $sm[1]) { $STATE_KEY = $k; break; }
   }
   if ($STATE_KEY === '') { $path = '/vets'; }
+  elseif (!empty($sm[2])) { $AREA_SLUG = $sm[2]; }
 }
-/* Pull one state's listings out of vet-data.js (one listing per line). */
-function biscuit_state_listings($key) {
+/* One page per RV area (added 2026-11-03): /vets/florida/stuart-jupiter. The area part is the
+   area's label without its ", ST" ending. index.html uses the same rule (areaSlug). */
+function biscuit_area_slug($label) {
+  return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(preg_replace('/,\s*[A-Z]{2}$/', '', $label))), '-');
+}
+/* Every area label in one state, as slug => label (read from vet-data.js). */
+function biscuit_state_areas($key) {
+  $js = @file_get_contents(__DIR__ . '/vet-data.js');
+  $out = array();
+  if ($js === false) return $out;
+  $js = str_replace("\r\n", "\n", $js);
+  foreach (explode("\nCAMPS: {", $js, 2) as $part) {
+    if (preg_match('#\n' . $key . ': \[\n(.*?)\n\]#s', $part, $m)) {
+      if (preg_match_all("#\bcity: '((?:\\\\.|[^'\\\\])*)'#", $m[1], $cm)) foreach ($cm[1] as $c) { $c = stripslashes($c); $out[biscuit_area_slug($c)] = $c; }
+    }
+  }
+  ksort($out);
+  return $out;
+}
+/* Pull one state's listings out of vet-data.js (one listing per line). With $city, only that area's. */
+function biscuit_state_listings($key, $city = '') {
   $js = @file_get_contents(__DIR__ . '/vet-data.js');
   if ($js === false) return array(array(), array());
   $js = str_replace("\r\n", "\n", $js);
@@ -57,9 +78,10 @@ function biscuit_state_listings($key) {
     if (preg_match('#\n' . $key . ': \[\n(.*?)\n\]#s', $part, $m)) {
       foreach (explode("\n", $m[1]) as $line) {
         $row = array();
-        foreach (array('name', 'where', 'phone', 'tag') as $f) {
+        foreach (array('name', 'where', 'city', 'phone', 'tag', 'note') as $f) {
           if (preg_match("#\b$f: '((?:\\\\.|[^'\\\\])*)'#", $line, $fm)) $row[$f] = stripslashes($fm[1]);
         }
+        if ($city !== '' && (!isset($row['city']) || $row['city'] !== $city)) continue;
         if (!empty($row['name'])) $list[strtolower(preg_replace('/[^0-9]/', '', isset($row['phone']) ? $row['phone'] : '') ?: $row['name'])] = $row;
       }
     }
@@ -67,13 +89,28 @@ function biscuit_state_listings($key) {
   }
   return array(isset($out[0]) ? $out[0] : array(), isset($out[1]) ? $out[1] : array());
 }
+$STATE_AREAS = array();
+if ($STATE_KEY !== '') {
+  $STATE_AREAS = biscuit_state_areas($STATE_KEY);
+  $stPath = '/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($STATES[$STATE_KEY])), '-');
+  if ($AREA_SLUG !== '') {
+    if (isset($STATE_AREAS[$AREA_SLUG])) { $AREA = $STATE_AREAS[$AREA_SLUG]; }
+    else { $path = $stPath; $AREA_SLUG = ''; } /* unknown area: show the state page */
+  }
+}
 if ($STATE_KEY !== '') {
   $nm = $STATES[$STATE_KEY];
-  list($SV, $SC) = biscuit_state_listings($STATE_KEY);
+  list($SV, $SC) = biscuit_state_listings($STATE_KEY, $AREA);
   $er = 0; foreach ($SV as $v) { if (isset($v['tag']) && ($v['tag'] === 'Open 24/7' || $v['tag'] === 'Emergency')) $er++; }
-  $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
-    "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
-    'biscuit-hero-smokies.jpg');
+  if ($AREA !== '') {
+    $an = preg_replace('/,\s*[A-Z]{2}$/', '', $AREA);
+    $d = "Vets near $an, $nm for RV travelers: " . ($er ? "$er emergency vet" . ($er > 1 ? 's' : '') . ', ' : '') . (count($SV) - $er) . ' regular vet' . (count($SV) - $er === 1 ? '' : 's') . ' and ' . count($SC) . ' pet-friendly campground' . (count($SC) === 1 ? '' : 's') . ', checked by hand. Call or get directions in one tap.';
+    $PAGES[$path] = array("Vets & Pet-Friendly Campgrounds near $AREA | Biscuit the Camping Bulldog", $d, 'biscuit-hero-smokies.jpg');
+  } else {
+    $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
+      "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
+      'biscuit-hero-smokies.jpg');
+  }
 }
 $html = @file_get_contents(__DIR__ . '/index.html');
 if ($html === false) { http_response_code(500); exit('Site file missing.'); }
@@ -144,8 +181,9 @@ if ($STATE_KEY !== '') {
   $crumbs = array('@type' => 'BreadcrumbList', 'itemListElement' => array(
     array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'),
     array('@type' => 'ListItem', 'position' => 2, 'name' => 'Find a vet', 'item' => $SITE . '/vets'),
-    array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $path)));
-  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $stPath)));
+  if ($AREA !== '') $crumbs['itemListElement'][] = array('@type' => 'ListItem', 'position' => 4, 'name' => $AREA, 'item' => $SITE . $path);
+  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => ($AREA !== '' ? 'Vets and pet-friendly campgrounds near ' . $AREA : $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds'), 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
 /* Extra schema (added 2026-10-27): breadcrumbs on every subpage, FAQ on the heat guide and pet papers
    (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
@@ -192,11 +230,21 @@ if (isset($PAGES[$path])) {
   $ns = '<noscript><div style="max-width:760px;margin:0 auto;padding:16px;font-family:sans-serif">';
   $ns .= '<h1>' . $e2(preg_replace('/ \| Biscuit the Camping Bulldog$/', '', $np[0])) . '</h1><p>' . $e2($np[1]) . '</p>';
   if ($STATE_KEY !== '') {
-    $ns .= '<h2>Vets in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
-    foreach ($SV as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['tag']) ? ' (' . $e2($v['tag']) . ')' : '') . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; <a href="tel:' . preg_replace('/[^0-9]/', '', $v['phone']) . '">' . $e2($v['phone']) . '</a>' : '') . '</li>';
-    $ns .= '</ul><h2>Pet-friendly campgrounds and state parks in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
-    foreach ($SC as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; ' . $e2($v['phone']) : '') . '</li>';
+    $where = $AREA !== '' ? 'near ' . $AREA : 'in ' . $STATES[$STATE_KEY];
+    $nt = function ($v) use ($AREA, $e2) { return ($AREA !== '' && !empty($v['note'])) ? '<br>' . $e2($v['note']) : ''; };
+    $ns .= '<h2>Vets ' . $e2($where) . '</h2><ul>';
+    foreach ($SV as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['tag']) ? ' (' . $e2($v['tag']) . ')' : '') . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; <a href="tel:' . preg_replace('/[^0-9]/', '', $v['phone']) . '">' . $e2($v['phone']) . '</a>' : '') . $nt($v) . '</li>';
+    $ns .= '</ul><h2>Pet-friendly campgrounds and state parks ' . $e2($where) . '</h2><ul>';
+    foreach ($SC as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; ' . $e2($v['phone']) : '') . $nt($v) . '</li>';
     $ns .= '</ul><p>Hours and services change. Call ahead when you can. In an emergency, go to the nearest open clinic.</p>';
+    /* Links to every RV area page in this state, so search engines can find them all. */
+    if ($STATE_AREAS) {
+      $ns .= '<h2>RV areas in ' . $e2($STATES[$STATE_KEY]) . '</h2><p>';
+      $al = array();
+      foreach ($STATE_AREAS as $as => $al_label) if ($as !== $AREA_SLUG) $al[] = '<a href="' . $stPath . '/' . $as . '">' . $e2($al_label) . '</a>';
+      $ns .= implode(' &middot; ', $al) . '</p>';
+      if ($AREA !== '') $ns .= '<p><a href="' . $stPath . '">All vets and campgrounds in ' . $e2($STATES[$STATE_KEY]) . '</a></p>';
+    }
   }
   if ($path === '/vets' || $STATE_KEY !== '') {
     $ns .= '<h2>Vets and pet-friendly campgrounds by state</h2><p>';

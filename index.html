@@ -50,6 +50,8 @@
       var t=window.BISCUIT_TITLES[p]||window.BISCUIT_HOME_TITLE;
       var sm=p.match(/^\/vets\/([a-z-]+)$/);
       if(sm){ var nm=sm[1].split('-').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' '); t=nm+" Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog"; }
+      /* RV area pages (/vets/florida/stuart-jupiter, added 2026-11-03): the server already wrote the right title, so only change it once the area's name is known */
+      if(/^\/vets\/[a-z-]+\/[a-z0-9-]+$/.test(p)){ if(!window.BISCUIT_AREA_LABEL) return; t="Vets & Pet-Friendly Campgrounds near "+window.BISCUIT_AREA_LABEL+" | Biscuit the Camping Bulldog"; }
       if(document.title!==t) document.title=t;
     }
     /* Review schema (JSON-LD) for review pages. Add every new review here: path -> Review object. Only use facts that appear on the page. */
@@ -717,6 +719,7 @@ a:hover{color:#A8352A}
                   <a href="{{ v.tel }}" style="flex:1;text-align:center;background:#A8352A;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#932C22">Call now</a>
                 </sc-if>
                 <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+<button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">
                 <span style="font:400 13px/1.35 Barlow,sans-serif;color:#7A6E5B">{{ v.source }}</span>
@@ -756,6 +759,7 @@ a:hover{color:#A8352A}
                       <a href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
                     </sc-if>
                     <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+<button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
                   </div>
                   <div style="font:400 13px/1.35 Barlow,sans-serif;color:#7A6E5B;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">{{ v.source }}</div>
                 </div>
@@ -794,6 +798,7 @@ a:hover{color:#A8352A}
                       <a href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
                     </sc-if>
                     <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+<button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
                   </div>
                   <div style="font:400 13px/1.35 Barlow,sans-serif;color:#7A6E5B;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">{{ v.source }}</div>
                 </div>
@@ -1599,8 +1604,16 @@ const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', abo
 const REVIEW_FOR = { 'FXW': ['fxwReview', 'Read the FXW Dog Fence review \u203a'], 'Necto': ['nectoReview', 'Read our Necto review \u203a'], 'RVLock': ['rvlockReview', 'Read our RVLock review \u203a'], 'Prime RV': ['primervReview', 'Read our Prime RV review \u203a'] };
 // One page per state for Google (added 2026-10-26): /vets/tennessee, /vets/new-york ...
 const stateSlug = (name) => String(name || '').toLowerCase().replace(/[^a-z]+/g, '-');
+// One page per RV area too (added 2026-11-03): /vets/florida/stuart-jupiter. The area part is the
+// dropdown label without its ", ST" ending. page.php uses the same rule (biscuit_area_slug).
+const areaSlug = (label) => String(label || '').replace(/,\s*[A-Z]{2}$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const areaPath = (stateName, label) => '/vets/' + stateSlug(stateName) + (label ? '/' + areaSlug(label) : '');
 function stateFromPath(pathname) {
-  const m = String(pathname || '').replace(/\/+$/, '').match(/^\/vets\/([a-z-]+)$/);
+  const m = String(pathname || '').replace(/\/+$/, '').match(/^\/vets\/([a-z-]+)(?:\/[a-z0-9-]+)?$/);
+  return m ? m[1] : '';
+}
+function areaFromPath(pathname) {
+  const m = String(pathname || '').replace(/\/+$/, '').match(/^\/vets\/[a-z-]+\/([a-z0-9-]+)$/);
   return m ? m[1] : '';
 }
 function pageFromPath(pathname) {
@@ -1829,18 +1842,50 @@ class Component extends DCLogic {
   };
 
   // Keep the address bar on the state's own page (/vets/tennessee) when a state is chosen.
-  setStateUrl = (stateName) => {
+  setStateUrl = (stateName, areaLabel) => {
     if (typeof window === 'undefined' || !window.history || !window.history.pushState) return;
-    const path = '/vets/' + stateSlug(stateName);
+    window.BISCUIT_AREA_LABEL = areaLabel || '';
+    const path = areaPath(stateName, areaLabel);
     if (window.location.pathname !== path) window.history.pushState({ page: 'vets' }, '', path);
   };
   applyStateFromPath = () => {
-    const slug = stateFromPath(typeof window !== 'undefined' ? window.location.pathname : '');
+    const path = typeof window !== 'undefined' ? window.location.pathname : '';
+    const slug = stateFromPath(path);
     if (!slug) return false;
     const idx = this.PLACES.findIndex(p => stateSlug(p.state) === slug);
     if (idx === -1) return false;
     this.setState({ page: 'vets', placeIx: idx, loc: 'found', locNote: '', locSource: 'picked', area: '', vetQuery: '' });
+    // An RV area page (/vets/florida/stuart-jupiter): open that area once the vet list has loaded.
+    const aSlug = areaFromPath(path);
+    if (aSlug) this.loadVetData().then(() => {
+      const key = this.PLACES[idx].key;
+      const all = [].concat(this.DATA[key] || [], this.CAMPS[key] || []);
+      const hit = all.find(v => areaSlug(v.city) === aSlug);
+      if (hit) {
+        window.BISCUIT_AREA_LABEL = hit.city;
+        this.setState({ area: hit.city });
+        try { window.biscuitSetTitle && window.biscuitSetTitle(window.location.pathname); } catch (e) {}
+      }
+    });
     return true;
+  };
+  // "Share" on a vet or campground card: the phone's own share menu (text, Messenger, email...),
+  // or copy the details when a browser has no share menu. Added 2026-11-03.
+  shareListing = (v) => {
+    const st = (String(v.city || '').match(/,\s*([A-Z]{2})$/) || [])[1];
+    const pl = this.PLACES.find(p => p.key === st);
+    const url = 'https://biscuitthecampingbulldog.com' + (pl ? areaPath(pl.state, v.city) : '/vets') + '?utm_source=share&utm_medium=social&utm_campaign=vet_finder';
+    const map = 'https://maps.google.com/?q=' + encodeURIComponent(v.name + ' ' + (v.where ? v.where.replace(/\s*\u00b7\s*/g, ' ') : v.city));
+    const text = v.name + (v.where ? '\n' + v.where : '') + (v.phone ? '\n' + v.phone : '') + '\nDirections: ' + map + '\n\nMore vets & pet-friendly campgrounds near ' + v.city + ' from Biscuit the Camping Bulldog:';
+    try { if (typeof window.gtag === 'function') window.gtag('event', 'vet_share', { clinic_name: v.name, page_path: location.pathname }); } catch (e) {}
+    const id = v.name + '|' + v.phone;
+    if (navigator.share) { navigator.share({ title: v.name, text, url }).catch(() => {}); return; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text + '\n' + url).then(() => {
+        this.setState({ sharedId: id });
+        setTimeout(() => { if (this.state.sharedId === id) this.setState({ sharedId: '' }); }, 2500);
+      }).catch(() => {});
+    }
   };
 
   // Hero button: if we already found them, jump to their state; otherwise locate.
@@ -2048,11 +2093,11 @@ return h('select', {
 value, 'aria-label': 'Pick a popular RV area',
 onChange: (e) => {
 const val = e.target.value;
-if (!val) { this.setState({ area: '' }); return; }
+if (!val) { this.setStateUrl(place.state); this.setState({ area: '' }); return; }
 const k = val.split('|')[0]; const label = val.slice(k.length + 1);
 const idx = this.PLACES.findIndex(p => p.key === k);
 if (this.state.page !== 'vets') this.go('vets')();
-if (idx !== -1) this.setStateUrl(this.PLACES[idx].state);
+if (idx !== -1) this.setStateUrl(this.PLACES[idx].state, label);
 this.setState({ area: label, placeIx: idx === -1 ? this.state.placeIx : idx, vetQuery: '', loc: 'found', locNote: '', locSource: 'picked' });
 },
 style: { display: 'block', width: '100%', maxWidth: 520, boxSizing: 'border-box', marginTop: 13, font: '400 16px/1.2 Barlow,sans-serif', color: '#1A1712', background: '#F5ECDC', border: '1px solid rgba(26,23,18,.28)', padding: '13px 12px', cursor: 'pointer' }
@@ -2097,6 +2142,8 @@ const LOC = {
       map: 'https://maps.google.com/?q=' + encodeURIComponent(v.name + ' ' + v.city),
       tagBg: v.tag === 'Open 24/7' || v.tag === 'Emergency' ? '#A8352A' : v.tag === 'Campground' ? 'rgba(60,90,70,0.12)' : v.tag === 'State Park' ? 'rgba(138,74,32,0.14)' : 'rgba(26,23,18,0.08)',
       tagFg: v.tag === 'Open 24/7' || v.tag === 'Emergency' ? '#FFF3E2' : v.tag === 'Campground' ? '#3C5A46' : v.tag === 'State Park' ? '#8A4A20' : '#4A4234',
+      share: () => this.shareListing(v),
+      shareLabel: this.state.sharedId === v.name + '|' + v.phone ? 'Copied!' : 'Share',
       reportLabel: 'Report a change',
       report: () => {
         const subject = 'Listing correction: ' + v.name;
