@@ -254,7 +254,7 @@ if (isset($PAGES[$path])) {
   }
   $ns .= '<h2>More from Biscuit the Camping Bulldog</h2><ul>';
   foreach ($NAV as $u => $label) if ($u !== $path) $ns .= '<li><a href="' . $u . '">' . $e2($label) . '</a></li>';
-  $ns .= '</ul><p>Contact: <a href="mailto:biscuit@biscuitthecampingbulldog.com">biscuit@biscuitthecampingbulldog.com</a></p></div></noscript>';
+  $ns .= '</ul><p>Contact: <a href="mailto:biscuit@biscuitthecampingbulldog.com">biscuit@biscuitthecampingbulldog.com</a> &middot; <a href="tel:+18652631450">(865) 263-1450</a></p></div></noscript>';
   $html = preg_replace_callback('#<body>#i', function ($m) use ($ns) { return '<body>' . $ns; }, $html, 1);
 }
 $html = preg_replace('#<html>#i', '<html lang="en">', $html, 1);
