@@ -42,7 +42,9 @@
     "/my-nose-knows-service-dog": "My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog",
     "/gear": "Biscuit's Road-Tested Gear | Biscuit the Camping Bulldog",
     "/giveaway": "Necto Giveaway | Biscuit the Camping Bulldog",
-    "/gift-guide": "Biscuit's Christmas Gift Guide | Biscuit the Camping Bulldog"
+    "/gift-guide": "Biscuit's Christmas Gift Guide | Biscuit the Camping Bulldog",
+    "/cold": "Pet Cold Weather Guide | Biscuit the Camping Bulldog",
+    "/leaving-pet-in-rv": "Leaving Your Pet in the RV | Biscuit the Camping Bulldog"
   };
   (function(){
     function setTitle(path){
@@ -879,7 +881,7 @@ a:hover{color:#A8352A}
               <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">If the trailer air conditioning quits in summer, a pet shut inside has minutes, not hours. Know where the nearest cooled building is before you settle in for the night.</div>
             </div>
           </div>
-          <div style="border:1px solid rgba(26,23,18,.2);background:#FFF9EE;padding:20px 22px;margin-top:22px;font:400 17px/1.55 Barlow,sans-serif;color:#1A1712">Heading out in the heat? The <a href="/gear" style="color:#8A4A20;font-weight:600;text-decoration:underline">Necto temperature monitor on my Gear page</a> alerts mama and daddy&rsquo;s phones if the camper gets too warm while I&rsquo;m home alone.<sc-if value="{{ giveawayOn }}" hint-placeholder-val="{{ false }}"> And you can <a href="/giveaway?utm_source=website&amp;utm_medium=heat_guide&amp;utm_campaign=necto_giveaway" style="color:#8A4A20;font-weight:600;text-decoration:underline">win one in my Necto giveaway</a> through December 14.</sc-if></div>
+          <div style="border:1px solid rgba(26,23,18,.2);background:#FFF9EE;padding:20px 22px;margin-top:22px;font:400 17px/1.55 Barlow,sans-serif;color:#1A1712">Heading out in the heat? The <a href="/gear" style="color:#8A4A20;font-weight:600;text-decoration:underline">Necto temperature monitor on my Gear page</a> alerts mama and daddy&rsquo;s phones if the camper gets too warm while I&rsquo;m home alone.<sc-if value="{{ giveawayOn }}" hint-placeholder-val="{{ false }}"> And you can <a href="/giveaway?utm_source=website&amp;utm_medium=heat_guide&amp;utm_campaign=necto_giveaway" style="color:#8A4A20;font-weight:600;text-decoration:underline">win one in my Necto giveaway</a> through December 14.</sc-if> Cold weather coming? See the <a href="/cold" style="color:#8A4A20;font-weight:600;text-decoration:underline">cold weather guide</a> and <a href="/leaving-pet-in-rv" style="color:#8A4A20;font-weight:600;text-decoration:underline">how to leave your pet in the RV safely</a>.</div>
           <div style="border-top:1px solid rgba(26,23,18,.2);margin-top:30px;padding-top:24px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
             <span style="flex:none;width:84px;height:84px;border-radius:50%;overflow:hidden;background:#1A1712;border:2px solid #C6A15B;display:block">
               <img src="images/biscuit-about.jpg" alt="Biscuit, an English Bulldog service dog" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
@@ -888,6 +890,155 @@ a:hover{color:#A8352A}
               <div style="font:400 19px/1.5 Barlow,sans-serif;color:#1A1712;max-width:54ch;text-wrap:pretty">Take it from a dog with a very short nose: when mom says we&rsquo;re done walking, we&rsquo;re done walking.</div>
               <div style="font:400 20px/1 'Alfa Slab One',serif;color:#C4707C;margin-top:12px">Biscuit</div>
             </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCold }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="background:#2E4A5C;color:#EEF4F7;padding:{{ secPad }}">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;opacity:.82">Cold guide</div>
+          <h1 style="font:400 {{ h1Size }}/1.05 'Alfa Slab One',serif;margin:14px 0 0;max-width:22ch;text-wrap:pretty">How cold is too cold for your pet?</h1>
+          <p style="font:400 {{ leadSize }}/1.5 Barlow,sans-serif;margin:16px 0 0;max-width:60ch;opacity:.93">Hi Pack, it&rsquo;s Biscuit! Short noses and short coats like mine don&rsquo;t love the cold, and a camper loses heat a lot faster than a house. Here&rsquo;s what mama and daddy go by when the temperature drops, plus how to keep the rig warm and safe for your pet all winter.</p>
+          <button type="button" onClick="{{ sharePage }}" style="margin-top:20px;background:transparent;border:1px solid rgba(238,244,247,.55);color:#EEF4F7;font:600 14.5px/1 Barlow,sans-serif;padding:13px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:9px" style-hover="background:rgba(238,244,247,.12)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            <span>{{ shareLabel }}</span>
+          </button>
+        </div>
+        <div style="padding:{{ secPad }}">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8A4A20">Outside temperature, for dogs</div>
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(26,23,18,.2);border:1px solid rgba(26,23,18,.2);margin-top:12px">
+            <div style="background:#F5ECDC;padding:20px 22px;display:flex;gap:22px;align-items:baseline;flex-wrap:wrap"><div style="flex:none;width:130px;font:600 19px/1.2 Barlow,sans-serif;color:#3C5A46">Above 45&deg;F</div><div style="flex:1;min-width:200px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Most dogs are fine. Small, thin-coated, young, senior or sick pets can start to feel chilly. A sweater helps.</div></div>
+            <div style="background:#F5ECDC;padding:20px 22px;display:flex;gap:22px;align-items:baseline;flex-wrap:wrap"><div style="flex:none;width:130px;font:600 19px/1.2 Barlow,sans-serif;color:#B5761F">32 to 45&deg;F</div><div style="flex:1;min-width:200px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Watch the vulnerable ones closely. Keep walks shorter, dry off wet fur fast, and put a coat on short-coated and flat-faced dogs.</div></div>
+            <div style="background:#F5ECDC;padding:20px 22px;display:flex;gap:22px;align-items:baseline;flex-wrap:wrap"><div style="flex:none;width:130px;font:600 19px/1.2 Barlow,sans-serif;color:#C0581F">20 to 32&deg;F</div><div style="flex:1;min-width:200px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Most dogs are now at risk of hypothermia and frostbite. Quick potty breaks, coat and booties, and nobody stays outside alone.</div></div>
+            <div style="background:#F5ECDC;padding:20px 22px;display:flex;gap:22px;align-items:baseline;flex-wrap:wrap"><div style="flex:none;width:130px;font:600 19px/1.2 Barlow,sans-serif;color:#A8352A">Below 20&deg;F</div><div style="flex:1;min-width:200px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Even cold-loving breeds need close watching. Bathroom trips only, then right back inside. Wind and wet fur make it feel even colder.</div></div>
+          </div>
+          <div style="font:400 14px/1.5 Barlow,sans-serif;color:#6B6152;margin-top:10px;max-width:66ch">Cats, rabbits and other small pets belong inside when it&rsquo;s cold. Every pet is different, so ask your own vet what&rsquo;s right for yours.</div>
+
+          <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">Keeping the camper warm</h2>
+          <div style="display:grid;grid-template-columns:{{ heatCols }};gap:18px;margin-top:18px">
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#2E4A5C">Know what keeps you warm</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Electric space heaters and heat pumps stop the moment campground power drops. A propane furnace keeps going, but it needs propane in the tank and a charged house battery to run its fan. Keep both topped up before a cold night.</div>
+            </div>
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#2E4A5C">Test your alarms</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Heaters, the furnace and generators can all make carbon monoxide. Test the camper&rsquo;s carbon monoxide and propane alarms before winter. Keep space heaters away from bedding and curious noses, and only use ones that shut off if they tip over.</div>
+            </div>
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#2E4A5C">Warm spot, off the floor</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Camper floors get cold, especially over the slides. A raised bed or a thick blanket away from the door and windows makes a big difference. Close the blinds at night to hold the heat in.</div>
+            </div>
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#2E4A5C">Water that doesn&rsquo;t freeze</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Outdoor water bowls freeze fast, so keep fresh water inside. A heated water hose (or filling your fresh tank and unhooking) keeps the camper&rsquo;s water flowing when nights drop below freezing.</div>
+            </div>
+          </div>
+
+          <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">Outside: paws, salt and antifreeze</h2>
+          <div style="font:400 17px/1.6 Barlow,sans-serif;color:#1A1712;margin-top:14px;max-width:66ch">
+            <p style="margin:0 0 12px"><strong>Wipe paws after every walk.</strong> Ice melt and road salt sting cracked pads and upset tummies when pups lick them off. Paw wax or booties help on salty campground roads.</p>
+            <p style="margin:0 0 12px"><strong>Car antifreeze is deadly.</strong> The kind in car and truck engines (ethylene glycol) tastes sweet, and even a few licks can kill a dog or cat. Wipe up drips under vehicles right away and call a poison line or vet at once if your pet gets into it.</p>
+            <p style="margin:0 0 12px"><strong>Pink RV antifreeze is safer, not safe.</strong> RV and &ldquo;pet-safe&rdquo; antifreeze is usually propylene glycol, which is much less toxic, but a lot of it can still make pets sick, and cats are very sensitive to it. Keep jugs closed and clean up spills when you winterize.</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:{{ heatCols }};gap:18px;margin-top:22px">
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D81E10">Signs your pet is too cold</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">Whining, shivering, lifting paws, slowing down or looking for a warm spot. Hypothermia looks like shivering that stops, sluggishness, confusion and stiff, clumsy walking. Frostbite shows up as pale, cold ears, tail tips or paw pads. Warm your pet up slowly with blankets (never a heating pad on high) and call the nearest vet.</div>
+              <button type="button" onClick="{{ goVets }}" style="margin-top:18px;background:#A8352A;border:none;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 20px;cursor:pointer" style-hover="background:#932C22">Nearest ER {{ placeNear }}</button>
+            </div>
+            <div style="border:1px solid rgba(26,23,18,.2);padding:24px 22px">
+              <div style="font:600 17px/1.3 Barlow,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#D81E10">Pet poison hotlines (24/7)</div>
+              <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:11px">ASPCA Animal Poison Control: <a href="tel:+18884264435" style="color:#8A4A20;font-weight:600">(888) 426-4435</a><br>Pet Poison Helpline: <a href="tel:+18557647661" style="color:#8A4A20;font-weight:600">(855) 764-7661</a><br><span style="font-size:15px;color:#4A4234">Both may charge a consultation fee. Save these in your phone before you need them.</span></div>
+            </div>
+          </div>
+          <div style="border:1px solid rgba(26,23,18,.2);background:#FFF9EE;padding:20px 22px;margin-top:22px;font:400 17px/1.55 Barlow,sans-serif;color:#1A1712">Leaving your pet in the camper on a cold day? Read <a href="/leaving-pet-in-rv" style="color:#8A4A20;font-weight:600">how we keep Biscuit safe when she stays home</a>, including what to do if the power goes out. Hot weather instead? See the <a href="/heat" style="color:#8A4A20;font-weight:600">heat guide</a>.</div>
+          <div style="border-top:1px solid rgba(26,23,18,.2);margin-top:30px;padding-top:24px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
+            <span style="flex:none;width:84px;height:84px;border-radius:50%;overflow:hidden;background:#1A1712;border:2px solid #C6A15B;display:block">
+              <img src="images/biscuit-about.jpg" alt="Biscuit, an English Bulldog service dog" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" />
+            </span>
+            <div style="flex:1;min-width:240px">
+              <div style="font:400 19px/1.5 Barlow,sans-serif;color:#1A1712;max-width:54ch;text-wrap:pretty">When the wind picks up, I put my sweater on and we make it a quick one. Then it&rsquo;s back to my blanket by the heater. Mama&rsquo;s rules.</div>
+              <div style="font:400 20px/1 'Alfa Slab One',serif;color:#C4707C;margin-top:12px">Biscuit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isPetAlone }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:{{ secPad }}">
+        <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8A4A20">Safety</div>
+        <h1 style="font:400 {{ h1Size }}/1.05 'Alfa Slab One',serif;color:#1A1712;margin:14px 0 0;max-width:24ch;text-wrap:pretty">Leaving your pet in the RV: how we keep Biscuit safe</h1>
+        <p style="font:400 {{ leadSize }}/1.5 Barlow,sans-serif;color:#4A4234;margin:16px 0 0;max-width:62ch">Hi Pack, it&rsquo;s Biscuit! When mama and daddy run errands, I stay home in the camper and nap. That only works because they follow the same routine every single time. Here it is, so your pet can stay home safely too.</p>
+        <div style="font:400 13px/1.4 Barlow,sans-serif;color:#6B6152;margin:10px 0 0">Some links on this page are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you. We only share gear we actually use.</div>
+        <button type="button" onClick="{{ sharePage }}" style="margin-top:18px;background:transparent;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 14.5px/1 Barlow,sans-serif;padding:13px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:9px" style-hover="background:#EFE3CE">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <span>{{ shareLabel }}</span>
+        </button>
+
+        <div style="background:#A8352A;color:#FFF3E2;padding:24px 26px;margin-top:28px">
+          <div style="font:600 14px/1.3 Barlow,sans-serif;letter-spacing:.16em;text-transform:uppercase">The big one: power loss</div>
+          <div style="font:400 19px/1.5 Barlow,sans-serif;margin-top:12px;max-width:60ch">A parked camper runs 30 to 40&deg;F hotter than the air outside, and it gets there in under an hour. If the air conditioning stops on a summer day, a pet shut inside has minutes, not hours. Campground power can trip, a surge protector can cut it on a bad pedestal, and generators run out of fuel. Plan for it before you leave.</div>
+        </div>
+
+        <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">Before you walk out the door</h2>
+        <div style="display:flex;flex-direction:column;gap:1px;background:rgba(26,23,18,.2);border:1px solid rgba(26,23,18,.2);margin-top:16px">
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Check the campground rules.</strong> Some campgrounds don&rsquo;t allow pets left alone, and many say no dog tied up outside unattended. Ask at the office when you check in.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Look at the weather for the whole time you&rsquo;re gone.</strong> A cool morning can turn into a hot afternoon. If it&rsquo;s going to be a scorcher or a deep freeze, take your pet along or keep the trip short.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Set the air or heat and make sure it&rsquo;s running.</strong> Listen for it to kick on before you leave. Close the blinds on the sunny side in summer.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Turn on your temperature monitor</strong> and check that the alert numbers are right (more on that below).</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Leave plenty of fresh water</strong> in a bowl that won&rsquo;t tip.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Pet-proof the camper.</strong> Put away food, trash, medicine and cords. Close the bathroom. If your pet is crate-trained, the crate is often the safest spot, away from windows and vents.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Put a note on the door:</strong> &ldquo;Pet inside. If there&rsquo;s a problem, call&rdquo; and your cell number. Campground staff and neighbors can reach you fast.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Tell someone nearby.</strong> A camping neighbor or the office can check on things if your monitor sends an alert while you&rsquo;re far away.</div>
+          <div style="background:#F5ECDC;padding:16px 20px;font:400 17px/1.5 Barlow,sans-serif;color:#1A1712"><strong>Keep your phone charged and on loud.</strong> An alert only helps if you hear it.</div>
+        </div>
+
+        <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">Have a plan for when the power goes out</h2>
+        <div style="font:400 17px/1.6 Barlow,sans-serif;color:#1A1712;margin-top:14px;max-width:66ch">
+          <p style="margin:0 0 12px"><strong>Decide ahead of time who goes back.</strong> Know how long it would take you to get back to the camper from where you&rsquo;re going. If that&rsquo;s more than a few minutes in summer heat, line up a neighbor or the campground office who can open the door and get your pet somewhere cool.</p>
+          <p style="margin:0 0 12px"><strong>In summer:</strong> know where the nearest air-conditioned building is (camp store, office, your truck with the AC running) and have a spare key where your helper can reach it.</p>
+          <p style="margin:0 0 12px"><strong>In winter:</strong> electric heaters stop when the power does, but a propane furnace keeps going if the propane tank and house battery are full. Top them up before you head out. Our <a href="/cold" style="color:#8A4A20;font-weight:600">cold weather guide</a> has more.</p>
+          <p style="margin:0 0 12px"><strong>Generators:</strong> if you count on one to run the air conditioning, fill the tank first and check that it isn&rsquo;t set to shut off during the campground&rsquo;s quiet hours.</p>
+        </div>
+
+        <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">Get a temperature monitor</h2>
+        <div style="font:400 17px/1.6 Barlow,sans-serif;color:#1A1712;margin-top:14px;max-width:66ch">
+          <p style="margin:0 0 12px">A pet temperature monitor sits in the camper and texts or calls you if it gets too hot or too cold inside. It&rsquo;s the one thing that tells you there&rsquo;s a problem while you&rsquo;re still in the grocery line. When you shop for one, look for:</p>
+          <ul style="margin:0 0 12px;padding-left:22px">
+            <li style="margin-bottom:6px">Its own cell connection, so it works without campground Wi-Fi</li>
+            <li style="margin-bottom:6px">Alerts to more than one phone</li>
+            <li style="margin-bottom:6px">A backup battery and an alert when the power goes out</li>
+            <li style="margin-bottom:6px">High and low temperature limits you can set yourself</li>
+            <li style="margin-bottom:6px">A monthly plan price you&rsquo;re happy to keep paying</li>
+          </ul>
+        </div>
+        <div style="border:1px solid rgba(26,23,18,.2);background:#FFF9EE;padding:22px;margin-top:8px">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8A4A20">What we use</div>
+          <div style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin-top:10px">Necto</div>
+          <div style="font:400 17px/1.55 Barlow,sans-serif;color:#1A1712;margin-top:10px;max-width:62ch">Necto is how mama and daddy know my nap spot isn&rsquo;t getting too hot or too cold. It runs on its own cell service, so it doesn&rsquo;t need campground Wi-Fi, and their phones get an alert right away if the temperature leaves the safe range. Ours came with two full years of monitoring included, then it&rsquo;s $6.99 a month.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:16px">
+            <a href="https://getnecto.com/?ref=biscuit" target="_blank" rel="sponsored nofollow noopener" style="background:#1A1712;color:#EFE0C4;font:600 15px/1 Barlow,sans-serif;padding:15px 20px;text-decoration:none">Get 10% off + free shipping with code Biscuit &rsaquo;</a>
+            <a href="/necto-temperature-monitor-review" style="border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:14px 18px;text-decoration:none">Read our Necto review &rsaquo;</a>
+          </div>
+        </div>
+
+        <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:40px 0 0">If something goes wrong</h2>
+        <div style="font:400 17px/1.6 Barlow,sans-serif;color:#1A1712;margin-top:14px;max-width:66ch">
+          <p style="margin:0 0 12px">Overheating looks like loud, raspy breathing, thick drool, bright red or purple gums, wobbling or not wanting to move. A pet that&rsquo;s too cold shivers, slows down and gets stiff and clumsy. Either way, get your pet to a comfortable temperature and call the nearest vet right away. Our <a href="/heat" style="color:#8A4A20;font-weight:600">heat guide</a> has the warning signs in detail.</p>
+        </div>
+        <button type="button" onClick="{{ goVets }}" style="margin-top:6px;background:#A8352A;border:none;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 20px;cursor:pointer" style-hover="background:#932C22">Find the nearest vet {{ placeNear }}</button>
+
+        <div style="border-top:1px solid rgba(26,23,18,.2);margin-top:34px;padding-top:24px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
+          <span style="flex:none;width:84px;height:84px;border-radius:50%;overflow:hidden;background:#1A1712;border:2px solid #C6A15B;display:block">
+            <img src="images/biscuit-about.jpg" alt="Biscuit, an English Bulldog service dog" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" />
+          </span>
+          <div style="flex:1;min-width:240px">
+            <div style="font:400 19px/1.5 Barlow,sans-serif;color:#1A1712;max-width:54ch;text-wrap:pretty">Mama checks the air, my water, my monitor and the note on the door, every single time. Then I get my treat and they go. I nap. Everybody wins.</div>
+            <div style="font:400 20px/1 'Alfa Slab One',serif;color:#C4707C;margin-top:12px">Biscuit</div>
           </div>
         </div>
       </div>
@@ -1600,7 +1751,7 @@ a:hover{color:#A8352A}
 // Maps a handful of pages to real, shareable URLs (e.g. biscuitthecampingbulldog.com/gear).
 // The matching .htaccess rule sends those URLs to this file so the app can read the
 // path below and open straight to the right page instead of a 404.
-const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', primervReview: '/prime-rv-tank-treatment-review', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', giveaway: '/giveaway', giftGuide: '/gift-guide' };
+const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', primervReview: '/prime-rv-tank-treatment-review', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', giveaway: '/giveaway', giftGuide: '/gift-guide', cold: '/cold', petAlone: '/leaving-pet-in-rv' };
 const REVIEW_FOR = { 'FXW': ['fxwReview', 'Read the FXW Dog Fence review \u203a'], 'Necto': ['nectoReview', 'Read our Necto review \u203a'], 'RVLock': ['rvlockReview', 'Read our RVLock review \u203a'], 'Prime RV': ['primervReview', 'Read our Prime RV review \u203a'] };
 // One page per state for Google (added 2026-10-26): /vets/tennessee, /vets/new-york ...
 const stateSlug = (name) => String(name || '').toLowerCase().replace(/[^a-z]+/g, '-');
@@ -2420,6 +2571,7 @@ areaSelectEl: this.buildAreaSelect(place),
       isGear: p === 'gear',
       goGear: this.go('gear'),
       isHeat: p === 'heat',
+      isCold: p === 'cold', isPetAlone: p === 'petAlone',
       showLoc: p === 'home' || p === 'vets',
       vetQuery: this.state.vetQuery,
       onVetQuery: (e) => this.setState({ vetQuery: e.target.value, area: '' }),
