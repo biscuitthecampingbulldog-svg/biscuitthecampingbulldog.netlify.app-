@@ -39,6 +39,7 @@
     "/terms": "Terms of Use | Biscuit the Camping Bulldog",
     "/shop": "Shop What We Use | Biscuit the Camping Bulldog",
     "/stories": "Biscuit's Stories | Biscuit the Camping Bulldog",
+    "/goodbye-old-camper": "Goodbye, Old Camper | Biscuit the Camping Bulldog",
     "/my-nose-knows-service-dog": "My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog",
     "/gear": "Biscuit's Road-Tested Gear | Biscuit the Camping Bulldog",
     "/giveaway": "Necto Giveaway | Biscuit the Camping Bulldog",
@@ -1430,12 +1431,31 @@ a:hover{color:#A8352A}
         <p style="font:400 {{ leadSize }}/1.5 Barlow,sans-serif;color:#4A4234;margin:16px 0 0;max-width:60ch">Stories from Biscuit's life on the road, straight from the bulldog herself.</p>
         <div style="display:flex;flex-direction:column;gap:14px;margin-top:32px">
           <div style="border:1px solid rgba(26,23,18,.2);background:#F5ECDC;padding:26px 24px">
+            <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C">Stories from the road &middot; November 2026</div>
+            <button type="button" onClick="{{ goOldCamperStory }}" style="display:block;background:transparent;border:none;padding:0;margin:10px 0 0;cursor:pointer;text-align:left;font:600 22px/1.3 Barlow,sans-serif;color:#1A1712" style-hover="color:#8A4A20">Goodbye, Old Camper: Thank You for Holding My Pack</button>
+            <p style="font:400 16.5px/1.5 Barlow,sans-serif;color:#4A4234;margin:10px 0 0;max-width:64ch">Recliner cuddles with daddy, a Christmas bear in Cades Cove, and one last sniff of every corner before our new chapter.</p>
+            <button type="button" onClick="{{ goOldCamperStory }}" style="margin-top:14px;background:transparent;border:none;padding:0;cursor:pointer;font:600 13.5px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">Read my story &rsaquo;</button>
+          </div>
+          <div style="border:1px solid rgba(26,23,18,.2);background:#F5ECDC;padding:26px 24px">
             <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C">Service Dog Month &middot; September 2026</div>
             <button type="button" onClick="{{ goSdmStory }}" style="display:block;background:transparent;border:none;padding:0;margin:10px 0 0;cursor:pointer;text-align:left;font:600 22px/1.3 Barlow,sans-serif;color:#1A1712" style-hover="color:#8A4A20">My Nose Knows: What This Service Dog Actually Does</button>
             <p style="font:400 16.5px/1.5 Barlow,sans-serif;color:#4A4234;margin:10px 0 0;max-width:64ch">People see the vest and think I'm playing dress-up. I am not.</p>
             <button type="button" onClick="{{ goSdmStory }}" style="margin-top:14px;background:transparent;border:none;padding:0;cursor:pointer;font:600 13.5px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">Read my story &rsaquo;</button>
           </div>
         </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOldCamperStory }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:{{ secPad }};max-width:74ch">
+        <button type="button" onClick="{{ goStories }}" style="background:transparent;border:none;padding:0;cursor:pointer;font:600 13px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">&lsaquo; All stories</button>
+        <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C;margin-top:20px">Stories from the road &middot; November 2026</div>
+        <h1 style="font:400 {{ h1Size }}/1.08 'Alfa Slab One',serif;color:#1A1712;margin:14px 0 0;max-width:24ch;text-wrap:pretty">Goodbye, Old Camper: Thank You for Holding My Pack</h1>
+        <img src="images/story-cades-cove-bear-2026.jpg" alt="A black bear walking past cars on the Cades Cove loop road, seen from Biscuit's truck" style="display:block;width:100%;max-width:560px;height:auto;margin:24px 0;border:1px solid rgba(26,23,18,.2)" />
+        <sc-for list="{{ story2Paras }}" as="p" hint-placeholder-count="10">
+          <p style="font:400 17px/1.6 Barlow,sans-serif;color:#4A4234;margin:0 0 14px;max-width:66ch">{{ p.text }}</p>
+        </sc-for>
+        <a href="https://www.facebook.com/profile.php?id=61582414480969" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#3C5A46;color:#F1EDE1;font:600 15px/1 Barlow,sans-serif;padding:12px 16px;text-decoration:none">Tell me on Facebook &rsaquo;</a>
       </div>
     </sc-if>
 
@@ -1751,7 +1771,7 @@ a:hover{color:#A8352A}
 // Maps a handful of pages to real, shareable URLs (e.g. biscuitthecampingbulldog.com/gear).
 // The matching .htaccess rule sends those URLs to this file so the app can read the
 // path below and open straight to the right page instead of a 404.
-const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', primervReview: '/prime-rv-tank-treatment-review', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', giveaway: '/giveaway', giftGuide: '/gift-guide', cold: '/cold', petAlone: '/leaving-pet-in-rv' };
+const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', primervReview: '/prime-rv-tank-treatment-review', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', oldCamperStory: '/goodbye-old-camper', giveaway: '/giveaway', giftGuide: '/gift-guide', cold: '/cold', petAlone: '/leaving-pet-in-rv' };
 const REVIEW_FOR = { 'FXW': ['fxwReview', 'Read the FXW Dog Fence review \u203a'], 'Necto': ['nectoReview', 'Read our Necto review \u203a'], 'RVLock': ['rvlockReview', 'Read our RVLock review \u203a'], 'Prime RV': ['primervReview', 'Read our Prime RV review \u203a'] };
 // One page per state for Google (added 2026-10-26): /vets/tennessee, /vets/new-york ...
 const stateSlug = (name) => String(name || '').toLowerCase().replace(/[^a-z]+/g, '-');
@@ -2464,6 +2484,20 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
       storyLabel: 'Read my story \u203a',
       toggleStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} }
     }));
+    // Goodbye old camper story (11/04/26), Denise's answers.
+    const STORY2_PARAS = [
+      'Hi friends, it\u2019s me, Biscuit. \uD83D\uDC3E',
+      'Today I want to tell you about a special place. It wasn\u2019t fancy. It had no backyard and no doggy door. But for a long time, it was my whole world. It was our old camper, and we just said goodbye to it.',
+      'Every bulldog knows the best seat in the house is wherever daddy is sitting. In the old camper, that was the recliner. Every evening daddy would lean back, and I would climb right up and squish in beside him. Was there really room for both of us? No. Did I care? Also no. That recliner was where I did my best snoring, my best cuddling, and my best pretending I didn\u2019t hear mama say \u201cBiscuit, scoot over.\u201d',
+      'The old camper gave us so many memories, but my favorite was last Christmas in the Smoky Mountains. Mama, daddy and I took the truck for a drive around Cades Cove. The air was cold and the mountains were quiet. Then a big black bear came strolling right down the road, walking past the cars like he owned the place! Mama got it all on video. I watched from my seat in the truck with my nose pressed to the window. I was very brave, and very glad there was glass between us. It was the most Smoky Mountain Christmas ever.',
+      'When moving day came, the camper was empty and echoey. Mama and daddy were busy carrying boxes, so I did the most important job of all. I sniffed every single corner. The spot by the door where I waited for walks. The floor where my water bowl sat. The kitchen, where crumbs used to fall if I was lucky. And of course, the recliner spot. I wanted to remember it all. Sniffing is how a bulldog says goodbye.',
+      'I\u2019ll be honest, friends. Leaving felt a little funny in my tummy. But here\u2019s what I learned: a camper is just walls and wheels. Home is my pack. Home is mama and daddy, and wherever they are, that\u2019s where I\u2019m parking my paws.',
+      'So thank you, old camper, for every cozy night, every road trip, and every snore. You kept us safe and warm, and you carried us on so many adventures.',
+      'And now? A brand new chapter begins. We have a new home, our Grand Design Solitude, and there are SO many new corners to sniff. I\u2019ve already started checking them all out. (Very official business. Sniffing inspector, reporting for duty.)',
+      'Stay tuned, pack. The best adventures are still ahead. \uD83D\uDC97',
+      'Love and slobbery kisses, Biscuit \uD83D\uDC36'
+    ].map(t => ({ text: t }));
+
     // Service Dog Month story (9/28/26) — full text shown under the Adventures cards.
     const STORY_PARAS = [
       'People see the vest and think I\u2019m playing dress-up. I am not. \uD83D\uDC3E',
@@ -2594,7 +2628,7 @@ areaSelectEl: this.buildAreaSelect(place),
       isAbout: p === 'about',
       isReviews: p === 'reviews',
       goReviews: this.go('reviews'),
-      isFxwReview: p === 'fxwReview', isBluReview: p === 'bluReview', isNectoReview: p === 'nectoReview', isRvlockReview: p === 'rvlockReview', isWaterstopReview: p === 'waterstopReview', isPrimervReview: p === 'primervReview', giveawayOn: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), isShop: p === 'shop', isGiftGuide: p === 'giftGuide', giftBoxOn: Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), isStories: p === 'stories', goStories: () => { this.go('stories')(); try { window.scrollTo(0, 0); } catch (e) {} }, isSdmStory: p === 'sdmStory', isGiveaway: p === 'giveaway', gwBannerShow: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwBannerText: Date.now() < Date.parse('2026-10-15T00:00:00-04:00') ? '\u{1F389} Biscuit\u2019s Necto giveaway opens October 15 \u2014 see the details \u203a' : '\u{1F389} Win a Necto ($199 value)! Enter Biscuit\u2019s giveaway \u203a', gwBefore: p === 'giveaway' && Date.now() < Date.parse('2026-10-15T00:00:00-04:00'), gwEnded: p === 'giveaway' && Date.now() >= Date.parse('2026-12-15T00:00:00-05:00'), gwShowForm: p === 'giveaway' && !this.state.gwDone && Date.now() >= Date.parse('2026-10-15T00:00:00-04:00') && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwDone: p === 'giveaway' && !!this.state.gwDone && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwName: this.state.gwName || '', gwEmail: this.state.gwEmail || '', gwErr: this.state.gwErr || '', onGwName: (e) => this.setState({ gwName: e.target.value, gwErr: '' }), onGwEmail: (e) => this.setState({ gwEmail: e.target.value, gwErr: '' }), gwEnter: () => {
+      isFxwReview: p === 'fxwReview', isBluReview: p === 'bluReview', isNectoReview: p === 'nectoReview', isRvlockReview: p === 'rvlockReview', isWaterstopReview: p === 'waterstopReview', isPrimervReview: p === 'primervReview', giveawayOn: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), isShop: p === 'shop', isGiftGuide: p === 'giftGuide', giftBoxOn: Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), isStories: p === 'stories', goStories: () => { this.go('stories')(); try { window.scrollTo(0, 0); } catch (e) {} }, isSdmStory: p === 'sdmStory', isOldCamperStory: p === 'oldCamperStory', isGiveaway: p === 'giveaway', gwBannerShow: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwBannerText: Date.now() < Date.parse('2026-10-15T00:00:00-04:00') ? '\u{1F389} Biscuit\u2019s Necto giveaway opens October 15 \u2014 see the details \u203a' : '\u{1F389} Win a Necto ($199 value)! Enter Biscuit\u2019s giveaway \u203a', gwBefore: p === 'giveaway' && Date.now() < Date.parse('2026-10-15T00:00:00-04:00'), gwEnded: p === 'giveaway' && Date.now() >= Date.parse('2026-12-15T00:00:00-05:00'), gwShowForm: p === 'giveaway' && !this.state.gwDone && Date.now() >= Date.parse('2026-10-15T00:00:00-04:00') && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwDone: p === 'giveaway' && !!this.state.gwDone && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwName: this.state.gwName || '', gwEmail: this.state.gwEmail || '', gwErr: this.state.gwErr || '', onGwName: (e) => this.setState({ gwName: e.target.value, gwErr: '' }), onGwEmail: (e) => this.setState({ gwEmail: e.target.value, gwErr: '' }), gwEnter: () => {
         const name = (this.state.gwName || '').trim();
         const email = (this.state.gwEmail || '').trim();
         if (!name) { this.setState({ gwErr: 'Please add your first name.' }); return; }
@@ -2613,7 +2647,7 @@ areaSelectEl: this.buildAreaSelect(place),
         }
         try { if (typeof window.gtag === 'function') window.gtag('event', 'giveaway_entry', { page_path: location.pathname }); } catch (e) {}
         this.setState({ gwDone: true, gwErr: '' });
-      }, goSdmStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} },
+      }, goSdmStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} }, goOldCamperStory: () => { this.go('oldCamperStory')(); try { window.scrollTo(0, 0); } catch (e) {} },
       goFxwReview: this.go('fxwReview'),
       goBluReview: () => { this.go('bluReview')(); try { window.scrollTo(0, 0); } catch (e) {} },
       goNectoReview: () => { this.go('nectoReview')(); try { window.scrollTo(0, 0); } catch (e) {} },
@@ -2750,7 +2784,7 @@ goFxwReviewTop: () => { this.go('fxwReview')(); try { window.scrollTo(0, 0); } c
         { label: 'YouTube \u00b7 @BiscuitTheCampingBulldog', href: 'https://www.youtube.com/@BiscuitTheCampingBulldog' }
       ],
       adventures: ADVENTURES,
-      storyOpen: !!this.state.storyOpen, storyParas: STORY_PARAS, closeStory: () => this.setState({ storyOpen: false }),
+      storyOpen: !!this.state.storyOpen, storyParas: STORY_PARAS, story2Paras: STORY2_PARAS, closeStory: () => this.setState({ storyOpen: false }),
 
       steps: [
         { device: 'Android phone & tablet', how: 'Open this site in Chrome, tap the three dots in the corner, then \u201cAdd to Home screen,\u201d then Install.' },

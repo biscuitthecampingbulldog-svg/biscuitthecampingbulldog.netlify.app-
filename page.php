@@ -26,6 +26,7 @@ $PAGES = array(
   '/cold' => array('Pet Cold Weather Guide | Biscuit the Camping Bulldog', "How cold is too cold for your dog? A temperature-by-temperature cold weather guide for RV travelers with pets, plus keeping the camper warm, paw and antifreeze safety, and pet poison hotlines.", 'biscuit-hero-smokies.jpg'),
   '/leaving-pet-in-rv' => array('Leaving Your Pet in the RV | Biscuit the Camping Bulldog', "How to leave your dog or cat in the RV safely: a before-you-leave checklist, a plan for when campground power goes out, and what to look for in a pet temperature monitor.", 'biscuit-hero-smokies.jpg'),
   '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains.', 'adv-service-dog-biscuit.jpg'),
+  '/goodbye-old-camper' => array('Goodbye, Old Camper | Biscuit the Camping Bulldog', "Biscuit says goodbye to her old camper: recliner cuddles with daddy, a Christmas bear in Cades Cove, one last sniff of every corner, and a new chapter ahead.", 'adv-roadtrip.jpg'),
   '/my-nose-knows-service-dog' => array('My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog', "People see the vest and think I'm playing dress-up. I am not. What a working service dog actually does, from Biscuit herself.", 'adv-service-dog-biscuit.jpg'),
   '/about' => array('About Biscuit | Biscuit the Camping Bulldog', "Meet Biscuit, an English Bulldog service dog who lives full-time in an RV in the Great Smoky Mountains with her mama Denise and daddy Jeffrey. Big heart!", 'adv-roadtrip.jpg'),
   '/install' => array("Get Biscuit's App | Biscuit the Camping Bulldog", "Add Biscuit's free vet finder to your phone's home screen. No app store and no account, and the vet list still works at campgrounds with no cell signal.", 'biscuit-hero-smokies.jpg'),
@@ -126,7 +127,7 @@ if (isset($PAGES[$path])) {
   };
   $html = preg_replace_callback('#<title>.*?</title>#s', function ($m) use ($title) { return '<title>' . $title . '</title>'; }, $html, 1);
   $html = $set($html, 'name', 'description', $desc);
-  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review' || $path === '/prime-rv-tank-treatment-review') ? 'article' : 'website';
+  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/goodbye-old-camper' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review' || $path === '/prime-rv-tank-treatment-review') ? 'article' : 'website';
   $html = $set($html, 'property', 'og:type', $ogType);
   $html = $set($html, 'property', 'og:title', $title);
   $html = $set($html, 'property', 'og:description', $desc);
@@ -136,7 +137,7 @@ if (isset($PAGES[$path])) {
   $html = $set($html, 'name', 'twitter:description', $desc);
   $html = $set($html, 'name', 'twitter:image', $img);
   $head = "\n<title>$title</title>\n<link rel=\"canonical\" href=\"$url\">\n<meta name=\"description\" content=\"$desc\">\n"
-    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review' || $path === '/prime-rv-tank-treatment-review' ? 'article' : 'website') . "\">\n"
+    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/goodbye-old-camper' || $path === '/goodbye-old-camper' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/blu-waterstop-review' || $path === '/prime-rv-tank-treatment-review' ? 'article' : 'website') . "\">\n"
     . "<meta property=\"og:site_name\" content=\"$NAME\">\n<meta property=\"og:title\" content=\"$title\">\n<meta property=\"og:description\" content=\"$desc\">\n"
     . "<meta property=\"og:image\" content=\"$img\">\n<meta property=\"og:url\" content=\"$url\">\n"
     . "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"$title\">\n<meta name=\"twitter:description\" content=\"$desc\">\n<meta name=\"twitter:image\" content=\"$img\">\n";
@@ -147,6 +148,9 @@ if (isset($PAGES[$path])) {
 $LD = array();
 $LD['/my-nose-knows-service-dog'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"BlogPosting","headline":"My Nose Knows: What This Service Dog Actually Does","url":"https://biscuitthecampingbulldog.com/my-nose-knows-service-dog","datePublished":"2026-09-28","image":"https://biscuitthecampingbulldog.com/images/adv-service-dog-biscuit.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
+JSON;
+$LD['/goodbye-old-camper'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Goodbye, Old Camper: Thank You for Holding My Pack","url":"https://biscuitthecampingbulldog.com/goodbye-old-camper","datePublished":"2026-11-04","image":"https://biscuitthecampingbulldog.com/images/story-cades-cove-bear-2026.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog"}}
 JSON;
 $LD['/fxw-dog-fence-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"FXW Dog Fence Review: Our Portable Fence for Campground Life","url":"https://biscuitthecampingbulldog.com/fxw-dog-fence-review","datePublished":"2026-09-24","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"FXW Dog Fence","brand":{"@type":"Brand","name":"FXW"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
@@ -191,7 +195,7 @@ if ($STATE_KEY !== '') {
    (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
 $LD2 = array();
 $CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/gift-guide' => 'Christmas gift guide', '/cold' => 'Pet cold weather guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
-$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/blu-waterstop-review' => '/reviews', '/prime-rv-tank-treatment-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories');
+$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/blu-waterstop-review' => '/reviews', '/prime-rv-tank-treatment-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories', '/goodbye-old-camper' => '/stories');
 if ($path !== '/' && $STATE_KEY === '' && isset($PAGES[$path])) {
   $cl = array(array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'));
   if (isset($CRUMB_PARENT[$path])) { $pp = $CRUMB_PARENT[$path]; $cl[] = array('@type' => 'ListItem', 'position' => 2, 'name' => $CRUMB_NAMES[$pp], 'item' => $SITE . $pp); }
