@@ -1,7 +1,7 @@
 // Biscuit the Camping Bulldog -- offline support.
 // Bump CACHE_VERSION any time the site's core files change materially,
 // so visitors' phones pick up the new version instead of a stale cache.
-const CACHE_VERSION = 'biscuit-v9';
+const CACHE_VERSION = 'biscuit-v10';
 const CORE_ASSETS = [
   '/',
   '/index.html',
