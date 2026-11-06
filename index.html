@@ -833,6 +833,45 @@ a:hover{color:#A8352A}
         <sc-if value="{{ noVetMatches }}" hint-placeholder-val="{{ false }}">
           <div style="border:1px dashed rgba(26,23,18,.3);padding:24px 22px;margin-top:22px;font:400 17px/1.5 Barlow,sans-serif;color:#4A4234">Nothing matches that here. Try a different spelling, clear the emergency filter, or pick another state below.</div>
         </sc-if>
+        <div data-biscuit="vet-gear" style="margin-top:44px;padding-top:30px;border-top:1px solid rgba(26,23,18,.2)">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8A4A20">Biscuit&rsquo;s road kit</div>
+          <h2 style="font:400 {{ h2Size }}/1.1 'Alfa Slab One',serif;color:#1A1712;margin:13px 0 0">What keeps me safe on the road</h2>
+          <div style="font:400 14px/1.5 Barlow,sans-serif;color:#7A6E5B;margin-top:9px;max-width:62ch">Affiliate links: I may earn a commission if you buy through my links, at no extra cost to you.</div>
+          <div style="display:grid;grid-template-columns:{{ vetCols }};gap:18px;margin-top:20px">
+            <a href="https://getnecto.com/?ref=biscuit" target="_blank" rel="sponsored nofollow noopener" onclick="if(window.gtag){gtag('event','gear_click',{'event_category':'vet_page','event_label':'Necto'});}" style="display:block;border:1px solid rgba(26,23,18,.2);background:#FFFDF8;color:#1A1712;text-decoration:none">
+              <img src="/images/picks/pick-necto.jpg" alt="Necto" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block" />
+              <div style="padding:14px 16px 16px">
+                <div style="font:600 18px/1.2 Barlow,sans-serif">Necto</div>
+                <div style="font:400 15px/1.45 Barlow,sans-serif;color:#4A4234;margin-top:6px">Temperature monitor for the camper, so mama knows I&rsquo;m cool when she&rsquo;s out.</div>
+                <div style="font:600 13px/1.3 Barlow,sans-serif;color:#8A4A20;margin-top:8px">Code: Biscuit (10% off + free shipping)</div>
+              </div>
+            </a>
+            <a href="https://chewy.sjv.io/c/7017016/2846786/32975" target="_blank" rel="sponsored nofollow noopener" onclick="if(window.gtag){gtag('event','gear_click',{'event_category':'vet_page','event_label':'Chewy'});}" style="display:block;border:1px solid rgba(26,23,18,.2);background:#FFFDF8;color:#1A1712;text-decoration:none">
+              <img src="/images/picks/pick-chewy.jpg" alt="Chewy" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block" />
+              <div style="padding:14px 16px 16px">
+                <div style="font:600 18px/1.2 Barlow,sans-serif">Chewy</div>
+                <div style="font:400 15px/1.45 Barlow,sans-serif;color:#4A4234;margin-top:6px">Pet food and supplies delivered on the road. My yak chews come from Chewy.</div>
+                <div style="font:600 13px/1.3 Barlow,sans-serif;color:#8A4A20;margin-top:8px">Shop Chewy</div>
+              </div>
+            </a>
+            <a href="https://happyhowl.com/biscuit" target="_blank" rel="sponsored nofollow noopener" onclick="if(window.gtag){gtag('event','gear_click',{'event_category':'vet_page','event_label':'Happy Howl'});}" style="display:block;border:1px solid rgba(26,23,18,.2);background:#FFFDF8;color:#1A1712;text-decoration:none">
+              <img src="/images/picks/pick-happy-howl.jpg" alt="Happy Howl" loading="lazy" style="width:100%;height:150px;object-fit:cover;display:block" />
+              <div style="padding:14px 16px 16px">
+                <div style="font:600 18px/1.2 Barlow,sans-serif">Happy Howl</div>
+                <div style="font:400 15px/1.45 Barlow,sans-serif;color:#4A4234;margin-top:6px">One of mama&rsquo;s picks for me, delivered on the road.</div>
+                <div style="font:600 13px/1.3 Barlow,sans-serif;color:#8A4A20;margin-top:8px">40% off every recurring order with Subscribe and Save</div>
+              </div>
+            </a>
+          </div>
+          <a href="/gear" style="display:inline-block;margin-top:16px;font:600 15px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline">See all of Biscuit&rsquo;s road-tested gear &rsaquo;</a>
+        </div>
+        <div data-biscuit="pack-box-vets" style="border:2px solid #3C5A46;background:#FFF9EE;padding:24px 22px;margin-top:34px;max-width:620px">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C4707C">Join the pack</div>
+          <div style="font:400 24px/1.15 'Alfa Slab One',serif;color:#1A1712;margin-top:10px">Get vet-finder updates</div>
+          <div style="font:400 17px/1.55 Barlow,sans-serif;color:#4A4234;margin-top:10px">New RV areas, pet-safety tips and stories from the road by email. No spam, just tail wags.</div>
+          <input type="email" placeholder="your email address" value="{{ email }}" onChange="{{ onEmail }}" style="width:100%;box-sizing:border-box;margin-top:16px;font:400 17px/1 Barlow,sans-serif;color:#1A1712;background:#F5ECDC;border:1px solid rgba(26,23,18,.25);padding:16px 14px" />
+          <button type="button" onClick="{{ subscribe }}" style="width:100%;margin-top:10px;background:#3C5A46;border:none;color:#F1EDE1;font:600 17px/1 Barlow,sans-serif;padding:18px 8px;cursor:pointer" style-hover="background:#324C3B">{{ subLabel }}</button>
+        </div>
       </div>
     </sc-if>
 
@@ -911,6 +950,13 @@ a:hover{color:#A8352A}
             </div>
           </div>
         </div>
+        <div data-biscuit="pack-box-heat" style="border:2px solid #3C5A46;background:#FFF9EE;padding:24px 22px;margin-top:34px;max-width:620px">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C4707C">Join the pack</div>
+          <div style="font:400 24px/1.15 'Alfa Slab One',serif;color:#1A1712;margin-top:10px">Get Biscuit&rsquo;s pet-safety tips</div>
+          <div style="font:400 17px/1.55 Barlow,sans-serif;color:#4A4234;margin-top:10px">Heat-safety reminders, gear picks and stories from the road by email. No spam, just tail wags.</div>
+          <input type="email" placeholder="your email address" value="{{ email }}" onChange="{{ onEmail }}" style="width:100%;box-sizing:border-box;margin-top:16px;font:400 17px/1 Barlow,sans-serif;color:#1A1712;background:#F5ECDC;border:1px solid rgba(26,23,18,.25);padding:16px 14px" />
+          <button type="button" onClick="{{ subscribe }}" style="width:100%;margin-top:10px;background:#3C5A46;border:none;color:#F1EDE1;font:600 17px/1 Barlow,sans-serif;padding:18px 8px;cursor:pointer" style-hover="background:#324C3B">{{ subLabel }}</button>
+        </div>
       </div>
     </sc-if>
 
@@ -983,6 +1029,13 @@ a:hover{color:#A8352A}
               <div style="font:400 20px/1 'Alfa Slab One',serif;color:#C4707C;margin-top:12px">Biscuit</div>
             </div>
           </div>
+        </div>
+        <div data-biscuit="pack-box-cold" style="border:2px solid #3C5A46;background:#FFF9EE;padding:24px 22px;margin-top:34px;max-width:620px">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C4707C">Join the pack</div>
+          <div style="font:400 24px/1.15 'Alfa Slab One',serif;color:#1A1712;margin-top:10px">Get Biscuit&rsquo;s winter tips</div>
+          <div style="font:400 17px/1.55 Barlow,sans-serif;color:#4A4234;margin-top:10px">Cold-weather pet tips, gear picks and stories from the road by email. No spam, just tail wags.</div>
+          <input type="email" placeholder="your email address" value="{{ email }}" onChange="{{ onEmail }}" style="width:100%;box-sizing:border-box;margin-top:16px;font:400 17px/1 Barlow,sans-serif;color:#1A1712;background:#F5ECDC;border:1px solid rgba(26,23,18,.25);padding:16px 14px" />
+          <button type="button" onClick="{{ subscribe }}" style="width:100%;margin-top:10px;background:#3C5A46;border:none;color:#F1EDE1;font:600 17px/1 Barlow,sans-serif;padding:18px 8px;cursor:pointer" style-hover="background:#324C3B">{{ subLabel }}</button>
         </div>
       </div>
     </sc-if>
@@ -1059,6 +1112,13 @@ a:hover{color:#A8352A}
             <div style="font:400 19px/1.5 Barlow,sans-serif;color:#1A1712;max-width:54ch;text-wrap:pretty">Mama checks the air, my water, my monitor and the note on the door, every single time. Then I get my treat and they go. I nap. Everybody wins.</div>
             <div style="font:400 20px/1 'Alfa Slab One',serif;color:#C4707C;margin-top:12px">Biscuit</div>
           </div>
+        </div>
+        <div data-biscuit="pack-box-petalone" style="border:2px solid #3C5A46;background:#FFF9EE;padding:24px 22px;margin-top:34px;max-width:620px">
+          <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#C4707C">Join the pack</div>
+          <div style="font:400 24px/1.15 'Alfa Slab One',serif;color:#1A1712;margin-top:10px">Safety tips for traveling pets</div>
+          <div style="font:400 17px/1.55 Barlow,sans-serif;color:#4A4234;margin-top:10px">Occasional pet-safety tips, gear picks and stories from the road. No spam, just tail wags.</div>
+          <input type="email" placeholder="your email address" value="{{ email }}" onChange="{{ onEmail }}" style="width:100%;box-sizing:border-box;margin-top:16px;font:400 17px/1 Barlow,sans-serif;color:#1A1712;background:#F5ECDC;border:1px solid rgba(26,23,18,.25);padding:16px 14px" />
+          <button type="button" onClick="{{ subscribe }}" style="width:100%;margin-top:10px;background:#3C5A46;border:none;color:#F1EDE1;font:600 17px/1 Barlow,sans-serif;padding:18px 8px;cursor:pointer" style-hover="background:#324C3B">{{ subLabel }}</button>
         </div>
       </div>
     </sc-if>
