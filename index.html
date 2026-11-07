@@ -2499,10 +2499,10 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
       { name: 'Blue Technology', note: 'Clean water, so Biscuit rests easy. 7 percent off, applied automatically.', href: 'https://goblutech.com/Biscuit', cta: 'Shop Now \u203a', pick: true },
       { name: 'Chewy', note: 'Biscuit\'s yak chews come from Chewy.', href: 'https://chewy.sjv.io/c/7017016/2846786/32975', cta: 'Shop Chewy \u203a' },
       { name: 'FXW', note: 'Rollick dog playpen \u00b7 4-year favorite', href: 'https://www.amazon.com/dp/B08MF1XBZW?tag=biscuit0b5-20', cta: 'Shop on Amazon \u203a', amazonExtra: true },
-      { name: 'RVLock', note: 'Keyless RV door lock. 10 percent off. Code: BISCUIT.', href: 'https://club.co/s/UW-J-NcpZXQtQ', cta: 'Shop RVLock \u203a' },
       { name: 'Happy Howl', note: '40 percent off every recurring order with Subscribe and Save.', href: 'https://happyhowl.com/biscuit', cta: 'Shop Happy Howl \u203a' },
       { name: 'CRAVOT', note: 'CyberRack S2 e-bike rack. 10 percent off. Code: biscuit10.', href: 'https://cravot.com/discount/biscuit10?redirect=%2Fproducts%2Fcravot-cyberrack-s2-hitch-bike-rack-2-receiver-300-lbs-capacity', cta: 'Shop CRAVOT \u203a' },
-      { name: 'CARMTEK', note: 'RV leveling blocks & accessories', href: 'https://www.amazon.com/dp/B0BS1VBD6V?linkCode=ll2&tag=biscuit0b5-20&linkId=48de9f08924658b60af8794b2876554c&language=en_US&ref_=as_li_ss_tl', cta: 'Shop on Amazon \u203a', amazonExtra: true }
+      { name: 'CARMTEK', note: 'RV leveling blocks & accessories', href: 'https://www.amazon.com/dp/B0BS1VBD6V?linkCode=ll2&tag=biscuit0b5-20&linkId=48de9f08924658b60af8794b2876554c&language=en_US&ref_=as_li_ss_tl', cta: 'Shop on Amazon \u203a', amazonExtra: true },
+      { name: 'RVLock', note: 'Keyless RV door lock. 10 percent off. Code: BISCUIT.', href: 'https://club.co/s/UW-J-NcpZXQtQ', cta: 'Shop RVLock \u203a' }
     ];
     // Official partner logos, lifted from Denise's live site. Value: [file, plate background]
     const PICK_LOGOS = {
@@ -2613,7 +2613,6 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
       { from: 'Happy Howl', brand: 'Happy Howl', name: 'Happy Howl Dog Food', note: 'Biscuit\u2019s actual dog food.', offer: 'Subscribe and Save takes 40 percent off every recurring order.', href: 'https://www.happyhowl.com/Biscuit' },
       { from: 'Chewy', name: 'Chewy', note: 'The pet supply store. Biscuit\u2019s yak chews come from Chewy.', href: 'https://chewy.sjv.io/c/7017016/2846786/32975' },
       { from: 'Necto', name: 'Necto', note: 'RV pet temperature monitor that watches Biscuit when her humans are away.', code: 'Biscuit', codeWhat: 'takes 10 percent off.', offer: 'Shipping is free.', href: 'https://getnecto.com/?ref=biscuit' },
-      { from: 'RVLock', name: 'RVLock', note: 'Keyless entry door lock installed on our camper.', code: 'BISCUIT', codeWhat: 'takes 10 percent off.', href: 'https://club.co/s/UW-J-NcpZXQtQ' },
       { from: 'CRAVOT', brand: 'CRAVOT', name: 'CRAVOT CyberRack S2', note: 'Hitch bike rack.', code: 'biscuit10', codeWhat: 'takes 10 percent off.', extra: 'Before you buy: for RV mounting, your hitch receiver must extend at least 3 inches (7.5 cm) beyond the RV\u2019s rear wall.', href: 'https://cravot.com/discount/biscuit10' },
       { from: 'Prime RV', name: 'Prime RV', note: 'RV tank treatment.', code: 'BISCUIT', codeWhat: 'takes 15 percent off.', offer: 'Shipping is free on orders over 49.99.', href: 'https://liquifiedrv.com/?rfsn=9002509.67644a' },
       { from: 'FXW', brand: 'FXW', name: 'FXW Dog Playpen', note: 'The dog playpen we set up at campsites.', review: true, href: 'https://www.amazon.com/dp/B08MF1XBZW?tag=biscuit0b5-20' },
@@ -2624,15 +2623,17 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
       { from: 'Veritas Vans', brand: 'Veritas Vans', name: 'Veritas Vans Starlink Mini Dish', note: 'The Starlink Mini dish itself.', photoFile: 'pick-veritas-mini-dish.jpg', photoAlt: 'Our Starlink Mini dish', cta: 'Shop the Dish \u203a', href: 'https://veritasvans.com/product/starlink-mini-dish/ref/profile-php' },
       { brand: 'BLUETTI', name: 'BLUETTI Power Stations', note: 'Portable power stations for off-grid camping.', honest: 'Honest note: we haven\u2019t tried it yet, but we will soon.', code: 'Biscuit5', codeWhat: 'takes 5 percent off sitewide (not accessories or flash-sale items).', href: 'https://www.awin1.com/cread.php?awinmid=59271&awinaffid=3103812&ued=https%3A%2F%2Fwww.bluettipower.com' },
       { from: 'Blue Technology', brand: 'Blu Tech', name: 'Blu Tech Water Filter', note: 'The RV water filter. Clean water, so Biscuit rests easy.', offer: '7 percent off, applied automatically.', href: 'https://goblutech.com/Biscuit' },
-      { brand: 'Harvest Hosts', name: 'Harvest Hosts', note: 'Membership for overnight RV stays at farms, wineries, and attractions.', code: 'BISCUIT20', codeWhat: 'takes 20 percent off a membership.', honest: 'Honest note: we haven\u2019t tried it yet, but we will soon.', href: 'https://www.awin1.com/cread.php?awinmid=111454&awinaffid=3103812&ued=https%3A%2F%2Fwww.harvesthosts.com%2F' }
+      { brand: 'Harvest Hosts', name: 'Harvest Hosts', note: 'Membership for overnight RV stays at farms, wineries, and attractions.', code: 'BISCUIT20', codeWhat: 'takes 20 percent off a membership.', honest: 'Honest note: we haven\u2019t tried it yet, but we will soon.', href: 'https://www.awin1.com/cread.php?awinmid=111454&awinaffid=3103812&ued=https%3A%2F%2Fwww.harvesthosts.com%2F' },
+      { from: 'RVLock', name: 'RVLock', note: 'Keyless entry door lock we used on our previous camper.', code: 'BISCUIT', codeWhat: 'takes 10 percent off.', href: 'https://club.co/s/UW-J-NcpZXQtQ' }
     ].map(gearCard);
     // Gear page sections (Denise said yes 10/24/26). Cards are matched by name; any card not listed lands in Around the Camper.
     const GEAR_GROUPS = [
       { id: 'gear-biscuit', title: 'For Biscuit', blurb: 'My food, my chews, my safety monitor and my fenced yard.', names: ['Happy Howl Dog Food', 'Chewy', 'Necto', 'FXW Dog Playpen'] },
       { id: 'gear-power', title: 'Power & Internet', blurb: 'What keeps our lights on and our WiFi working, even way out in the hollows.', names: ['ECO-WORTHY 12V 280Ah Lithium Batteries', 'Starlink', 'Veritas Vans Starlink Mini Mount', 'Veritas Vans Starlink Mini Dish'] },
       { id: 'gear-water', title: 'Water & Tanks', blurb: 'Clean water in, clean tanks out.', names: ['Blu Tech Water Filter', 'Prime RV'] },
-      { id: 'gear-camper', title: 'Around the Camper', blurb: 'The door lock and bike rack we use every day.', names: ['RVLock', 'CRAVOT CyberRack S2'] },
-      { id: 'gear-wishlist', title: 'On Biscuit\u2019s Wish List', blurb: 'Good partners we trust. We haven\u2019t tried these yet, but we will soon.', names: ['Xtreme Heaters', 'BLUETTI Power Stations', 'Harvest Hosts'] }
+      { id: 'gear-camper', title: 'Around the Camper', blurb: 'The bike rack we use every day.', names: ['CRAVOT CyberRack S2'] },
+      { id: 'gear-wishlist', title: 'On Biscuit\u2019s Wish List', blurb: 'Good partners we trust. We haven\u2019t tried these yet, but we will soon.', names: ['Xtreme Heaters', 'BLUETTI Power Stations', 'Harvest Hosts'] },
+      { id: 'gear-previous', title: 'From Our Previous Camper', blurb: 'We loved this lock on our old camper, but it doesn\u2019t fit the door on our new one.', names: ['RVLock'] }
     ];
     const GEAR_USED = {};
     const GEAR_SECTIONS = GEAR_GROUPS.map(g => ({ id: g.id, title: g.title, blurb: g.blurb, cards: g.names.map(n => { const c = GEAR_CARDS.find(x => x.name === n); if (c) GEAR_USED[n] = true; return c; }).filter(Boolean) }));
@@ -2649,7 +2650,7 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
 
     // Homepage "Biscuit's Picks" teaser: Denise's 7 picks, in her order (9/28/26). Existing cards reused as-is.
     const HOME_BLUETTI = { name: 'BLUETTI', note: 'Portable power stations for off-grid camping.', code: 'Biscuit5', codeWhat: 'takes 5 percent off sitewide (not accessories or flash-sale items).', hasCode: true, href: 'https://www.awin1.com/cread.php?awinmid=59271&awinaffid=3103812&ued=https%3A%2F%2Fwww.bluettipower.com', cta: 'Shop BLUETTI \u203a', plateBg: '#1A1712', hasLogo: false, noLogo: true, logoEl: null, hasPhoto: false, photoEl: null, hasDisclosure: false };
-    const HOME_PICKS = ['Happy Howl', 'Necto', 'RVLock', 'FXW', 'Starlink', 'BLUETTI', 'Veritas Vans'].map(nm =>
+    const HOME_PICKS = ['Happy Howl', 'Necto', 'FXW', 'Starlink', 'BLUETTI', 'Veritas Vans', 'RVLock'].map(nm =>
       nm === 'BLUETTI' ? HOME_BLUETTI : (nm === 'FXW' ? Object.assign({}, GEAR_FROM['FXW'], { hasDisclosure: true, disclosure: GEAR_AMZ_NOTE }) : GEAR_FROM[nm]));
 
     return {
