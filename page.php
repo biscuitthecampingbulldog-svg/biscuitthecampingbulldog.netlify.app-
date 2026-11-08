@@ -258,6 +258,12 @@ if (isset($PAGES[$path])) {
     foreach ($STATES as $k => $nm) $links[] = '<a href="/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') . '">' . $e2($nm) . '</a>';
     $ns .= implode(' &middot; ', $links) . '</p>';
   }
+  /* Gear page: link the partner shops (added 2026-11-07, Denise approved) so search engines and AI tools can find them. */
+  if ($path === '/gear') {
+    $ns .= '<h2>Our partners&rsquo; shops</h2><p><a href="https://partners.biscuitthecampingbulldog.com/">All of Biscuit&rsquo;s partner shops in one place</a></p><ul>';
+    foreach (array('starlink' => 'Starlink Mini gear (Veritas Vans)', 'blutech' => 'Blu Tech RV water filtration', 'primerv' => 'Prime RV tank care', 'cravot' => 'Cravot hitch bike racks', 'bluetti' => 'BLUETTI portable power', 'xtremeheaters' => 'Xtreme Heaters RV freeze protection', 'rvlock' => 'RVLock keyless locks') as $sub => $lbl) $ns .= '<li><a href="https://' . $sub . '.biscuitthecampingbulldog.com/">' . $lbl . '</a></li>';
+    $ns .= '</ul>';
+  }
   $ns .= '<h2>More from Biscuit the Camping Bulldog</h2><ul>';
   foreach ($NAV as $u => $label) if ($u !== $path) $ns .= '<li><a href="' . $u . '">' . $e2($label) . '</a></li>';
   $ns .= '</ul><p>Contact: <a href="mailto:biscuit@biscuitthecampingbulldog.com">biscuit@biscuitthecampingbulldog.com</a></p></div></noscript>';
