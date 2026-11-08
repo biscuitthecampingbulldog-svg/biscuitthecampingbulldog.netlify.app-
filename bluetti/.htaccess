@@ -1,0 +1,6 @@
+# BLUETTI shop. This folder belongs ONLY to bluetti.biscuitthecampingbulldog.com.
+# Keep the main site's page-address rules out of here, and send anyone who reaches this folder
+# through Biscuit's address (biscuitthecampingbulldog.com/bluetti) to the shop's own address.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^bluetti\. [NC]
+RewriteRule ^(.*)$ https://bluetti.biscuitthecampingbulldog.com/$1 [R=301,L]

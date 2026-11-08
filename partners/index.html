@@ -122,6 +122,33 @@
   ]
 }
 </script>
+<!-- Google Analytics (Biscuit's account). Counts visits to this shop and its order-button taps (added 2026-11-07). -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T6H2CSSG6B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  /* Denise's, Jeff's and Claude's own devices: open this shop once with ?biscuit_internal=on to leave that device out of the counts. */
+  try {
+    var bqi = new URLSearchParams(location.search).get('biscuit_internal');
+    if (bqi === 'on') localStorage.setItem('biscuit_internal', '1');
+    if (bqi === 'off') localStorage.removeItem('biscuit_internal');
+    if (localStorage.getItem('biscuit_internal') === '1') gtag('set', { traffic_type: 'internal' });
+  } catch (e) {}
+  gtag('config', 'G-T6H2CSSG6B');
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || a.host === location.host) return;
+    var card = a.closest('article, .card');
+    var h = card && card.querySelector('h3');
+    gtag('event', 'shop_order_click', {
+      shop: 'Partners hub',
+      product: h ? h.textContent.trim().slice(0, 100) : a.textContent.trim().slice(0, 100),
+      link_url: a.href,
+      transport_type: 'beacon'
+    });
+  });
+</script>
 </head>
 <body>
 <header>
