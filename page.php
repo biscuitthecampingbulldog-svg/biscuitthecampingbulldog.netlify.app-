@@ -115,6 +115,59 @@ if ($STATE_KEY !== '') {
       'biscuit-hero-smokies.jpg');
   }
 }
+/* Pull one page's visible words out of index.html as plain HTML for the crawler version (added 2026-11-09). */
+function biscuit_page_text($html, $flag) {
+  $start = strpos($html, '<sc-if value="{{ ' . $flag . ' }}"');
+  if ($start === false) return '';
+  $depth = 0; $end = false;
+  if (!preg_match_all('#<sc-if\b|</sc-if>#', $html, $m, PREG_OFFSET_CAPTURE, $start)) return '';
+  foreach ($m[0] as $hit) {
+    $depth += ($hit[0] === '<sc-if') ? 1 : -1;
+    if ($depth === 0) { $end = $hit[1]; break; }
+  }
+  if ($end === false) return '';
+  $b = substr($html, $start, $end - $start);
+  $b = preg_replace('#^<sc-if[^>]*>#', '', $b);
+  $now = time();
+  $on = array(
+    'giveawayOn' => $now < strtotime('2026-12-15T00:00:00-05:00'),
+    'hhSaleOn' => $now < strtotime('2027-01-13T00:00:00-05:00'),
+    'hhSaleOff' => $now >= strtotime('2027-01-13T00:00:00-05:00'),
+    'giftBoxOn' => $now < strtotime('2026-12-26T00:00:00-05:00'),
+  );
+  for ($i = 0; $i < 40; $i++) {
+    $n = preg_replace('#<sc-for\b[^>]*>(?:(?!<sc-for\b).)*?</sc-for>#s', '', $b);
+    $n = preg_replace_callback('#<sc-if value="\{\{ ([^}]*) \}\}"[^>]*>((?:(?!<sc-if\b).)*?)</sc-if>#s', function ($x) use ($on) {
+      return !empty($on[$x[1]]) ? $x[2] : '';
+    }, $n);
+    if ($n === $b) break;
+    $b = $n;
+  }
+  $b = preg_replace('#<(script|style|svg|button|select|textarea|label|iframe|video|noscript)\b.*?</\1>#is', ' ', $b);
+  $b = preg_replace('#<(input|img|source|hr)\b[^>]*>#i', ' ', $b);
+  $b = preg_replace('#\{\{[^}]*\}\}#', '', $b);
+  $b = preg_replace_callback('#<(/?)([a-zA-Z][a-zA-Z0-9-]*)\b([^>]*)>#', function ($x) {
+    $t = strtolower($x[2]); $close = $x[1] === '/';
+    if ($t === 'h1') $t = 'h2';
+    if (in_array($t, array('h2', 'h3', 'h4', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'table', 'tr', 'td', 'th'), true)) return '<' . ($close ? '/' : '') . $t . '>';
+    if ($t === 'br') return '<br>';
+    if ($t === 'a') {
+      if ($close) return '</a>';
+      $h = preg_match('#\shref="([^"]*)"#', $x[3], $hm) ? $hm[1] : '';
+      $r = preg_match('#\srel="([^"]*)"#', $x[3], $rm) ? ' rel="' . $rm[1] . '"' : '';
+      if ($h === '' || $h[0] === '#') return '<a>';
+      return '<a href="' . $h . '"' . $r . '>';
+    }
+    if ($t === 'div' || $t === 'section' || $t === 'article') return "\n<br>";
+    return ' ';
+  }, $b);
+  $b = preg_replace('#<a>(.*?)</a>#s', '$1', $b);
+  $b = preg_replace('#[ \t]+#', ' ', $b);
+  $b = preg_replace('#(\s*<br>\s*)+#', '<br>', $b);
+  $b = preg_replace('#<(p|li|h2|h3|h4|strong|em)>\s*(<br>\s*)*</\1>#', '', $b);
+  $b = preg_replace('#\s*\n\s*#', "\n", $b);
+  return trim(preg_replace('#^(<br>)+|(<br>)+$#', '', trim($b)));
+}
 $html = @file_get_contents(__DIR__ . '/index.html');
 if ($html === false) { http_response_code(500); exit('Site file missing.'); }
 if (isset($PAGES[$path])) {
@@ -263,6 +316,17 @@ if (isset($PAGES[$path])) {
     $ns .= '<h2>Our partners&rsquo; shops</h2><p><a href="https://partners.biscuitthecampingbulldog.com/">All of Biscuit&rsquo;s partner shops in one place</a></p><ul>';
     foreach (array('starlink' => 'Starlink Mini gear (Veritas Vans)', 'blutech' => 'Blu Tech RV water filtration', 'primerv' => 'Prime RV tank care', 'cravot' => 'Cravot hitch bike racks', 'bluetti' => 'BLUETTI portable power', 'xtremeheaters' => 'Xtreme Heaters RV freeze protection', 'rvlock' => 'RVLock keyless locks') as $sub => $lbl) $ns .= '<li><a href="https://' . $sub . '.biscuitthecampingbulldog.com/">' . $lbl . '</a></li>';
     $ns .= '</ul>';
+  }
+  /* Guides, reviews, shop and gift guide: put the page's own words in the crawler version (added 2026-11-09),
+     so AI tools that don't run JavaScript read the whole page, not just the summary. Built fresh from index.html
+     each time, so it always matches what visitors see. Parts that change by date or by visitor are left out. */
+  $FULL = array('/heat' => 'isHeat', '/cold' => 'isCold', '/leaving-pet-in-rv' => 'isPetAlone', '/pet-papers' => 'isPapers',
+    '/gift-guide' => 'isGiftGuide', '/shop' => 'isShop', '/giveaway' => 'isGiveaway', '/about' => 'isAbout', '/reviews' => 'isReviews',
+    '/fxw-dog-fence-review' => 'isFxwReview', '/blu-tech-review' => 'isBluReview', '/necto-temperature-monitor-review' => 'isNectoReview',
+    '/rvlock-keyless-entry-review' => 'isRvlockReview', '/blu-waterstop-review' => 'isWaterstopReview', '/prime-rv-tank-treatment-review' => 'isPrimervReview');
+  if (isset($FULL[$path])) {
+    $ft = biscuit_page_text($html, $FULL[$path]);
+    if ($ft !== '') $ns .= '<div>' . $ft . '</div>';
   }
   $ns .= '<h2>More from Biscuit the Camping Bulldog</h2><ul>';
   foreach ($NAV as $u => $label) if ($u !== $path) $ns .= '<li><a href="' . $u . '">' . $e2($label) . '</a></li>';
