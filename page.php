@@ -24,6 +24,8 @@ $PAGES = array(
   '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', "Win a Necto pet temperature monitor (\$199 value)! Join Biscuit's Pack by Dec 14, 2026 to enter. Winner drawn Dec 15. US residents 18+, no purchase needed.", 'picks/pick-necto.jpg'),
   '/gift-guide' => array("Biscuit's Christmas Gift Guide | Biscuit the Camping Bulldog", "Biscuit's Christmas gift guide for campers and their dogs: stocking stuffers, great gifts and splurges, picked by a full-time RV bulldog and her family.", 'biscuit-hero-smokies.jpg'),
   '/cold' => array('Pet Cold Weather Guide | Biscuit the Camping Bulldog', "How cold is too cold for your dog? A temperature-by-temperature cold weather guide for RV travelers with pets, plus keeping the camper warm, paw and antifreeze safety, and pet poison hotlines.", 'biscuit-hero-smokies.jpg'),
+  '/spring' => array('Spring Pet Safety Guide | Biscuit the Camping Bulldog', "Spring pet safety for RV travelers: tick checks and removal, mud and puddles, pollen allergies, snakes and busy campgrounds, plus the gear Biscuit uses.", 'biscuit-hero-smokies.jpg'),
+  '/fall' => array('Fall Pet Safety Guide | Biscuit the Camping Bulldog', "Fall pet safety for RV travelers: bright colors in hunting season, mouse bait dangers as campers close up, shorter days, cooler nights and the gear that helps.", 'biscuit-hero-smokies.jpg'),
   '/leaving-pet-in-rv' => array('Leaving Your Pet in the RV | Biscuit the Camping Bulldog', "How to leave your dog or cat in the RV safely: a before-you-leave checklist, a plan for when campground power goes out, and what to look for in a pet temperature monitor.", 'biscuit-hero-smokies.jpg'),
   '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains.', 'adv-service-dog-biscuit.jpg'),
   '/goodbye-old-camper' => array('Goodbye, Old Camper | Biscuit the Camping Bulldog', "Biscuit says goodbye to her old camper: recliner cuddles with daddy, a Christmas bear in Cades Cove, one last sniff of every corner, and a new chapter ahead.", 'adv-roadtrip.jpg'),
@@ -247,7 +249,7 @@ if ($STATE_KEY !== '') {
 /* Extra schema (added 2026-10-27): breadcrumbs on every subpage, FAQ on the heat guide and pet papers
    (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
 $LD2 = array();
-$CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/gift-guide' => 'Christmas gift guide', '/cold' => 'Pet cold weather guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+$CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/gift-guide' => 'Christmas gift guide', '/cold' => 'Pet cold weather guide', '/spring' => 'Spring pet safety guide', '/fall' => 'Fall pet safety guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
 $CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/blu-waterstop-review' => '/reviews', '/prime-rv-tank-treatment-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories', '/goodbye-old-camper' => '/stories');
 if ($path !== '/' && $STATE_KEY === '' && isset($PAGES[$path])) {
   $cl = array(array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'));
@@ -283,7 +285,7 @@ if (isset($LD[$path])) {
    Visitors never see it (it sits inside <noscript>); it gives crawlers the real page title, summary,
    links to every page and, on state pages, every vet and campground. */
 $e2 = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
-$NAV = array('/' => 'Home', '/vets' => 'Find a vet near you (all 50 states)', '/heat' => 'Pet heat safety guide', '/cold' => 'Pet cold weather guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV safely', '/pet-papers' => 'Pet travel papers checklist', '/gear' => "Biscuit's road-tested gear", '/shop' => 'Shop what we use', '/gift-guide' => "Biscuit's Christmas gift guide", '/reviews' => 'Gear reviews', '/stories' => "Biscuit's stories", '/giveaway' => 'Necto giveaway', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+$NAV = array('/' => 'Home', '/vets' => 'Find a vet near you (all 50 states)', '/heat' => 'Pet heat safety guide', '/cold' => 'Pet cold weather guide', '/spring' => 'Spring pet safety guide', '/fall' => 'Fall pet safety guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV safely', '/pet-papers' => 'Pet travel papers checklist', '/gear' => "Biscuit's road-tested gear", '/shop' => 'Shop what we use', '/gift-guide' => "Biscuit's Christmas gift guide", '/reviews' => 'Gear reviews', '/stories' => "Biscuit's stories", '/giveaway' => 'Necto giveaway', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
 if (isset($PAGES[$path])) {
   $np = $PAGES[$path];
   $ns = '<noscript><div style="max-width:760px;margin:0 auto;padding:16px;font-family:sans-serif">';
@@ -320,7 +322,7 @@ if (isset($PAGES[$path])) {
   /* Guides, reviews, shop and gift guide: put the page's own words in the crawler version (added 2026-11-09),
      so AI tools that don't run JavaScript read the whole page, not just the summary. Built fresh from index.html
      each time, so it always matches what visitors see. Parts that change by date or by visitor are left out. */
-  $FULL = array('/heat' => 'isHeat', '/cold' => 'isCold', '/leaving-pet-in-rv' => 'isPetAlone', '/pet-papers' => 'isPapers',
+  $FULL = array('/heat' => 'isHeat', '/cold' => 'isCold', '/spring' => 'isSpring', '/fall' => 'isFall', '/leaving-pet-in-rv' => 'isPetAlone', '/pet-papers' => 'isPapers',
     '/gift-guide' => 'isGiftGuide', '/shop' => 'isShop', '/giveaway' => 'isGiveaway', '/about' => 'isAbout', '/reviews' => 'isReviews',
     '/fxw-dog-fence-review' => 'isFxwReview', '/blu-tech-review' => 'isBluReview', '/necto-temperature-monitor-review' => 'isNectoReview',
     '/rvlock-keyless-entry-review' => 'isRvlockReview', '/blu-waterstop-review' => 'isWaterstopReview', '/prime-rv-tank-treatment-review' => 'isPrimervReview');
