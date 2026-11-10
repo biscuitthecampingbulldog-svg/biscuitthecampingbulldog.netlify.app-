@@ -1,6 +1,6 @@
 # Biscuit the Camping Bulldog — Xtreme Heaters Shop
 
-Page: https://xtremeheaters.biscuitthecampingbulldog.com/
+Page: https://biscuitthecampingbulldog.com/xtremeheaters/
 
 A shop for Xtreme Heaters freeze protection for RVs and campers: underbelly and compartment heaters (400W to 1000W), money-saving 2-packs, a space heater for inside the camper, and mounting brackets, a shore power adapter and freeze spray. Every order button links to the matching product on xtremeheaters.com through the shop's partner link.
 
@@ -10,10 +10,10 @@ Honest note from the page: they found Xtreme Heaters at the Hershey RV Show and 
 
 ## Categories (13 products total)
 
-- RV Underbelly & Camper Heaters (4 products): https://xtremeheaters.biscuitthecampingbulldog.com/#rv
-- 2-Packs (two heaters, one order) (3 products): https://xtremeheaters.biscuitthecampingbulldog.com/#twopacks
-- Inside the Camper (1 product): https://xtremeheaters.biscuitthecampingbulldog.com/#inside
-- Brackets, Adapters & Extras (5 products): https://xtremeheaters.biscuitthecampingbulldog.com/#extras
+- RV Underbelly & Camper Heaters (4 products): https://biscuitthecampingbulldog.com/xtremeheaters/#rv
+- 2-Packs (two heaters, one order) (3 products): https://biscuitthecampingbulldog.com/xtremeheaters/#twopacks
+- Inside the Camper (1 product): https://biscuitthecampingbulldog.com/xtremeheaters/#inside
+- Brackets, Adapters & Extras (5 products): https://biscuitthecampingbulldog.com/xtremeheaters/#extras
 
 ## Standout products
 

@@ -1,6 +1,8 @@
-# Xtreme Heaters shop. This folder belongs ONLY to xtremeheaters.biscuitthecampingbulldog.com.
-# Keep the main site's page-address rules out of here, and send anyone who reaches this folder
-# through Biscuit's address (biscuitthecampingbulldog.com/xtremeheaters) to the shop's own address.
+# Xtreme Heaters shop. Since 11/10/26 (Jeffrey's call) it lives at biscuitthecampingbulldog.com/xtremeheaters/
+# because its own subdomain isn't switched on. RewriteEngine On here keeps the main site's page rules out of this folder.
+# If xtremeheaters.biscuitthecampingbulldog.com is ever switched on, its visits come here so the shop keeps one address.
+DirectoryIndex index.html
 RewriteEngine On
-RewriteCond %{HTTP_HOST} !^xtremeheaters\. [NC]
-RewriteRule ^(.*)$ https://xtremeheaters.biscuitthecampingbulldog.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^xtremeheaters\. [NC]
+RewriteRule ^(.*)$ https://biscuitthecampingbulldog.com/xtremeheaters/$1 [R=301,L]
+RewriteRule ^$ index.html [L]

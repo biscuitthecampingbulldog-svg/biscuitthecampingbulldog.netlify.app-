@@ -26,4 +26,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://xtremeheaters.biscuitthecampingbulldog.com/sitemap.xml
+Sitemap: https://biscuitthecampingbulldog.com/xtremeheaters/sitemap.xml

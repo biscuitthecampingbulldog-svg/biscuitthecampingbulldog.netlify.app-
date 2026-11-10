@@ -314,7 +314,7 @@ if (isset($PAGES[$path])) {
   /* Gear page: link the partner shops (added 2026-11-07, Denise approved) so search engines and AI tools can find them. */
   if ($path === '/gear') {
     $ns .= '<h2>Our partners&rsquo; shops</h2><p><a href="https://partners.biscuitthecampingbulldog.com/">All of Biscuit&rsquo;s partner shops in one place</a></p><ul>';
-    foreach (array('starlink' => 'Starlink Mini gear (Veritas Vans)', 'blutech' => 'Blu Tech RV water filtration', 'primerv' => 'Prime RV tank care', 'cravot' => 'Cravot hitch bike racks', 'bluetti' => 'BLUETTI portable power', 'xtremeheaters' => 'Xtreme Heaters RV freeze protection', 'rvlock' => 'RVLock keyless locks') as $sub => $lbl) $ns .= '<li><a href="https://' . $sub . '.biscuitthecampingbulldog.com/">' . $lbl . '</a></li>';
+    foreach (array('starlink' => 'Starlink Mini gear (Veritas Vans)', 'blutech' => 'Blu Tech RV water filtration', 'primerv' => 'Prime RV tank care', 'cravot' => 'Cravot hitch bike racks', 'bluetti' => 'BLUETTI portable power', 'xtremeheaters' => 'Xtreme Heaters RV freeze protection', 'rvlock' => 'RVLock keyless locks') as $sub => $lbl) $ns .= '<li><a href="' . ($sub === 'xtremeheaters' ? 'https://biscuitthecampingbulldog.com/xtremeheaters/' : 'https://' . $sub . '.biscuitthecampingbulldog.com/') . '">' . $lbl . '</a></li>';
     $ns .= '</ul>';
   }
   /* Guides, reviews, shop and gift guide: put the page's own words in the crawler version (added 2026-11-09),
