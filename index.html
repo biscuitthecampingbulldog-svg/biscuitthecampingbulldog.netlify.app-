@@ -42,6 +42,7 @@
     "/shop": "Shop What We Use | Biscuit the Camping Bulldog",
     "/stories": "Biscuit's Stories | Biscuit the Camping Bulldog",
     "/goodbye-old-camper": "Goodbye, Old Camper | Biscuit the Camping Bulldog",
+    "/too-many-buttons-new-camper": "Too Many Buttons | Biscuit the Camping Bulldog",
     "/my-nose-knows-service-dog": "My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog",
     "/gear": "Biscuit's Road-Tested Gear | Biscuit the Camping Bulldog",
     "/giveaway": "Necto Giveaway | Biscuit the Camping Bulldog",
@@ -1854,6 +1855,12 @@ a:hover{color:#A8352A}
         <div style="display:flex;flex-direction:column;gap:14px;margin-top:32px">
           <div style="border:1px solid rgba(26,23,18,.2);background:#F5ECDC;padding:26px 24px">
             <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C">Stories from the road &middot; November 2026</div>
+            <button type="button" onClick="{{ goButtonsStory }}" style="display:block;background:transparent;border:none;padding:0;margin:10px 0 0;cursor:pointer;text-align:left;font:600 22px/1.3 Barlow,sans-serif;color:#1A1712" style-hover="color:#8A4A20">Too Many Buttons: Mama and Daddy vs. the New Camper</button>
+            <p style="font:400 16.5px/1.5 Barlow,sans-serif;color:#4A4234;margin:10px 0 0;max-width:64ch">A new fireplace, a new water heater, new thermostats and a whole lot of touch buttons. I watched from my bed and supervised.</p>
+            <button type="button" onClick="{{ goButtonsStory }}" style="margin-top:14px;background:transparent;border:none;padding:0;cursor:pointer;font:600 13.5px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">Read my story &rsaquo;</button>
+          </div>
+          <div style="border:1px solid rgba(26,23,18,.2);background:#F5ECDC;padding:26px 24px">
+            <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C">Stories from the road &middot; November 2026</div>
             <button type="button" onClick="{{ goOldCamperStory }}" style="display:block;background:transparent;border:none;padding:0;margin:10px 0 0;cursor:pointer;text-align:left;font:600 22px/1.3 Barlow,sans-serif;color:#1A1712" style-hover="color:#8A4A20">Goodbye, Old Camper: Thank You for Holding My Pack</button>
             <p style="font:400 16.5px/1.5 Barlow,sans-serif;color:#4A4234;margin:10px 0 0;max-width:64ch">Recliner cuddles with daddy, a Christmas bear in Cades Cove, and one last sniff of every corner before our new chapter.</p>
             <button type="button" onClick="{{ goOldCamperStory }}" style="margin-top:14px;background:transparent;border:none;padding:0;cursor:pointer;font:600 13.5px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">Read my story &rsaquo;</button>
@@ -1865,6 +1872,30 @@ a:hover{color:#A8352A}
             <button type="button" onClick="{{ goSdmStory }}" style="margin-top:14px;background:transparent;border:none;padding:0;cursor:pointer;font:600 13.5px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">Read my story &rsaquo;</button>
           </div>
         </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isButtonsStory }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:{{ secPad }};max-width:74ch">
+        <button type="button" onClick="{{ goStories }}" style="background:transparent;border:none;padding:0;cursor:pointer;font:600 13px/1 Barlow,sans-serif;color:#8A4A20;text-decoration:underline" style-hover="color:#A8352A">&lsaquo; All stories</button>
+        <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C4707C;margin-top:20px">Stories from the road &middot; November 2026</div>
+        <h1 style="font:400 {{ h1Size }}/1.08 'Alfa Slab One',serif;color:#1A1712;margin:14px 0 0;max-width:24ch;text-wrap:pretty">Too Many Buttons: Mama and Daddy vs. the New Camper</h1>
+        <img src="images/story-fireplace-nap-2026.jpg" alt="Biscuit napping on her bed in front of the fireplace in our new Grand Design Solitude" style="display:block;width:100%;max-width:560px;height:auto;margin:24px 0;border:1px solid rgba(26,23,18,.2)" />
+        <sc-for list="{{ story3A }}" as="p" hint-placeholder-count="6">
+          <sc-if value="{{ p.h }}" hint-placeholder-val="{{ false }}"><h2 style="font:600 21px/1.3 Barlow,sans-serif;color:#3C5A46;margin:26px 0 8px">{{ p.text }}</h2></sc-if>
+          <sc-if value="{{ p.t }}" hint-placeholder-val="{{ true }}"><p style="font:400 17px/1.6 Barlow,sans-serif;color:#4A4234;margin:0 0 14px;max-width:66ch">{{ p.text }}</p></sc-if>
+        </sc-for>
+        <img src="images/story-solitude-and-reflection-2026.jpg" alt="Our new Grand Design Solitude parked next to our old Grand Design Reflection" loading="lazy" style="display:block;width:100%;max-width:560px;height:auto;margin:24px 0;border:1px solid rgba(26,23,18,.2)" />
+        <sc-for list="{{ story3B }}" as="p" hint-placeholder-count="6">
+          <sc-if value="{{ p.h }}" hint-placeholder-val="{{ false }}"><h2 style="font:600 21px/1.3 Barlow,sans-serif;color:#3C5A46;margin:26px 0 8px">{{ p.text }}</h2></sc-if>
+          <sc-if value="{{ p.t }}" hint-placeholder-val="{{ true }}"><p style="font:400 17px/1.6 Barlow,sans-serif;color:#4A4234;margin:0 0 14px;max-width:66ch">{{ p.text }}</p></sc-if>
+        </sc-for>
+        <img src="images/story-solitude-fall-site-2026.jpg" alt="Biscuit's new home, the Grand Design Solitude, at our campsite with fall leaves all around" loading="lazy" style="display:block;width:100%;max-width:560px;height:auto;margin:24px 0;border:1px solid rgba(26,23,18,.2)" />
+        <sc-for list="{{ story3C }}" as="p" hint-placeholder-count="6">
+          <sc-if value="{{ p.h }}" hint-placeholder-val="{{ false }}"><h2 style="font:600 21px/1.3 Barlow,sans-serif;color:#3C5A46;margin:26px 0 8px">{{ p.text }}</h2></sc-if>
+          <sc-if value="{{ p.t }}" hint-placeholder-val="{{ true }}"><p style="font:400 17px/1.6 Barlow,sans-serif;color:#4A4234;margin:0 0 14px;max-width:66ch">{{ p.text }}</p></sc-if>
+        </sc-for>
+        <a href="https://www.facebook.com/profile.php?id=61582414480969" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#3C5A46;color:#F1EDE1;font:600 15px/1 Barlow,sans-serif;padding:12px 16px;text-decoration:none">Tell me on Facebook &rsaquo;</a>
       </div>
     </sc-if>
 
@@ -2363,7 +2394,7 @@ const SEASON_BANDS = {
     picksTitle: 'What helps us through winter',
     picks: [ NECTO_PICK, AMZ_PICK('Camco 50 ft Heated Drinking Water Hose', 'Keeps our water flowing in freezing weather.', 'B01ABONAS8'), AMZ_PICK('GYALAPERI Dog Sweaters (3-pack)', 'For chilly mountain mornings.', 'B0D79BCWKL'), AMZ_PICK('Musher\u2019s Secret Paw Wax (60 g)', 'Paw protection for rough gravel and winter road salt.', 'B0002IJQDC'), { name: 'Xtreme Heaters', note: 'Keeps an RV underbelly above freezing. On our list for the new camper; we haven\u2019t tried it yet.', href: 'https://xtremeheaters.com/?ref=Biscuit', cta: 'Shop Xtreme Heaters \u203a' } ] }
 };
-const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', goveeSwap: '/govee-vs-blu-waterstop', primervReview: '/prime-rv-tank-treatment-review', winterGear: '/winter-rv-gear-for-dogs', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', oldCamperStory: '/goodbye-old-camper', giveaway: '/giveaway', giftGuide: '/gift-guide', cold: '/cold', petAlone: '/leaving-pet-in-rv', spring: '/spring', fall: '/fall' };
+const PAGE_PATHS = { home: '/', gear: '/gear', vets: '/vets', heat: '/heat', about: '/about', papers: '/pet-papers', install: '/install', reviews: '/reviews', fxwReview: '/fxw-dog-fence-review', bluReview: '/blu-tech-review', nectoReview: '/necto-temperature-monitor-review', rvlockReview: '/rvlock-keyless-entry-review', waterstopReview: '/blu-waterstop-review', goveeSwap: '/govee-vs-blu-waterstop', primervReview: '/prime-rv-tank-treatment-review', winterGear: '/winter-rv-gear-for-dogs', terms: '/terms', shop: '/shop', stories: '/stories', sdmStory: '/my-nose-knows-service-dog', oldCamperStory: '/goodbye-old-camper', buttonsStory: '/too-many-buttons-new-camper', giveaway: '/giveaway', giftGuide: '/gift-guide', cold: '/cold', petAlone: '/leaving-pet-in-rv', spring: '/spring', fall: '/fall' };
 const REVIEW_FOR = { 'FXW': ['fxwReview', 'Read the FXW Dog Fence review \u203a'], 'Necto': ['nectoReview', 'Read our Necto review \u203a'], 'RVLock': ['rvlockReview', 'Read our RVLock review \u203a'], 'Prime RV': ['primervReview', 'Read our Prime RV review \u203a'] };
 // One page per state for Google (added 2026-10-26): /vets/tennessee, /vets/new-york ...
 const stateSlug = (name) => String(name || '').toLowerCase().replace(/[^a-z]+/g, '-');
@@ -3076,6 +3107,31 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
       storyLabel: 'Read my story \u203a',
       toggleStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} }
     }));
+    // Too many buttons story (11/15/26), Denise's answers.
+    const STORY3A = [
+      { text: "Well, Pack, we did it. We moved into our new home, the Grand Design Solitude. New smells, new floors, new corners to sniff. And the very best part? My bed sits right in front of the fireplace. I found my spot on day one. Easy.", h: false, t: true },
+      { text: "Mama and daddy did not have it so easy.", h: false, t: true },
+      { text: "See, our old camper and I understood each other. Mama and daddy knew every switch and knob in it like I know the sound of the treat bag. But this new camper has way more bells and whistles than the old one, and almost everything inside and outside works a little differently. So while I settled in, my humans started what I like to call \"the button show.\" I had a front-row seat.", h: false, t: true },
+    ];
+    const STORY3B = [
+      { text: "Act One: The Fireplace", h: true, t: false },
+      { text: "You would think a fireplace would be simple. It's warm. It glows. You lie in front of it. That's what I do, anyway. But the setup on this one is different from what mama and daddy were used to, and there was a whole lot of looking, pointing and \"wait, try that one\" before my cozy glow got going. I stayed on my bed and supervised. Somebody had to.", h: false, t: true },
+      { text: "Act Two: The Water Heater", h: true, t: false },
+      { text: "The water heater in this camper is totally different from our old one. Not a little different. Totally. Mama and daddy stood there studying it like I study a squirrel I can't reach. I don't use the water heater myself (bulldogs and baths are not friends), but I could tell from all the sighing that this one was a puzzle.", h: false, t: true },
+      { text: "Act Three: The Furnace and the Thermostats", h: true, t: false },
+      { text: "Then came the furnace controls and the thermostats. These all seem to be different too. I heard a lot of \"huh.\" At one point all that fuss was just too much to ignore, so I got up off my warm bed, waddled over and gave them a good once-over to make sure everyone was okay. Mama got a nose check, daddy got a nose check, and I went back to my spot. You're welcome.", h: false, t: true },
+      { text: "Act Four: The Touch Buttons", h: true, t: false },
+      { text: "And the touch buttons. Oh, the touch buttons. This camper has a lot of them, and they're nothing like what we had before. Mama would tap one and look at daddy. Daddy would tap another one and look at mama. Then they'd both look at me, like I'm supposed to know. Mama, I don't have thumbs. I have wrinkles. I can't help you here.", h: false, t: true },
+      { text: "Where We Are Now", h: true, t: false },
+      { text: "Here's the good news: mama and daddy have figured out most of it. Most. They're still learning a few things, and every now and then something new sends them back to the touch buttons. But every day it feels more like home, and they're getting a little faster at the button show.", h: false, t: true },
+    ];
+    const STORY3C = [
+      { text: "Me? I learned the most important feature on the very first night: the warm spot in front of the fireplace. Everything else is a human problem.", h: false, t: true },
+      { text: "What I want you to know, fellow campers, is that if you just got a new rig and you're standing in the middle of it scratching your head, you're not alone. Even after living in our old camper, this new one made mama and daddy feel brand new again. Be patient with yourself, take it one button at a time, and make sure your pup has a good bed to watch from. We are excellent supervisors.", h: false, t: true },
+      { text: "Happy camper. Wrinkly face. Zero regrets.", h: false, t: true },
+      { text: "Love, Biscuit", h: false, t: true },
+      { text: "Your turn, Pack: What gadget in YOUR camper took the longest to figure out? Come tell me on my Facebook page so mama and daddy feel better!", h: false, t: true },
+    ];
     // Goodbye old camper story (11/04/26), Denise's answers.
     const STORY2_PARAS = [
       'Hi friends, it\u2019s me, Biscuit. \uD83D\uDC3E',
@@ -3235,7 +3291,7 @@ areaSelectEl: this.buildAreaSelect(place),
       isAbout: p === 'about',
       isReviews: p === 'reviews',
       goReviews: this.go('reviews'),
-      isFxwReview: p === 'fxwReview', isBluReview: p === 'bluReview', isNectoReview: p === 'nectoReview', isRvlockReview: p === 'rvlockReview', isWaterstopReview: p === 'waterstopReview', isGoveeSwap: p === 'goveeSwap', isPrimervReview: p === 'primervReview', isWinterGear: p === 'winterGear', giveawayOn: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), isShop: p === 'shop', isGiftGuide: p === 'giftGuide', hhSaleOn: Date.now() < Date.parse('2027-01-13T00:00:00-05:00'), hhSaleOff: Date.now() >= Date.parse('2027-01-13T00:00:00-05:00'), giftBoxOn: Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), bfBannerShow: p !== 'giftGuide' && Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), isStories: p === 'stories', goStories: () => { this.go('stories')(); try { window.scrollTo(0, 0); } catch (e) {} }, isSdmStory: p === 'sdmStory', isOldCamperStory: p === 'oldCamperStory', isGiveaway: p === 'giveaway', gwBannerShow: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwBannerText: Date.now() < Date.parse('2026-10-15T00:00:00-04:00') ? '\u{1F389} Biscuit\u2019s Necto giveaway opens October 15 \u2014 see the details \u203a' : '\u{1F389} Win a Necto ($199 value)! Enter Biscuit\u2019s giveaway \u203a', gwBefore: p === 'giveaway' && Date.now() < Date.parse('2026-10-15T00:00:00-04:00'), gwEnded: p === 'giveaway' && Date.now() >= Date.parse('2026-12-15T00:00:00-05:00'), gwShowForm: p === 'giveaway' && !this.state.gwDone && Date.now() >= Date.parse('2026-10-15T00:00:00-04:00') && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwDone: p === 'giveaway' && !!this.state.gwDone && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwName: this.state.gwName || '', gwEmail: this.state.gwEmail || '', gwErr: this.state.gwErr || '', onGwName: (e) => this.setState({ gwName: e.target.value, gwErr: '' }), onGwEmail: (e) => this.setState({ gwEmail: e.target.value, gwErr: '' }), gwEnter: () => {
+      isFxwReview: p === 'fxwReview', isBluReview: p === 'bluReview', isNectoReview: p === 'nectoReview', isRvlockReview: p === 'rvlockReview', isWaterstopReview: p === 'waterstopReview', isGoveeSwap: p === 'goveeSwap', isPrimervReview: p === 'primervReview', isWinterGear: p === 'winterGear', giveawayOn: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), isShop: p === 'shop', isGiftGuide: p === 'giftGuide', hhSaleOn: Date.now() < Date.parse('2027-01-13T00:00:00-05:00'), hhSaleOff: Date.now() >= Date.parse('2027-01-13T00:00:00-05:00'), giftBoxOn: Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), bfBannerShow: p !== 'giftGuide' && Date.now() < Date.parse('2026-12-26T00:00:00-05:00'), isStories: p === 'stories', goStories: () => { this.go('stories')(); try { window.scrollTo(0, 0); } catch (e) {} }, isSdmStory: p === 'sdmStory', isOldCamperStory: p === 'oldCamperStory', isButtonsStory: p === 'buttonsStory', isGiveaway: p === 'giveaway', gwBannerShow: Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwBannerText: Date.now() < Date.parse('2026-10-15T00:00:00-04:00') ? '\u{1F389} Biscuit\u2019s Necto giveaway opens October 15 \u2014 see the details \u203a' : '\u{1F389} Win a Necto ($199 value)! Enter Biscuit\u2019s giveaway \u203a', gwBefore: p === 'giveaway' && Date.now() < Date.parse('2026-10-15T00:00:00-04:00'), gwEnded: p === 'giveaway' && Date.now() >= Date.parse('2026-12-15T00:00:00-05:00'), gwShowForm: p === 'giveaway' && !this.state.gwDone && Date.now() >= Date.parse('2026-10-15T00:00:00-04:00') && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwDone: p === 'giveaway' && !!this.state.gwDone && Date.now() < Date.parse('2026-12-15T00:00:00-05:00'), gwName: this.state.gwName || '', gwEmail: this.state.gwEmail || '', gwErr: this.state.gwErr || '', onGwName: (e) => this.setState({ gwName: e.target.value, gwErr: '' }), onGwEmail: (e) => this.setState({ gwEmail: e.target.value, gwErr: '' }), gwEnter: () => {
         const name = (this.state.gwName || '').trim();
         const email = (this.state.gwEmail || '').trim();
         if (!name) { this.setState({ gwErr: 'Please add your first name.' }); return; }
@@ -3254,7 +3310,7 @@ areaSelectEl: this.buildAreaSelect(place),
         }
         try { if (typeof window.gtag === 'function') window.gtag('event', 'giveaway_entry', { page_path: location.pathname }); } catch (e) {}
         this.setState({ gwDone: true, gwErr: '' });
-      }, goSdmStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} }, goOldCamperStory: () => { this.go('oldCamperStory')(); try { window.scrollTo(0, 0); } catch (e) {} },
+      }, goSdmStory: () => { this.go('sdmStory')(); try { window.scrollTo(0, 0); } catch (e) {} }, goOldCamperStory: () => { this.go('oldCamperStory')(); try { window.scrollTo(0, 0); } catch (e) {} }, goButtonsStory: () => { this.go('buttonsStory')(); try { window.scrollTo(0, 0); } catch (e) {} },
       goFxwReview: this.go('fxwReview'),
       goBluReview: () => { this.go('bluReview')(); try { window.scrollTo(0, 0); } catch (e) {} },
       goNectoReview: () => { this.go('nectoReview')(); try { window.scrollTo(0, 0); } catch (e) {} },
@@ -3405,7 +3461,7 @@ goFxwReviewTop: () => { this.go('fxwReview')(); try { window.scrollTo(0, 0); } c
         { label: 'YouTube \u00b7 @BiscuitTheCampingBulldog', href: 'https://www.youtube.com/@BiscuitTheCampingBulldog' }
       ],
       adventures: ADVENTURES,
-      storyOpen: !!this.state.storyOpen, storyParas: STORY_PARAS, story2Paras: STORY2_PARAS, closeStory: () => this.setState({ storyOpen: false }),
+      storyOpen: !!this.state.storyOpen, storyParas: STORY_PARAS, story2Paras: STORY2_PARAS, story3A: STORY3A, story3B: STORY3B, story3C: STORY3C, closeStory: () => this.setState({ storyOpen: false }),
 
       steps: [
         { device: 'Android phone & tablet', how: 'Open this site in Chrome, tap the three dots in the corner, then \u201cAdd to Home screen,\u201d then Install.' },
