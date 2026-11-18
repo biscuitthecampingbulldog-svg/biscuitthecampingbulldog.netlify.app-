@@ -21,3 +21,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://biscuitthecampingbulldog.com/sitemap.xml
+Sitemap: https://biscuitthecampingbulldog.com/sitemap-areas.xml

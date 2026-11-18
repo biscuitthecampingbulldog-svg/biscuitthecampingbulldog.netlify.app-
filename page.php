@@ -17,13 +17,23 @@ $PAGES = array(
   '/fxw-dog-fence-review' => array('FXW Dog Fence Review | Biscuit the Camping Bulldog', "Our FXW portable dog fence review: how it gives Biscuit her own yard at every campground, the 10 minute setup, what we like and what to know before you buy.", 'review-fxw-fence-upright.jpg'),
   '/blu-tech-review' => array('Blu Technology Review | Biscuit the Camping Bulldog', 'The leak alarm, water filter and softener that keep our camper water clean and our floor dry: what each one does and why we use it, with a video from Biscuit.', 'picks/pick-blu-tech.jpg'),
   '/necto-temperature-monitor-review' => array('Necto Temperature Monitor Review | Biscuit the Camping Bulldog', 'Why Biscuit stays home safely in the camper: the Necto cell-connected temperature monitor, 2 years of monitoring included, alerts straight to our phones.', 'picks/pick-necto.jpg'),
-  '/rvlock-keyless-entry-review' => array('RVLock Keyless Door Lock Review | Biscuit the Camping Bulldog', 'The RVLock keyless RV door lock: unlock the camper from a keychain remote, no more fumbling for keys with your hands full.', 'picks/pick-rvlock-2.jpg'),
+  '/rvlock-keyless-entry-review' => array('RVLock Keyless Door Lock Review | Biscuit the Camping Bulldog', 'Our RVLock keyless RV door lock review: unlock the camper from a keychain remote, no fumbling for keys with full hands. 5 paws, plus a November 2026 update.', 'picks/pick-rvlock-2.jpg'),
+  '/blu-waterstop-review' => array('Blu Technology WATERSTOP Review | Biscuit the Camping Bulldog', 'A blown water pump seal, a tiny leak puck and an automatic shut-off: why the Blu Technology WATERSTOP kept our RV underbelly dry. Specs and 5 paws.', 'picks/pick-blu-tech.jpg'),
+  '/govee-vs-blu-waterstop' => array('Why We Swapped Our Govee Leak Alarm for the Blu WATERSTOP | Biscuit the Camping Bulldog', "Our Govee leak alarm could sound off, but it couldn't stop the water. Here's why we swapped it for the Blu Technology WATERSTOP automatic shut-off in our RV.", 'picks/pick-blu-tech.jpg'),
   '/victron-battery-monitor-review' => array('Victron Battery Monitor Review | Biscuit the Camping Bulldog', 'How the Victron BMV-712 Smart battery monitor showed us our battery during 6 days off-grid at Raystown Lake with no solar coming in. Specs and 5 paws from Biscuit.', 'reviews/victron-battery-bay-new-camper.jpg'),
   '/prime-rv-tank-treatment-review' => array('Prime RV Tank Treatment Review | Biscuit the Camping Bulldog', 'Blue tablets left our RV gray tank smelling. Liquified (now Prime RV) tank treatment fixed it in two tankfuls. What we use, prices and 5 paws from Biscuit.', 'picks/pick-prime-rv-2.jpg'),
   '/shop' => array('Shop What We Use | Biscuit the Camping Bulldog', "Over 85 things our full-time RV family actually bought and uses, from dog gear, solar and RV parts to plumbing, camp kitchen and campsite favorites on Amazon.", 'biscuit-hero-smokies.jpg'),
   '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', "Win a Necto pet temperature monitor (\$199 value)! Join Biscuit's Pack by Dec 14, 2026 to enter. Winner drawn Dec 15. US residents 18+, no purchase needed.", 'picks/pick-necto.jpg'),
-  '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, a service dog and English Bulldog living full-time in an RV in the Great Smoky Mountains.', 'adv-service-dog-biscuit.jpg'),
-  '/my-nose-knows-service-dog' => array('My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog', "People see the vest and think I'm playing dress-up. I am not. What a working service dog actually does, from Biscuit herself.", 'adv-service-dog-biscuit.jpg'),
+  '/gift-guide' => array("Biscuit's Christmas Gift Guide | Biscuit the Camping Bulldog", "Biscuit's Christmas gift guide for campers and their dogs: stocking stuffers, great gifts and splurges, picked by a full-time RV bulldog and her family.", 'biscuit-hero-smokies.jpg'),
+  '/cold' => array('Pet Cold Weather Guide | Biscuit the Camping Bulldog', "How cold is too cold for your dog? A temperature-by-temperature guide for RVers with pets, plus keeping the camper warm, paw care and antifreeze safety.", 'biscuit-hero-smokies.jpg'),
+  '/spring' => array('Spring Pet Safety Guide | Biscuit the Camping Bulldog', "Spring pet safety for RV travelers: tick checks and removal, mud and puddles, pollen allergies, snakes and busy campgrounds, plus the gear Biscuit uses.", 'biscuit-hero-smokies.jpg'),
+  '/fall' => array('Fall Pet Safety Guide | Biscuit the Camping Bulldog', "Fall pet safety for RV travelers: bright colors in hunting season, mouse bait dangers as campers close up, shorter days, cooler nights and the gear that helps.", 'biscuit-hero-smokies.jpg'),
+  '/winter-rv-gear-for-dogs' => array('Winter RV Gear for Dogs: 6 Things We Actually Use | Biscuit the Camping Bulldog', "Winter RV gear for dogs we really use: a pet temperature monitor, dog sweaters, a heated water hose, a leak shut-off and the batteries that keep the heat on.", 'picks/pick-necto.jpg'),
+  '/leaving-pet-in-rv' => array('Leaving Your Pet in the RV | Biscuit the Camping Bulldog', "How to leave your dog or cat in the RV safely: a before-you-leave checklist, a plan if campground power goes out, and what to look for in a temp monitor.", 'biscuit-hero-smokies.jpg'),
+  '/stories' => array("Biscuit's Stories | Biscuit the Camping Bulldog", 'Stories from the road with Biscuit, an English Bulldog service dog living full-time in an RV in the Great Smoky Mountains of Tennessee with her mama and daddy.', 'adv-service-dog-biscuit.jpg'),
+  '/too-many-buttons-new-camper' => array('Too Many Buttons | Biscuit the Camping Bulldog', "Biscuit watches mama and daddy learn the new camper: a new fireplace, water heater, thermostats and lots of touch buttons, while she supervises from her bed.", 'story-fireplace-nap-2026.jpg'),
+  '/goodbye-old-camper' => array('Goodbye, Old Camper | Biscuit the Camping Bulldog', "Biscuit says goodbye to her old camper: recliner cuddles with daddy, a Christmas bear in Cades Cove, one last sniff of every corner, and a new chapter ahead.", 'adv-roadtrip.jpg'),
+  '/my-nose-knows-service-dog' => array('My Nose Knows: What This Service Dog Actually Does | Biscuit the Camping Bulldog', "People see the vest and think I'm playing dress-up. I am not. What a diabetic alert service dog actually does on the road and at home, told by Biscuit herself.", 'adv-service-dog-biscuit.jpg'),
   '/about' => array('About Biscuit | Biscuit the Camping Bulldog', "Meet Biscuit, an English Bulldog service dog who lives full-time in an RV in the Great Smoky Mountains with her mama Denise and daddy Jeffrey. Big heart!", 'adv-roadtrip.jpg'),
   '/install' => array("Get Biscuit's App | Biscuit the Camping Bulldog", "Add Biscuit's free vet finder to your phone's home screen. No app store and no account, and the vet list still works at campgrounds with no cell signal.", 'biscuit-hero-smokies.jpg'),
   '/terms' => array('Terms of Use | Biscuit the Camping Bulldog', "Terms of use and copyright for biscuitthecampingbulldog.com, the vet-first pet travel website from Biscuit, an English Bulldog service dog living in an RV.", 'biscuit-hero-smokies.jpg')
@@ -38,14 +48,35 @@ if ($path === '') $path = '/';
    campgrounds (read straight from vet-data.js, so new areas show up by themselves). */
 $STATES = array('AL'=>'Alabama','AK'=>'Alaska','AZ'=>'Arizona','AR'=>'Arkansas','CA'=>'California','CO'=>'Colorado','CT'=>'Connecticut','DE'=>'Delaware','FL'=>'Florida','GA'=>'Georgia','HI'=>'Hawaii','ID'=>'Idaho','IL'=>'Illinois','IN'=>'Indiana','IA'=>'Iowa','KS'=>'Kansas','KY'=>'Kentucky','LA'=>'Louisiana','ME'=>'Maine','MD'=>'Maryland','MA'=>'Massachusetts','MI'=>'Michigan','MN'=>'Minnesota','MS'=>'Mississippi','MO'=>'Missouri','MT'=>'Montana','NE'=>'Nebraska','NV'=>'Nevada','NH'=>'New Hampshire','NJ'=>'New Jersey','NM'=>'New Mexico','NY'=>'New York','NC'=>'North Carolina','ND'=>'North Dakota','OH'=>'Ohio','OK'=>'Oklahoma','OR'=>'Oregon','PA'=>'Pennsylvania','RI'=>'Rhode Island','SC'=>'South Carolina','SD'=>'South Dakota','TN'=>'Tennessee','TX'=>'Texas','UT'=>'Utah','VT'=>'Vermont','VA'=>'Virginia','WA'=>'Washington','WV'=>'West Virginia','WI'=>'Wisconsin','WY'=>'Wyoming');
 $STATE_KEY = '';
-if (preg_match('#^/vets/([a-z-]+)$#', $path, $sm)) {
+$AREA = ''; $AREA_SLUG = '';
+if (preg_match('#^/vets/([a-z-]+)(?:/([a-z0-9-]+))?$#', $path, $sm)) {
   foreach ($STATES as $k => $nm) {
     if (trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') === $sm[1]) { $STATE_KEY = $k; break; }
   }
   if ($STATE_KEY === '') { $path = '/vets'; }
+  elseif (!empty($sm[2])) { $AREA_SLUG = $sm[2]; }
 }
-/* Pull one state's listings out of vet-data.js (one listing per line). */
-function biscuit_state_listings($key) {
+/* One page per RV area (added 2026-11-03): /vets/florida/stuart-jupiter. The area part is the
+   area's label without its ", ST" ending. index.html uses the same rule (areaSlug). */
+function biscuit_area_slug($label) {
+  return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(preg_replace('/,\s*[A-Z]{2}$/', '', $label))), '-');
+}
+/* Every area label in one state, as slug => label (read from vet-data.js). */
+function biscuit_state_areas($key) {
+  $js = @file_get_contents(__DIR__ . '/vet-data.js');
+  $out = array();
+  if ($js === false) return $out;
+  $js = str_replace("\r\n", "\n", $js);
+  foreach (explode("\nCAMPS: {", $js, 2) as $part) {
+    if (preg_match('#\n' . $key . ': \[\n(.*?)\n\]#s', $part, $m)) {
+      if (preg_match_all("#\bcity: '((?:\\\\.|[^'\\\\])*)'#", $m[1], $cm)) foreach ($cm[1] as $c) { $c = stripslashes($c); $out[biscuit_area_slug($c)] = $c; }
+    }
+  }
+  ksort($out);
+  return $out;
+}
+/* Pull one state's listings out of vet-data.js (one listing per line). With $city, only that area's. */
+function biscuit_state_listings($key, $city = '') {
   $js = @file_get_contents(__DIR__ . '/vet-data.js');
   if ($js === false) return array(array(), array());
   $js = str_replace("\r\n", "\n", $js);
@@ -56,9 +87,10 @@ function biscuit_state_listings($key) {
     if (preg_match('#\n' . $key . ': \[\n(.*?)\n\]#s', $part, $m)) {
       foreach (explode("\n", $m[1]) as $line) {
         $row = array();
-        foreach (array('name', 'where', 'phone', 'tag') as $f) {
+        foreach (array('name', 'where', 'city', 'phone', 'tag', 'note') as $f) {
           if (preg_match("#\b$f: '((?:\\\\.|[^'\\\\])*)'#", $line, $fm)) $row[$f] = stripslashes($fm[1]);
         }
+        if ($city !== '' && (!isset($row['city']) || $row['city'] !== $city)) continue;
         if (!empty($row['name'])) $list[strtolower(preg_replace('/[^0-9]/', '', isset($row['phone']) ? $row['phone'] : '') ?: $row['name'])] = $row;
       }
     }
@@ -66,13 +98,81 @@ function biscuit_state_listings($key) {
   }
   return array(isset($out[0]) ? $out[0] : array(), isset($out[1]) ? $out[1] : array());
 }
+$STATE_AREAS = array();
+if ($STATE_KEY !== '') {
+  $STATE_AREAS = biscuit_state_areas($STATE_KEY);
+  $stPath = '/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($STATES[$STATE_KEY])), '-');
+  if ($AREA_SLUG !== '') {
+    if (isset($STATE_AREAS[$AREA_SLUG])) { $AREA = $STATE_AREAS[$AREA_SLUG]; }
+    else { $path = $stPath; $AREA_SLUG = ''; } /* unknown area: show the state page */
+  }
+}
 if ($STATE_KEY !== '') {
   $nm = $STATES[$STATE_KEY];
-  list($SV, $SC) = biscuit_state_listings($STATE_KEY);
+  list($SV, $SC) = biscuit_state_listings($STATE_KEY, $AREA);
   $er = 0; foreach ($SV as $v) { if (isset($v['tag']) && ($v['tag'] === 'Open 24/7' || $v['tag'] === 'Emergency')) $er++; }
-  $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
-    "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
-    'biscuit-hero-smokies.jpg');
+  if ($AREA !== '') {
+    $an = preg_replace('/,\s*[A-Z]{2}$/', '', $AREA);
+    $d = "Vets near $an, $nm for RV travelers: " . ($er ? "$er emergency vet" . ($er > 1 ? 's' : '') . ', ' : '') . (count($SV) - $er) . ' regular vet' . (count($SV) - $er === 1 ? '' : 's') . ' and ' . count($SC) . ' pet-friendly campground' . (count($SC) === 1 ? '' : 's') . ', checked by hand. Call or get directions in one tap.';
+    $PAGES[$path] = array("Vets & Pet-Friendly Campgrounds near $AREA | Biscuit the Camping Bulldog", $d, 'biscuit-hero-smokies.jpg');
+  } else {
+    $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
+      "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
+      'biscuit-hero-smokies.jpg');
+  }
+}
+/* Pull one page's visible words out of index.html as plain HTML for the crawler version (added 2026-11-09). */
+function biscuit_page_text($html, $flag) {
+  $start = strpos($html, '<sc-if value="{{ ' . $flag . ' }}"');
+  if ($start === false) return '';
+  $depth = 0; $end = false;
+  if (!preg_match_all('#<sc-if\b|</sc-if>#', $html, $m, PREG_OFFSET_CAPTURE, $start)) return '';
+  foreach ($m[0] as $hit) {
+    $depth += ($hit[0] === '<sc-if') ? 1 : -1;
+    if ($depth === 0) { $end = $hit[1]; break; }
+  }
+  if ($end === false) return '';
+  $b = substr($html, $start, $end - $start);
+  $b = preg_replace('#^<sc-if[^>]*>#', '', $b);
+  $now = time();
+  $on = array(
+    'giveawayOn' => $now < strtotime('2026-12-15T00:00:00-05:00'),
+    'hhSaleOn' => $now < strtotime('2027-01-13T00:00:00-05:00'),
+    'hhSaleOff' => $now >= strtotime('2027-01-13T00:00:00-05:00'),
+    'giftBoxOn' => $now < strtotime('2026-12-26T00:00:00-05:00'),
+  );
+  for ($i = 0; $i < 40; $i++) {
+    $n = preg_replace('#<sc-for\b[^>]*>(?:(?!<sc-for\b).)*?</sc-for>#s', '', $b);
+    $n = preg_replace_callback('#<sc-if value="\{\{ ([^}]*) \}\}"[^>]*>((?:(?!<sc-if\b).)*?)</sc-if>#s', function ($x) use ($on) {
+      return !empty($on[$x[1]]) ? $x[2] : '';
+    }, $n);
+    if ($n === $b) break;
+    $b = $n;
+  }
+  $b = preg_replace('#<(script|style|svg|button|select|textarea|label|iframe|video|noscript)\b.*?</\1>#is', ' ', $b);
+  $b = preg_replace('#<(input|img|source|hr)\b[^>]*>#i', ' ', $b);
+  $b = preg_replace('#\{\{[^}]*\}\}#', '', $b);
+  $b = preg_replace_callback('#<(/?)([a-zA-Z][a-zA-Z0-9-]*)\b([^>]*)>#', function ($x) {
+    $t = strtolower($x[2]); $close = $x[1] === '/';
+    if ($t === 'h1') $t = 'h2';
+    if (in_array($t, array('h2', 'h3', 'h4', 'p', 'ul', 'ol', 'li', 'strong', 'em', 'table', 'tr', 'td', 'th'), true)) return '<' . ($close ? '/' : '') . $t . '>';
+    if ($t === 'br') return '<br>';
+    if ($t === 'a') {
+      if ($close) return '</a>';
+      $h = preg_match('#\shref="([^"]*)"#', $x[3], $hm) ? $hm[1] : '';
+      $r = preg_match('#\srel="([^"]*)"#', $x[3], $rm) ? ' rel="' . $rm[1] . '"' : '';
+      if ($h === '' || $h[0] === '#') return '<a>';
+      return '<a href="' . $h . '"' . $r . '>';
+    }
+    if ($t === 'div' || $t === 'section' || $t === 'article') return "\n<br>";
+    return ' ';
+  }, $b);
+  $b = preg_replace('#<a>(.*?)</a>#s', '$1', $b);
+  $b = preg_replace('#[ \t]+#', ' ', $b);
+  $b = preg_replace('#(\s*<br>\s*)+#', '<br>', $b);
+  $b = preg_replace('#<(p|li|h2|h3|h4|strong|em)>\s*(<br>\s*)*</\1>#', '', $b);
+  $b = preg_replace('#\s*\n\s*#', "\n", $b);
+  return trim(preg_replace('#^(<br>)+|(<br>)+$#', '', trim($b)));
 }
 $html = @file_get_contents(__DIR__ . '/index.html');
 if ($html === false) { http_response_code(500); exit('Site file missing.'); }
@@ -86,7 +186,7 @@ if (isset($PAGES[$path])) {
   };
   $html = preg_replace_callback('#<title>.*?</title>#s', function ($m) use ($title) { return '<title>' . $title . '</title>'; }, $html, 1);
   $html = $set($html, 'name', 'description', $desc);
-  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/victron-battery-monitor-review' || $path === '/prime-rv-tank-treatment-review') ? 'article' : 'website';
+  $ogType = ($path === '/my-nose-knows-service-dog' || $path === '/goodbye-old-camper' || $path === '/too-many-buttons-new-camper' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/victron-battery-monitor-review' || $path === '/blu-waterstop-review' || $path === '/govee-vs-blu-waterstop' || $path === '/prime-rv-tank-treatment-review' || $path === '/winter-rv-gear-for-dogs') ? 'article' : 'website';
   $html = $set($html, 'property', 'og:type', $ogType);
   $html = $set($html, 'property', 'og:title', $title);
   $html = $set($html, 'property', 'og:description', $desc);
@@ -96,7 +196,7 @@ if (isset($PAGES[$path])) {
   $html = $set($html, 'name', 'twitter:description', $desc);
   $html = $set($html, 'name', 'twitter:image', $img);
   $head = "\n<title>$title</title>\n<link rel=\"canonical\" href=\"$url\">\n<meta name=\"description\" content=\"$desc\">\n"
-    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/victron-battery-monitor-review' || $path === '/prime-rv-tank-treatment-review' ? 'article' : 'website') . "\">\n"
+    . "<meta property=\"og:type\" content=\"" . ($path === '/my-nose-knows-service-dog' || $path === '/goodbye-old-camper' || $path === '/too-many-buttons-new-camper' || $path === '/goodbye-old-camper' || $path === '/too-many-buttons-new-camper' || $path === '/fxw-dog-fence-review' || $path === '/blu-tech-review' || $path === '/necto-temperature-monitor-review' || $path === '/rvlock-keyless-entry-review' || $path === '/victron-battery-monitor-review' || $path === '/blu-waterstop-review' || $path === '/govee-vs-blu-waterstop' || $path === '/prime-rv-tank-treatment-review' || $path === '/winter-rv-gear-for-dogs' ? 'article' : 'website') . "\">\n"
     . "<meta property=\"og:site_name\" content=\"$NAME\">\n<meta property=\"og:title\" content=\"$title\">\n<meta property=\"og:description\" content=\"$desc\">\n"
     . "<meta property=\"og:image\" content=\"$img\">\n<meta property=\"og:url\" content=\"$url\">\n"
     . "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"$title\">\n<meta name=\"twitter:description\" content=\"$desc\">\n<meta name=\"twitter:image\" content=\"$img\">\n";
@@ -107,6 +207,12 @@ if (isset($PAGES[$path])) {
 $LD = array();
 $LD['/my-nose-knows-service-dog'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"BlogPosting","headline":"My Nose Knows: What This Service Dog Actually Does","url":"https://biscuitthecampingbulldog.com/my-nose-knows-service-dog","datePublished":"2026-09-28","image":"https://biscuitthecampingbulldog.com/images/adv-service-dog-biscuit.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
+JSON;
+$LD['/too-many-buttons-new-camper'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Too Many Buttons: Mama and Daddy vs. the New Camper","url":"https://biscuitthecampingbulldog.com/too-many-buttons-new-camper","datePublished":"2026-11-15","image":"https://biscuitthecampingbulldog.com/images/story-fireplace-nap-2026.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog"}}
+JSON;
+$LD['/goodbye-old-camper'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Goodbye, Old Camper: Thank You for Holding My Pack","url":"https://biscuitthecampingbulldog.com/goodbye-old-camper","datePublished":"2026-11-04","image":"https://biscuitthecampingbulldog.com/images/story-cades-cove-bear-2026.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog"}}
 JSON;
 $LD['/fxw-dog-fence-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"FXW Dog Fence Review: Our Portable Fence for Campground Life","url":"https://biscuitthecampingbulldog.com/fxw-dog-fence-review","datePublished":"2026-09-24","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"FXW Dog Fence","brand":{"@type":"Brand","name":"FXW"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
@@ -122,6 +228,14 @@ $LD['/rvlock-keyless-entry-review'] = <<<'JSON'
 JSON;
 $LD['/victron-battery-monitor-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"Victron BMV-712 Battery Monitor Review: No More Guessing Off-Grid","url":"https://biscuitthecampingbulldog.com/victron-battery-monitor-review","datePublished":"2026-11-16","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"Victron BMV-712 Smart Battery Monitor","brand":{"@type":"Brand","name":"Victron Energy"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
+$LD['/blu-waterstop-review'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"Review","name":"Blu Technology WATERSTOP Review: The Little Blue Box That Saved Our Underbelly","url":"https://biscuitthecampingbulldog.com/blu-waterstop-review","datePublished":"2026-11-02","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"Blu Technology WATERSTOP RV Leak Detection and Automatic Water Shut-Off","brand":{"@type":"Brand","name":"Blu Technology"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
+JSON;
+$LD['/govee-vs-blu-waterstop'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Why We Swapped Our Govee Leak Alarm for the Blu WATERSTOP","url":"https://biscuitthecampingbulldog.com/govee-vs-blu-waterstop","datePublished":"2026-11-15","image":"https://biscuitthecampingbulldog.com/images/reviews/waterstop-leak-puck.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com"}}
+JSON;
+$LD['/winter-rv-gear-for-dogs'] = <<<'JSON'
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Winter RV Gear for Dogs: 6 Things We Actually Use","url":"https://biscuitthecampingbulldog.com/winter-rv-gear-for-dogs","datePublished":"2026-11-10","image":"https://biscuitthecampingbulldog.com/images/picks/pick-necto.jpg","author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
 JSON;
 $LD['/prime-rv-tank-treatment-review'] = <<<'JSON'
 {"@context":"https://schema.org","@type":"Review","name":"Prime RV (Liquified) Tank Treatment Review: Goodbye, Gray Tank Smell","url":"https://biscuitthecampingbulldog.com/prime-rv-tank-treatment-review","datePublished":"2026-10-27","reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5,"worstRating":1},"itemReviewed":{"@type":"Product","name":"Liquified RV Tank Treatments","brand":{"@type":"Brand","name":"Prime RV"}},"author":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"},"publisher":{"@type":"Organization","name":"Biscuit the Camping Bulldog","url":"https://biscuitthecampingbulldog.com/"}}
@@ -143,14 +257,15 @@ if ($STATE_KEY !== '') {
   $crumbs = array('@type' => 'BreadcrumbList', 'itemListElement' => array(
     array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'),
     array('@type' => 'ListItem', 'position' => 2, 'name' => 'Find a vet', 'item' => $SITE . '/vets'),
-    array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $path)));
-  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds', 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    array('@type' => 'ListItem', 'position' => 3, 'name' => $STATES[$STATE_KEY], 'item' => $SITE . $stPath)));
+  if ($AREA !== '') $crumbs['itemListElement'][] = array('@type' => 'ListItem', 'position' => 4, 'name' => $AREA, 'item' => $SITE . $path);
+  $LD[$path] = json_encode(array('@context' => 'https://schema.org', '@graph' => array($crumbs, array('@type' => 'ItemList', 'name' => ($AREA !== '' ? 'Vets and pet-friendly campgrounds near ' . $AREA : $STATES[$STATE_KEY] . ' vets and pet-friendly campgrounds'), 'url' => $SITE . $path, 'numberOfItems' => count($items), 'itemListElement' => $items))), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
 /* Extra schema (added 2026-10-27): breadcrumbs on every subpage, FAQ on the heat guide and pet papers
    (questions answered on those pages), and the gear list. Keep the FAQ answers matching the page text. */
 $LD2 = array();
-$CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
-$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/victron-battery-monitor-review' => '/reviews', '/prime-rv-tank-treatment-review' => '/reviews', '/my-nose-knows-service-dog' => '/stories');
+$CRUMB_NAMES = array('/gear' => 'Gear', '/vets' => 'Find a vet', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet papers', '/reviews' => 'Reviews', '/shop' => 'Shop', '/gift-guide' => 'Christmas gift guide', '/cold' => 'Pet cold weather guide', '/spring' => 'Spring pet safety guide', '/fall' => 'Fall pet safety guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV', '/giveaway' => 'Necto giveaway', '/stories' => 'Stories', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+$CRUMB_PARENT = array('/fxw-dog-fence-review' => '/reviews', '/blu-tech-review' => '/reviews', '/necto-temperature-monitor-review' => '/reviews', '/rvlock-keyless-entry-review' => '/reviews', '/victron-battery-monitor-review' => '/reviews', '/blu-waterstop-review' => '/reviews', '/govee-vs-blu-waterstop' => '/reviews', '/prime-rv-tank-treatment-review' => '/reviews', '/winter-rv-gear-for-dogs' => '/reviews', '/my-nose-knows-service-dog' => '/stories', '/goodbye-old-camper' => '/stories', '/too-many-buttons-new-camper' => '/stories');
 if ($path !== '/' && $STATE_KEY === '' && isset($PAGES[$path])) {
   $cl = array(array('@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => $SITE . '/'));
   if (isset($CRUMB_PARENT[$path])) { $pp = $CRUMB_PARENT[$path]; $cl[] = array('@type' => 'ListItem', 'position' => 2, 'name' => $CRUMB_NAMES[$pp], 'item' => $SITE . $pp); }
@@ -169,7 +284,7 @@ if ($path === '/pet-papers') $LD2[] = $faq(array(
   'What does my dog need to come back into the U.S. from Canada?' => 'The dog must be at least 6 months old, have a microchip a standard scanner can read, look healthy, and you need a receipt for the free CDC Dog Import Form, filled in online before you reach the border (one per dog, good for 6 months).',
   'Where is the pet papers card saved?' => 'Only in the browser on your own device. Nothing is uploaded or sent to the website, and it opens with no signal.'));
 if ($path === '/gear') {
-  $GEAR = array(array('Happy Howl Dog Food', 'https://www.happyhowl.com/Biscuit'), array('Chewy', 'https://chewy.sjv.io/c/7017016/2846786/32975'), array('Necto temperature monitor', 'https://getnecto.com/?ref=biscuit'), array('FXW Dog Playpen', 'https://www.amazon.com/dp/B08MF1XBZW?tag=biscuit0b5-20'), array('Starlink', 'https://starlink.com/'), array('Veritas Vans Starlink Mini Mount', 'https://veritasvans.com/product/starlink-mini-mount/'), array('Veritas Vans Starlink Mini Dish', 'https://veritasvans.com/product/starlink-mini-dish/'), array('Blu Tech Water Filter', 'https://goblutech.com/Biscuit'), array('Prime RV tank treatment', 'https://liquifiedrv.com/'), array('RVLock keyless door lock', 'https://club.co/s/UW-J-NcpZXQtQ'), array('CRAVOT CyberRack S2', 'https://cravot.com/discount/biscuit10'), array('Xtreme Heaters', 'https://xtremeheaters.com/?ref=Biscuit'), array('BLUETTI Power Stations', 'https://www.bluettipower.com/'), array('Harvest Hosts', 'https://www.harvesthosts.com/'));
+  $GEAR = array(array('Victron BMV-712 Smart Battery Monitor', 'https://invertersrus.com/?ref=26940'), array('Victron SmartShunt', 'https://invertersrus.com/?ref=26940'), array('Victron MultiPlus-II Inverter/Charger', 'https://invertersrus.com/?ref=26940'), array('Victron SmartSolar MPPT Charge Controller', 'https://invertersrus.com/?ref=26940'), array('Victron Cerbo GX', 'https://invertersrus.com/?ref=26940'), array('Victron Orion DC-DC Charger', 'https://invertersrus.com/?ref=26940'), array('Victron Lynx Distributor', 'https://invertersrus.com/?ref=26940'), array('Micro-Air EasyStart Soft Starter', 'https://invertersrus.com/?ref=26940'), array('Ruuvi Temperature Sensors', 'https://invertersrus.com/?ref=26940'), array('REDARC Battery Chargers', 'https://invertersrus.com/?ref=26940'), array('Spartan Power Inverters', 'https://invertersrus.com/?ref=26940'), array('BLUETTI Power Stations', 'https://www.bluettipower.com/'), array('Xtreme Heaters', 'https://xtremeheaters.com/?ref=Biscuit'), array('Veritas Vans Starlink Mini Mount', 'https://veritasvans.com/product/starlink-mini-mount/'), array('Veritas Vans Starlink Mini Dish', 'https://veritasvans.com/product/starlink-mini-dish/'), array('Happy Howl Dog Food', 'https://www.happyhowl.com/Biscuit'), array('Chewy', 'https://chewy.sjv.io/c/7017016/2846786/32975'), array('Necto temperature monitor', 'https://getnecto.com/?ref=biscuit'), array('FXW Dog Playpen', 'https://www.amazon.com/dp/B08MF1XBZW?tag=biscuit0b5-20'), array('U-NICE HOME Reversible Dog Sofa Cover', 'https://www.amazon.com/dp/B08BL4QM8F?tag=biscuit0b5-20'), array('ECO-WORTHY 12V 280Ah Lithium Batteries', 'https://www.amazon.com/dp/B0CKT2J3M9?tag=biscuit0b5-20'), array('Starlink', 'https://starlink.com/'), array('Blu Tech Water Filter', 'https://goblutech.com/Biscuit'), array('Prime RV tank treatment', 'https://liquifiedrv.com/'), array('Glooglitter Heated Faucet Cover', 'https://www.amazon.com/dp/B0FY2HYJQW?tag=biscuit0b5-20'), array('Camco Rhino 25 ft Clean-Out Hose', 'https://www.amazon.com/dp/B06XGW1NGD?tag=biscuit0b5-20'), array('CRAVOT CyberRack S2', 'https://cravot.com/discount/biscuit10'), array('Lippert Thin Shade EcoCell Door Window Shade', 'https://www.amazon.com/dp/B0FKJ54NJM?tag=biscuit0b5-20'), array('Harvest Hosts', 'https://www.harvesthosts.com/'), array('RVLock keyless door lock', 'https://club.co/s/UW-J-NcpZXQtQ'));
   $gi = array(); foreach ($GEAR as $n => $g) $gi[] = array('@type' => 'ListItem', 'position' => $n + 1, 'name' => $g[0], 'url' => $g[1]);
   $LD2[] = array('@context' => 'https://schema.org', '@type' => 'ItemList', 'name' => "Biscuit's Road-Tested Gear", 'url' => $SITE . '/gear', 'numberOfItems' => count($gi), 'itemListElement' => $gi);
 }
@@ -185,23 +300,50 @@ if (isset($LD[$path])) {
    Visitors never see it (it sits inside <noscript>); it gives crawlers the real page title, summary,
    links to every page and, on state pages, every vet and campground. */
 $e2 = function ($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); };
-$NAV = array('/' => 'Home', '/vets' => 'Find a vet near you (all 50 states)', '/heat' => 'Pet heat safety guide', '/pet-papers' => 'Pet travel papers checklist', '/gear' => "Biscuit's road-tested gear", '/shop' => 'Shop what we use', '/reviews' => 'Gear reviews', '/stories' => "Biscuit's stories", '/giveaway' => 'Necto giveaway', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
+$NAV = array('/' => 'Home', '/vets' => 'Find a vet near you (all 50 states)', '/heat' => 'Pet heat safety guide', '/cold' => 'Pet cold weather guide', '/spring' => 'Spring pet safety guide', '/fall' => 'Fall pet safety guide', '/leaving-pet-in-rv' => 'Leaving your pet in the RV safely', '/pet-papers' => 'Pet travel papers checklist', '/gear' => "Biscuit's road-tested gear", '/shop' => 'Shop what we use', '/gift-guide' => "Biscuit's Christmas gift guide", '/reviews' => 'Gear reviews', '/winter-rv-gear-for-dogs' => 'Winter RV gear for dogs', '/stories' => "Biscuit's stories", '/giveaway' => 'Necto giveaway', '/about' => 'About Biscuit', '/install' => "Get Biscuit's app", '/terms' => 'Terms of use');
 if (isset($PAGES[$path])) {
   $np = $PAGES[$path];
   $ns = '<noscript><div style="max-width:760px;margin:0 auto;padding:16px;font-family:sans-serif">';
   $ns .= '<h1>' . $e2(preg_replace('/ \| Biscuit the Camping Bulldog$/', '', $np[0])) . '</h1><p>' . $e2($np[1]) . '</p>';
   if ($STATE_KEY !== '') {
-    $ns .= '<h2>Vets in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
-    foreach ($SV as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['tag']) ? ' (' . $e2($v['tag']) . ')' : '') . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; <a href="tel:' . preg_replace('/[^0-9]/', '', $v['phone']) . '">' . $e2($v['phone']) . '</a>' : '') . '</li>';
-    $ns .= '</ul><h2>Pet-friendly campgrounds and state parks in ' . $e2($STATES[$STATE_KEY]) . '</h2><ul>';
-    foreach ($SC as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; ' . $e2($v['phone']) : '') . '</li>';
+    $where = $AREA !== '' ? 'near ' . $AREA : 'in ' . $STATES[$STATE_KEY];
+    $nt = function ($v) use ($AREA, $e2) { return ($AREA !== '' && !empty($v['note'])) ? '<br>' . $e2($v['note']) : ''; };
+    $ns .= '<h2>Vets ' . $e2($where) . '</h2><ul>';
+    foreach ($SV as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['tag']) ? ' (' . $e2($v['tag']) . ')' : '') . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; <a href="tel:' . preg_replace('/[^0-9]/', '', $v['phone']) . '">' . $e2($v['phone']) . '</a>' : '') . $nt($v) . '</li>';
+    $ns .= '</ul><h2>Pet-friendly campgrounds and state parks ' . $e2($where) . '</h2><ul>';
+    foreach ($SC as $v) $ns .= '<li><strong>' . $e2($v['name']) . '</strong>' . (!empty($v['where']) ? ' &mdash; ' . $e2($v['where']) : '') . (!empty($v['phone']) ? ' &mdash; ' . $e2($v['phone']) : '') . $nt($v) . '</li>';
     $ns .= '</ul><p>Hours and services change. Call ahead when you can. In an emergency, go to the nearest open clinic.</p>';
+    /* Links to every RV area page in this state, so search engines can find them all. */
+    if ($STATE_AREAS) {
+      $ns .= '<h2>RV areas in ' . $e2($STATES[$STATE_KEY]) . '</h2><p>';
+      $al = array();
+      foreach ($STATE_AREAS as $as => $al_label) if ($as !== $AREA_SLUG) $al[] = '<a href="' . $stPath . '/' . $as . '">' . $e2($al_label) . '</a>';
+      $ns .= implode(' &middot; ', $al) . '</p>';
+      if ($AREA !== '') $ns .= '<p><a href="' . $stPath . '">All vets and campgrounds in ' . $e2($STATES[$STATE_KEY]) . '</a></p>';
+    }
   }
   if ($path === '/vets' || $STATE_KEY !== '') {
     $ns .= '<h2>Vets and pet-friendly campgrounds by state</h2><p>';
     $links = array();
     foreach ($STATES as $k => $nm) $links[] = '<a href="/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') . '">' . $e2($nm) . '</a>';
     $ns .= implode(' &middot; ', $links) . '</p>';
+  }
+  /* Gear page: link the partner shops (added 2026-11-07, Denise approved) so search engines and AI tools can find them. */
+  if ($path === '/gear') {
+    $ns .= '<h2>Our partners&rsquo; shops</h2><p><a href="https://partners.biscuitthecampingbulldog.com/">All of Biscuit&rsquo;s partner shops in one place</a></p><ul>';
+    foreach (array('starlink' => 'Starlink Mini gear (Veritas Vans)', 'blutech' => 'Blu Tech RV water filtration', 'primerv' => 'Prime RV tank care', 'cravot' => 'Cravot hitch bike racks', 'bluetti' => 'BLUETTI portable power', 'xtremeheaters' => 'Xtreme Heaters RV freeze protection', 'rvlock' => 'RVLock keyless locks') as $sub => $lbl) $ns .= '<li><a href="' . ($sub === 'xtremeheaters' ? 'https://biscuitthecampingbulldog.com/xtremeheaters/' : 'https://' . $sub . '.biscuitthecampingbulldog.com/') . '">' . $lbl . '</a></li>';
+    $ns .= '</ul>';
+  }
+  /* Guides, reviews, shop and gift guide: put the page's own words in the crawler version (added 2026-11-09),
+     so AI tools that don't run JavaScript read the whole page, not just the summary. Built fresh from index.html
+     each time, so it always matches what visitors see. Parts that change by date or by visitor are left out. */
+  $FULL = array('/heat' => 'isHeat', '/cold' => 'isCold', '/spring' => 'isSpring', '/fall' => 'isFall', '/leaving-pet-in-rv' => 'isPetAlone', '/pet-papers' => 'isPapers',
+    '/gift-guide' => 'isGiftGuide', '/shop' => 'isShop', '/giveaway' => 'isGiveaway', '/about' => 'isAbout', '/reviews' => 'isReviews',
+    '/fxw-dog-fence-review' => 'isFxwReview', '/blu-tech-review' => 'isBluReview', '/necto-temperature-monitor-review' => 'isNectoReview',
+    '/rvlock-keyless-entry-review' => 'isRvlockReview', '/blu-waterstop-review' => 'isWaterstopReview', '/govee-vs-blu-waterstop' => 'isGoveeSwap', '/prime-rv-tank-treatment-review' => 'isPrimervReview', '/winter-rv-gear-for-dogs' => 'isWinterGear');
+  if (isset($FULL[$path])) {
+    $ft = biscuit_page_text($html, $FULL[$path]);
+    if ($ft !== '') $ns .= '<div>' . $ft . '</div>';
   }
   $ns .= '<h2>More from Biscuit the Camping Bulldog</h2><ul>';
   foreach ($NAV as $u => $label) if ($u !== $path) $ns .= '<li><a href="' . $u . '">' . $e2($label) . '</a></li>';
