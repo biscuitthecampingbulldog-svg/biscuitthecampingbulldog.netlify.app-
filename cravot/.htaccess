@@ -1,0 +1,6 @@
+# Cravot shop. This folder belongs ONLY to cravot.biscuitthecampingbulldog.com (rebuilt in the repo 11/14/26, US racks only).
+# Keep the main site's page-address rules out of here, and send anyone who reaches this folder
+# through Biscuit's address (biscuitthecampingbulldog.com/cravot) to the shop's own address.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^cravot\. [NC]
+RewriteRule ^(.*)$ https://cravot.biscuitthecampingbulldog.com/$1 [R=301,L]
