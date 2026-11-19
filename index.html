@@ -455,7 +455,7 @@ a:hover{color:#A8352A}
           <div style="font:600 11.5px/1 Barlow,sans-serif;letter-spacing:.2em;text-transform:uppercase;opacity:.82;margin-top:40px">{{ sb.picksTitle }}</div>
           <div style="display:grid;grid-template-columns:{{ threeCols }};gap:12px;margin-top:14px">
             <sc-for list="{{ sb.picks }}" as="w" hint-placeholder-count="5">
-              <a href="{{ w.href }}" target="_blank" rel="noopener sponsored nofollow" style="background:#FFF9EE;color:#1A1712;padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none">
+              <a sc-camel-href="{{ w.href }}" target="_blank" rel="noopener sponsored nofollow" style="background:#FFF9EE;color:#1A1712;padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none">
                 <span style="display:block;font:700 17px/1.3 Barlow,sans-serif">{{ w.name }}</span>
                 <span style="display:block;font:400 15px/1.45 Barlow,sans-serif;color:#4A4234;flex:1">{{ w.note }}</span>
                 <span style="display:block;font:600 14px/1 Barlow,sans-serif;color:#8A4A20">{{ w.cta }}</span>
@@ -683,7 +683,7 @@ a:hover{color:#A8352A}
           <div style="font:400 16.5px/1.5 Barlow,sans-serif;color:#4A4234;max-width:66ch;margin-bottom:26px">These are the products mama and I use and recommend on our adventures. I only put my paw print on things I actually love.</div>
           <div style="display:grid;grid-template-columns:{{ threeCols }};gap:14px">
             <sc-for list="{{ homePicks }}" as="k" hint-placeholder-count="8">
-              <a href="{{ k.href }}" target="_blank" rel="noopener sponsored nofollow" style="position:relative;background:#F5ECDC;border:1px solid rgba(26,23,18,.2);padding:20px;display:flex;flex-direction:column;gap:10px;justify-content:space-between;min-height:132px;text-decoration:none;color:#1A1712" style-hover="border-color:#8A4A20;background:#FFF9EE">
+              <a sc-camel-href="{{ k.href }}" target="_blank" rel="noopener sponsored nofollow" style="position:relative;background:#F5ECDC;border:1px solid rgba(26,23,18,.2);padding:20px;display:flex;flex-direction:column;gap:10px;justify-content:space-between;min-height:132px;text-decoration:none;color:#1A1712" style-hover="border-color:#8A4A20;background:#FFF9EE">
                 <sc-if value="{{ false }}" hint-placeholder-val="{{ false }}">
                   <span style="position:absolute;top:10px;right:10px;background:repeating-conic-gradient(#E8A4C4 0% 25%, #C97EA6 0% 50%) 0 0/14px 14px;color:#1A1712;font:700 10.5px/1 Barlow,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border:1px solid rgba(26,23,18,.25);box-shadow:0 2px 4px rgba(26,23,18,.18)">Biscuit&rsquo;s Pick</span>
                 </sc-if>
@@ -774,7 +774,7 @@ a:hover{color:#A8352A}
           <label for="gear-find" style="display:block;font:600 11px/1 Barlow,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8A4A20;margin-bottom:10px">Find a product</label>
           <input id="gear-find" type="search" placeholder="Try leash, hose or solar" value="{{ gearQ }}" onChange="{{ onGearQ }}" autocomplete="off" style="width:100%;box-sizing:border-box;font:400 17px/1 Barlow,sans-serif;color:#1A1712;background:#FFF9EE;border:1px solid rgba(26,23,18,.3);padding:14px" style-focus="outline:2px solid #8A4A20;outline-offset:1px">
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-            <sc-for list="{{ gearChips }}" as="ch" hint-placeholder-count="10"><a href="{{ ch.href }}" style="font:600 14.5px/1 Barlow,sans-serif;color:#1A1712;background:#FFF9EE;border:1px solid rgba(26,23,18,.25);padding:11px 13px;text-decoration:none" style-hover="border-color:#8A4A20">{{ ch.label }} <span style="font-weight:400;color:#6B6152">{{ ch.count }}</span></a></sc-for>
+            <sc-for list="{{ gearChips }}" as="ch" hint-placeholder-count="10"><a sc-camel-href="{{ ch.href }}" style="font:600 14.5px/1 Barlow,sans-serif;color:#1A1712;background:#FFF9EE;border:1px solid rgba(26,23,18,.25);padding:11px 13px;text-decoration:none" style-hover="border-color:#8A4A20">{{ ch.label }} <span style="font-weight:400;color:#6B6152">{{ ch.count }}</span></a></sc-for>
             <a href="#gear-amazon" style="font:600 14.5px/1 Barlow,sans-serif;color:#1A1712;background:#FFF9EE;border:1px solid rgba(26,23,18,.25);padding:11px 13px;text-decoration:none" style-hover="border-color:#8A4A20">Shop on Amazon</a>
           </div>
         </div>
@@ -799,7 +799,7 @@ a:hover{color:#A8352A}
               <sc-if value="{{ k.hasHonest }}" hint-placeholder-val="{{ false }}"><span style="display:block;font:italic 400 15px/1.45 Barlow,sans-serif;color:#8A4A20">{{ k.honest }}</span></sc-if>
               <sc-if value="{{ k.hasAlso }}" hint-placeholder-val="{{ false }}">{{ k.alsoEl }}</sc-if>
               <sc-if value="{{ k.hasGiveaway }}" hint-placeholder-val="{{ false }}"><a href="/giveaway" style="display:block;text-align:center;background:#C4707C;color:#FFFFFF;font:600 15px/1.2 Barlow,sans-serif;padding:11px 10px;text-decoration:none" style-hover="background:#A85A66">{{ k.giveawayLabel }}</a></sc-if>
-              <a href="{{ k.href }}" target="_blank" rel="noopener sponsored nofollow" style="display:block;text-align:center;background:#3C5A46;color:#F1EDE1;font:600 16px/1.2 Barlow,sans-serif;padding:13px 10px;text-decoration:none;margin-top:4px" style-hover="background:#324C3B">{{ k.cta }}</a>
+              <a sc-camel-href="{{ k.href }}" target="_blank" rel="noopener sponsored nofollow" style="display:block;text-align:center;background:#3C5A46;color:#F1EDE1;font:600 16px/1.2 Barlow,sans-serif;padding:13px 10px;text-decoration:none;margin-top:4px" style-hover="background:#324C3B">{{ k.cta }}</a>
               <span style="display:block;font:400 12.5px/1.4 Barlow,sans-serif;color:#6B6152">{{ k.affNote }}</span>
               <sc-if value="{{ k.hasReview }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ k.goReview }}" style="background:transparent;border:none;padding:0;text-align:left;cursor:pointer;font:600 14px/1.3 Barlow,sans-serif;color:#8A4A20;text-decoration:underline">{{ k.reviewLabel }}</button></sc-if>
               </div>
@@ -818,7 +818,7 @@ a:hover{color:#A8352A}
                 <span style="display:block;font:400 15px/1.45 Barlow,sans-serif;color:#4A4234">{{ r.note }}</span>
                 <sc-if value="{{ r.hasAlso }}" hint-placeholder-val="{{ false }}">{{ r.alsoEl }}</sc-if>
               </div>
-              <a href="{{ r.href }}" target="_blank" rel="noopener sponsored nofollow" style="flex:none;box-sizing:border-box;text-align:center;background:#8A4A20;color:#FFF9EE;font:600 14.5px/1 Barlow,sans-serif;padding:{{ gearRowBtnPad }};text-decoration:none;white-space:nowrap" style-hover="background:#6F3A18">{{ gearRowBtnText }}</a>
+              <a sc-camel-href="{{ r.href }}" target="_blank" rel="noopener sponsored nofollow" style="flex:none;box-sizing:border-box;text-align:center;background:#8A4A20;color:#FFF9EE;font:600 14.5px/1 Barlow,sans-serif;padding:{{ gearRowBtnPad }};text-decoration:none;white-space:nowrap" style-hover="background:#6F3A18">{{ gearRowBtnText }}</a>
             </div>
           </sc-for>
           </div>
@@ -879,7 +879,7 @@ a:hover{color:#A8352A}
           <div id="state-picker" style="font:600 11px/1 Barlow,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#8A4A20;margin-top:18px">Or pick a state</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:13px">
             <sc-for list="{{ stateChips }}" as="s" hint-placeholder-count="8">
-              <a href="{{ s.href }}" onClick="{{ s.go }}" style="background:{{ s.bg }};border:1px solid {{ s.border }};color:{{ s.fg }};font:600 13.5px/1 Barlow,sans-serif;padding:12px 14px;cursor:pointer;white-space:nowrap;display:inline-block;text-decoration:none" style-hover="border-color:#8A4A20">{{ s.label }}</a>
+              <a sc-camel-href="{{ s.href }}" onClick="{{ s.go }}" style="background:{{ s.bg }};border:1px solid {{ s.border }};color:{{ s.fg }};font:600 13.5px/1 Barlow,sans-serif;padding:12px 14px;cursor:pointer;white-space:nowrap;display:inline-block;text-decoration:none" style-hover="border-color:#8A4A20">{{ s.label }}</a>
             </sc-for>
             <span style="display:flex;align-items:center;font:400 13.5px/1.4 Barlow,sans-serif;color:#7A6E5B;padding:0 6px">All 50 states covered</span>
           </div>
@@ -911,9 +911,9 @@ a:hover{color:#A8352A}
               </sc-if>
               <div style="display:flex;gap:9px;margin-top:14px">
                 <sc-if value="{{ v.hasPhone }}" hint-placeholder-val="{{ true }}">
-                  <a href="{{ v.tel }}" style="flex:1;text-align:center;background:#A8352A;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#932C22">Call now</a>
+                  <a sc-camel-href="{{ v.tel }}" style="flex:1;text-align:center;background:#A8352A;color:#FFF3E2;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#932C22">Call now</a>
                 </sc-if>
-                <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+                <a sc-camel-href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
 <button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">
@@ -951,9 +951,9 @@ a:hover{color:#A8352A}
                   </sc-if>
                   <div style="display:flex;gap:9px;margin-top:14px">
                     <sc-if value="{{ v.hasPhone }}" hint-placeholder-val="{{ false }}">
-                      <a href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
+                      <a sc-camel-href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
                     </sc-if>
-                    <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+                    <a sc-camel-href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
 <button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
                   </div>
                   <div style="font:400 13px/1.35 Barlow,sans-serif;color:#7A6E5B;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">{{ v.source }}</div>
@@ -990,9 +990,9 @@ a:hover{color:#A8352A}
                   </sc-if>
                   <div style="display:flex;gap:9px;margin-top:14px">
                     <sc-if value="{{ v.hasPhone }}" hint-placeholder-val="{{ false }}">
-                      <a href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
+                      <a sc-camel-href="{{ v.tel }}" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Call</a>
                     </sc-if>
-                    <a href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
+                    <a sc-camel-href="{{ v.map }}" target="_blank" rel="noopener" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px" style-hover="background:#EFE3CE;border-color:#8A4A20">Directions</a>
 <button type="button" onClick="{{ v.share }}" aria-label="Share this listing" style="flex:1;text-align:center;border:1px solid rgba(26,23,18,.28);background:transparent;color:#1A1712;font:600 15px/1 Barlow,sans-serif;padding:15px 8px;cursor:pointer" style-hover="background:#EFE3CE;border-color:#8A4A20">{{ v.shareLabel }}</button>
                   </div>
                   <div style="font:400 13px/1.35 Barlow,sans-serif;color:#7A6E5B;margin-top:14px;padding-top:12px;border-top:1px solid rgba(26,23,18,.12)">{{ v.source }}</div>
@@ -2349,7 +2349,7 @@ a:hover{color:#A8352A}
           <div style="font:600 11px/1 Barlow,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#C6A15B">Follow</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:13px">
             <sc-for list="{{ socials }}" as="s" hint-placeholder-count="1">
-              <a href="{{ s.href }}" target="_blank" rel="noopener" style="font:600 13.5px/1 Barlow,sans-serif;color:#EFE0C4;border:1px solid rgba(239,224,196,.28);padding:12px 13px" style-hover="background:#EFE0C4;color:#1A1712">{{ s.label }}</a>
+              <a sc-camel-href="{{ s.href }}" target="_blank" rel="noopener" style="font:600 13.5px/1 Barlow,sans-serif;color:#EFE0C4;border:1px solid rgba(239,224,196,.28);padding:12px 13px" style-hover="background:#EFE0C4;color:#1A1712">{{ s.label }}</a>
             </sc-for>
           </div>
           <a href="mailto:biscuit@biscuitthecampingbulldog.com" style="display:inline-block;margin-top:16px;font:400 15px/1.4 Barlow,sans-serif;color:#C6A15B;word-break:break-word" style-hover="color:#EFE0C4">biscuit@biscuitthecampingbulldog.com</a>
