@@ -21,7 +21,7 @@ $PAGES = array(
   '/blu-waterstop-review' => array('Blu Technology WATERSTOP Review | Biscuit the Camping Bulldog', 'A blown water pump seal, a tiny leak puck and an automatic shut-off: why the Blu Technology WATERSTOP kept our RV underbelly dry. Specs and 5 paws.', 'picks/pick-blu-tech.jpg'),
   '/eco-worthy-battery-review' => array('ECO-WORTHY Battery Review | Biscuit the Camping Bulldog', 'Our two ECO-WORTHY 280Ah lithium batteries: six straight days off grid with no solar and battery to spare, no maintenance, and lighter than lead-acid.', 'reviews/eco-worthy-batteries-new-camper.jpg'),
   '/govee-vs-blu-waterstop' => array('Why We Swapped Our Govee Leak Alarm for the Blu WATERSTOP | Biscuit the Camping Bulldog', "Our Govee leak alarm could sound off, but it couldn't stop the water. Here's why we swapped it for the Blu Technology WATERSTOP automatic shut-off in our RV.", 'picks/pick-blu-tech.jpg'),
-  '/victron-battery-monitor-review' => array('Victron Battery Monitor Review | Biscuit the Camping Bulldog', 'How the Victron BMV-712 Smart battery monitor showed us our battery during 6 days off-grid at Raystown Lake with no solar coming in. Specs and 5 paws from Biscuit.', 'reviews/victron-battery-bay-new-camper.jpg'),
+  '/victron-battery-monitor-review' => array('Victron Battery Monitor Review | Biscuit the Camping Bulldog', 'How the Victron BMV-712 Smart battery monitor showed us our battery during 6 days off-grid at Raystown Lake with no solar coming in. Specs and 5 paws.', 'reviews/victron-battery-bay-new-camper.jpg'),
   '/prime-rv-tank-treatment-review' => array('Prime RV Tank Treatment Review | Biscuit the Camping Bulldog', 'Blue tablets left our RV gray tank smelling. Liquified (now Prime RV) tank treatment fixed it in two tankfuls. What we use, prices and 5 paws from Biscuit.', 'picks/pick-prime-rv-2.jpg'),
   '/shop' => array('Shop What We Use | Biscuit the Camping Bulldog', "Over 85 things our full-time RV family actually bought and uses, from dog gear, solar and RV parts to plumbing, camp kitchen and campsite favorites on Amazon.", 'biscuit-hero-smokies.jpg'),
   '/giveaway' => array('Necto Giveaway | Biscuit the Camping Bulldog', "Win a Necto pet temperature monitor (\$199 value)! Join Biscuit's Pack by Dec 14, 2026 to enter. Winner drawn Dec 15. US residents 18+, no purchase needed.", 'picks/pick-necto.jpg'),
@@ -115,11 +115,16 @@ if ($STATE_KEY !== '') {
   if ($AREA !== '') {
     $an = preg_replace('/,\s*[A-Z]{2}$/', '', $AREA);
     $d = "Vets near $an, $nm for RV travelers: " . ($er ? "$er emergency vet" . ($er > 1 ? 's' : '') . ', ' : '') . (count($SV) - $er) . ' regular vet' . (count($SV) - $er === 1 ? '' : 's') . ' and ' . count($SC) . ' pet-friendly campground' . (count($SC) === 1 ? '' : 's') . ', checked by hand. Call or get directions in one tap.';
+    /* Keep Google's summary at 160 characters or less so it isn't cut off (11/20/26). */
+    if (strlen($d) > 160) $d = str_replace(' Call or get directions in one tap.', '', $d);
+    if (strlen($d) > 160) $d = str_replace(' for RV travelers:', ':', $d);
     $PAGES[$path] = array("Vets & Pet-Friendly Campgrounds near $AREA | Biscuit the Camping Bulldog", $d, 'biscuit-hero-smokies.jpg');
   } else {
-    $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog",
-      "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.",
-      'biscuit-hero-smokies.jpg');
+    $d = "$er emergency (24-hour) vets, " . (count($SV) - $er) . " regular vets and " . count($SC) . " pet-friendly campgrounds and state parks in $nm, checked by hand for RV travelers. Call or get directions in one tap.";
+    /* Keep Google's summary at 160 characters or less so it isn't cut off (11/20/26). */
+    if (strlen($d) > 160) $d = str_replace(' Call or get directions in one tap.', '', $d);
+    if (strlen($d) > 160) $d = str_replace(' for RV travelers.', '.', $d);
+    $PAGES[$path] = array("$nm Vets & Pet-Friendly Campgrounds | Biscuit the Camping Bulldog", $d, 'biscuit-hero-smokies.jpg');
   }
 }
 /* Pull one page's visible words out of index.html as plain HTML for the crawler version (added 2026-11-09). */
