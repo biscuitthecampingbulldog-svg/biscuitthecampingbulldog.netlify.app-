@@ -333,6 +333,8 @@ if (isset($PAGES[$path])) {
     }
   }
   if ($path === '/vets' || $STATE_KEY !== '') {
+    /* "Right now" emergency box (added 2026-11-24), same words as the box visitors see. */
+    $ns .= '<h2>Pet emergency right now?</h2><ol><li>Call the vet or ER on the way so they are ready when you arrive. Struggling to breathe, bleeding badly or having a seizure? Go now and call from the road.</li><li>Keep your pet calm and still. Don&rsquo;t give any medicine or home remedy, and don&rsquo;t make them throw up unless a vet or poison hotline tells you to.</li><li>Swallowed something? Bring the package, label or leftover pills with you.</li></ol><p>Pet poison hotlines, open 24/7 (both may charge a fee): ASPCA Animal Poison Control <a href="tel:+18884264435">(888) 426-4435</a> &middot; Pet Poison Helpline <a href="tel:+18557647661">(855) 764-7661</a></p>';
     $ns .= '<h2>Vets and pet-friendly campgrounds by state</h2><p>';
     $links = array();
     foreach ($STATES as $k => $nm) $links[] = '<a href="/vets/' . trim(preg_replace('/[^a-z]+/', '-', strtolower($nm)), '-') . '">' . $e2($nm) . '</a>';
