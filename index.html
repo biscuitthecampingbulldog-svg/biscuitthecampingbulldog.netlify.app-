@@ -3555,9 +3555,9 @@ const vetsAll = (searchAll(this.DATA) || fillNear(this.DATA, inArea(rows0), erOK
 { brand: 'THANSTAR', name: 'THANSTAR Collapsible Dish Drying Rack (Gray and White)', note: 'Folds flat to save space in the RV kitchen.', photoFile: 'dish-rack-solitude-2026.jpg', photoAlt: 'Our collapsible dish drying rack set over the sink in our new camper kitchen', href: 'https://www.amazon.com/dp/B08PF21KKL?tag=biscuit0b5-20' }
     ].map(gearCard);
 
-    // Homepage "Biscuit's Picks" teaser: order per Jeffrey 11/10/26 (BLUETTI, Xtreme Heaters for winter, Veritas Vans first; RVLock last). Existing cards reused as-is.
+    // Homepage "Biscuit's Picks" teaser: order per Jeffrey 11/10/26 (Veritas Vans first per Jeffrey 11/25/26 for giveaway ask, then BLUETTI, Xtreme Heaters; RVLock last). Existing cards reused as-is.
     const HOME_BLUETTI = { name: 'BLUETTI', note: 'Portable power stations for off-grid camping.', code: 'Biscuit5', codeWhat: 'takes 5 percent off sitewide (not accessories or flash-sale items).', hasCode: true, href: 'https://www.awin1.com/cread.php?awinmid=59271&awinaffid=3103812&ued=https%3A%2F%2Fwww.bluettipower.com', cta: 'Shop BLUETTI \u203a', plateBg: '#1A1712', hasLogo: false, noLogo: true, logoEl: null, hasPhoto: true, photoEl: gearThumb('bluetti-ac180-power-station-2026.jpg', 'BLUETTI AC180 portable power station (BLUETTI product photo)', null, false), hasDisclosure: false };
-    const HOME_PICKS = ['BLUETTI', 'Xtreme Heaters', 'Veritas Vans', 'Happy Howl', 'Necto', 'FXW', 'Starlink', 'RVLock'].map(nm =>
+    const HOME_PICKS = ['Veritas Vans', 'BLUETTI', 'Xtreme Heaters', 'Happy Howl', 'Necto', 'FXW', 'Starlink', 'RVLock'].map(nm =>
       nm === 'BLUETTI' ? HOME_BLUETTI : (nm === 'FXW' ? Object.assign({}, GEAR_FROM['FXW'], { hasDisclosure: true, disclosure: GEAR_AMZ_NOTE }) : GEAR_FROM[nm]));
 
     return {
