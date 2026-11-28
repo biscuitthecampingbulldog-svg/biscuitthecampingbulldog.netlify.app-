@@ -149,6 +149,8 @@ function biscuit_page_text($html, $flag) {
     'hhSaleOn' => $now < strtotime('2027-01-13T00:00:00-05:00'),
     'hhSaleOff' => $now >= strtotime('2027-01-13T00:00:00-05:00'),
     'giftBoxOn' => $now < strtotime('2026-12-26T00:00:00-05:00'),
+    'waterstopSale' => $now < strtotime('2026-12-01T00:00:00-05:00'),
+    'waterstopSaleOver' => $now >= strtotime('2026-12-01T00:00:00-05:00'),
   );
   for ($i = 0; $i < 40; $i++) {
     $n = preg_replace('#<sc-for\b[^>]*>(?:(?!<sc-for\b).)*?</sc-for>#s', '', $b);
